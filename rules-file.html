@@ -212,73 +212,59 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
   <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
 
-    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Governance Rules File</b></h1>
-    <p style="font-size:1.1em; color:#555; margin-top:0;">Zero-effort governance &mdash; upload once, every AI generation is governed</p>
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Demo: Governance Rules File</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">An example of how governance constraints can be delivered to AI coding tools</p>
 
     <!-- Disclaimer -->
     <div class="w3-panel w3-leftbar w3-pale-red w3-padding-16" style="border-left-color: #e53935; margin-bottom:32px;">
-      <p style="margin:0; font-size: 0.95em;"><b>Disclaimer:</b> This is a demonstration of the VibeOps governance framework concept. It is <b>not an official Salesforce product, tool, or endorsed artifact.</b> It is provided as a starting point for teams exploring AI-assisted development governance. Adapt, extend, and validate against your own org's security policies before use.</p>
+      <p style="margin:0; font-size: 0.95em;"><b>Disclaimer:</b> This is a demonstration of the VibeOps governance framework concept. It is <b>not an official Salesforce product, tool, or endorsed artifact.</b></p>
     </div>
 
     <!-- What this is -->
     <h2><b>What This Is</b></h2>
 
-    <p>The entire VibeOps governance framework distilled into a single file you upload to your AI coding tool. The developer describes intent. The AI applies governance constraints automatically. No framework to memorize, no checklist to follow.</p>
+    <p>A small experiment: taking some of the governance patterns from this framework and putting them into a rules file that AI coding tools can read. The idea is to nudge the AI toward safer defaults &mdash; things like <code>WITH USER_MODE</code>, bulk-safety, fault paths &mdash; without the developer having to remember to ask for them every time.</p>
 
-    <p>This is the governance instruction set I use before asking ChatGPT, Gemini, or Claude to generate any Salesforce code, Flow, agent configuration, or integration for me.</p>
+    <p>This is not a governance solution. The real governance comes from platform controls &mdash; Shield, Code Analyzer, Trust Layer, Transaction Security, bounded autonomy. This file just makes the AI slightly more careful at generation time.</p>
 
     <hr style="margin: 32px 0;">
 
-    <!-- How to use -->
-    <h2><b>How to Use</b></h2>
+    <!-- How it works -->
+    <h2><b>How It Works</b></h2>
 
-    <div class="step-box">
-      <p style="margin:0;"><b>Step 1.</b> Copy the rules below (or download the file).</p>
-    </div>
-    <div class="step-box">
-      <p style="margin:0;"><b>Step 2.</b> Upload it at the start of your AI session &mdash; ChatGPT, Gemini, Claude, Copilot, or any tool.</p>
-    </div>
-    <div class="step-box">
-      <p style="margin:0;"><b>Step 3.</b> Say: <i>"Follow these rules when generating Salesforce code for me."</i></p>
-    </div>
-    <div class="step-box">
-      <p style="margin:0;"><b>Step 4.</b> Describe your intent normally. The AI handles governance. You review the output.</p>
-    </div>
-    <div class="step-box">
-      <p style="margin:0;"><b>Step 5.</b> Read the warnings at the end of the AI's response &mdash; those are the things you handle outside the chat.</p>
-    </div>
+    <p>AI coding tools (ChatGPT, Gemini, Claude, Copilot) can accept uploaded files as context. If a file like this one is uploaded at the start of a session, the AI reads the constraints and tries to follow them during code generation. It's the same concept as <code>CLAUDE.md</code> or <code>.cursorrules</code> for IDE-based tools.</p>
 
     <hr style="margin: 32px 0;">
 
     <!-- What it won't catch -->
-    <h2><b>What This File Will NOT Catch</b></h2>
+    <h2><b>What This Does NOT Replace</b></h2>
 
-    <p>A rules file guides AI generation. It does not replace the other two governance layers:</p>
+    <p>This file is a lightweight nudge, not a control. The actual governance is elsewhere:</p>
 
     <div style="margin: 16px 0 24px; padding: 20px 24px; background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 4px;">
-      <p style="margin: 0 0 16px;"><b><i class="fa fa-code w3-margin-right"></i>Code Analyzer / Static Analysis (merge-time gate)</b><br>
-      Cross-class vulnerabilities, complex taint analysis, performance anti-patterns, and graph-based vulnerability detection require <code>sf scanner run</code> or Code Analyzer in your CI/CD pipeline. The rules file can't see across files.</p>
+      <p style="margin: 0 0 16px;"><b><i class="fa fa-code w3-margin-right"></i>Code Analyzer / Static Analysis</b><br>
+      Cross-class vulnerabilities, complex taint analysis, performance anti-patterns &mdash; these require <code>sf scanner run</code> or Code Analyzer in CI/CD. A rules file can't see across files or detect graph-based vulnerabilities.</p>
 
-      <p style="margin: 0 0 16px;"><b><i class="fa fa-shield w3-margin-right"></i>Platform Controls (runtime enforcement)</b><br>
-      Transaction Security Policies, Event Monitoring, Platform Encryption, Field Audit Trail, and Data Detect must be configured in Setup. These are architectural walls that operate regardless of what the code says. No rules file substitutes for them.</p>
+      <p style="margin: 0 0 16px;"><b><i class="fa fa-shield w3-margin-right"></i>Platform Controls (Shield, Transaction Security, Event Monitoring)</b><br>
+      These are the real governance layer. They operate at runtime regardless of what the code says, and must be configured in Setup. No text file substitutes for architectural enforcement.</p>
 
       <p style="margin: 0 0 16px;"><b><i class="fa fa-question-circle w3-margin-right"></i>Business Logic Correctness</b><br>
-      AI implements the rule you describe but cannot validate whether your business rule is actually correct &mdash; discount thresholds, territory assignments, approval matrices. Validate with stakeholders and production-representative data.</p>
+      AI implements whatever rule is described to it. It cannot validate whether that rule is actually correct for the business.</p>
 
       <p style="margin: 0;"><b><i class="fa fa-sitemap w3-margin-right"></i>Automation Interaction at Runtime</b><br>
-      Order-of-execution conflicts, managed package automation, scheduled jobs, platform events, and async processes are not fully visible to AI even with context. Run integration tests with bulk data that exercises the full execution order.</p>
+      Order-of-execution conflicts, managed package automation, scheduled jobs, and platform events are not visible to AI. Integration testing with bulk data is still necessary.</p>
     </div>
 
     <div style="background: #f3f4f6; padding: 16px 20px; border-radius: 6px; margin-bottom: 32px;">
-      <p style="margin:0;"><b>The three-layer model:</b> Rules file = soft guardrail at generation. Code Analyzer = hard gate at merge. Platform controls = architectural wall at runtime. Any single layer can fail. The stack doesn't.</p>
+      <p style="margin:0;">The platform does the heavy lifting. This file just helps the AI avoid the obvious mistakes at generation time.</p>
     </div>
 
     <hr style="margin: 32px 0;">
 
     <!-- The rules file -->
-    <h2><b>The Rules File</b></h2>
+    <h2><b>Example Content</b></h2>
 
-    <p>Copy everything in the block below and save as <code>salesforce-vibeops-rules.md</code> (or any filename). Upload to your AI tool at the start of each coding session.</p>
+    <p>The example rules file is shown below. Also available as a raw file: <a href="salesforce-vibeops-rules.md" style="color:#1a73e8;">salesforce-vibeops-rules.md</a></p>
 
     <button class="copy-btn" onclick="copyRules()"><i class="fa fa-copy w3-margin-right"></i>Copy to Clipboard</button>
 
@@ -375,7 +361,7 @@ when generating Salesforce code — Apex, LWC, Flows, SOQL, agents, integrations
     <!-- IDE integration note -->
     <h2><b>For IDE-Based AI Tools</b></h2>
 
-    <p>If your team uses AI coding tools integrated into their IDE, the same rules content auto-loads from the project repo &mdash; no upload required:</p>
+    <p>IDE-based AI tools can also read rules files automatically from the project repo:</p>
 
     <div style="margin: 16px 0;">
       <table style="width:100%; border-collapse:collapse;">
@@ -407,7 +393,7 @@ when generating Salesforce code — Apex, LWC, Flows, SOQL, agents, integrations
       </table>
     </div>
 
-    <p style="color:#555;">Save the same rules content with the appropriate filename and commit it to the repo. Every developer who clones the project gets governed generation automatically.</p>
+    <p style="color:#555;">For IDE-based tools, the same rules content placed in the project repo is read automatically &mdash; no manual upload per session.</p>
 
     <hr style="margin: 40px 0;">
 
