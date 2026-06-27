@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Cloud — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.control-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.control-header {
+  padding: 14px 20px;
+  background: #f0fdf4;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-header i { color: #16a34a; }
+.control-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.governance-map {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.governance-map th, .governance-map td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+.governance-map th {
+  background: #f3f4f6;
+  font-size: 0.9em;
+}
+.governance-map td {
+  font-size: 0.9em;
+}
+
+.pillar-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.pillar-box b {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.05em;
+}
+.pillar-box p {
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 768px) {
+  .principle-grid { grid-template-columns: 1fr; }
+}
+.principle-item {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.principle-item b {
+  display: block;
+  margin-bottom: 6px;
+  color: #1d4ed8;
+}
+.principle-item p {
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Gap</span>
+      <span class="nav-desc">Why vibe coding changes the risk equation</span></span>
+    </a>
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Failure Taxonomy</span>
+      <span class="nav-desc">Four vectors of agentic SDLC failure</span></span>
+    </a>
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Model</span>
+      <span class="nav-desc">Five pillars of vibe coding control</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Secure Apex</span>
+      <span class="nav-desc">Security bypass — unsafe vs governed code</span></span>
+    </a>
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Logic Hallucination</span>
+      <span class="nav-desc">Looks correct, is wrong</span></span>
+    </a>
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Prompt Injection</span>
+      <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span></span>
+    </a>
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Flow Sprawl</span>
+      <span class="nav-desc">Sandbox success, production failure</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Sales Cloud</span>
+      <span class="nav-desc">Revenue guardrails for autonomous pipeline</span></span>
+    </a>
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Service Cloud</span>
+      <span class="nav-desc">Trusted agent execution across service channels</span></span>
+    </a>
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Marketing Cloud</span>
+      <span class="nav-desc">Governed personalization at campaign scale</span></span>
+    </a>
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Data Cloud</span>
+      <span class="nav-desc">Trusted data foundation for AI and identity</span></span>
+    </a>
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Agentforce</span>
+      <span class="nav-desc">Deterministic execution with observable reasoning</span></span>
+    </a>
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">MuleSoft</span>
+      <span class="nav-desc">Controlled agent-to-API execution</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">People &amp; Organization</span>
+      <span class="nav-desc">Roles, scorecards, interviews, and taste</span></span>
+    </a>
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Platform as Governance Layer</span>
+      <span class="nav-desc">How Salesforce primitives map to each control</span></span>
+    </a>
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Maturity &amp; Roadmap</span>
+      <span class="nav-desc">Self-assessment and 30/60/90 day plan</span></span>
+    </a>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Data Cloud</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Trusted data foundation for AI grounding and identity resolution</p>
+    <p style="font-size:0.85em; color:#888; margin-top:-8px;"><i>Note: Data Cloud is being renamed to Data360 in upcoming releases.</i></p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Every AI agent is only as trustworthy as the data it reasons over. Data Cloud provides the governed data foundation that grounds AI in accurate, classified, access-controlled information &mdash; ensuring agents and AI-generated code work from a single source of truth rather than stale, fragmented, or unauthorized data.
+      </p>
+    </div>
+
+    <p>Data Cloud's role in the governance framework is foundational. It sits beneath every other cloud as the layer that unifies customer data, enforces classification and access policies, provides grounding context for LLM interactions, and maintains the lineage trail that makes AI decisions auditable. Without a governed data layer, every other control is working on uncertain ground.</p>
+
+    <div class="key-insight">
+      <p>AI governance is ultimately <b>data governance</b>. You can constrain the agent, validate the code, and bound the autonomy &mdash; but if the data the agent reads is wrong, stale, or improperly classified, the output will be wrong regardless of how well-governed the execution layer is.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Core Governance Capabilities -->
+    <h2><b>Data Cloud as AI Governance Foundation</b></h2>
+
+    <p>Data Cloud provides four capabilities that are essential for governing AI-assisted development and agent execution:</p>
+
+    <div class="principle-grid">
+      <div class="principle-item">
+        <b>Unified Data with Lineage</b>
+        <p>Agents and AI-generated code work from a single, harmonized view of customer data rather than querying fragmented sources with conflicting values. Every data element carries lineage &mdash; where it came from, when it was last updated, and which rules applied.</p>
+      </div>
+      <div class="principle-item">
+        <b>Identity Resolution with Clear Rules</b>
+        <p>When AI personalizes or takes action, it needs to know exactly who the customer is. Data Cloud's identity resolution unifies profiles across sources using defined match rules &mdash; giving agents and code a trusted, deduplicated identity to work from.</p>
+      </div>
+      <div class="principle-item">
+        <b>Data Classification &amp; Sensitivity Tagging</b>
+        <p>Every data element can be classified (PII, PHI, PCI, confidential) and tagged with sensitivity levels. These classifications flow through to access policies &mdash; ensuring AI agents only access data appropriate to their role and permission level.</p>
+      </div>
+      <div class="principle-item">
+        <b>Zero-Copy Architecture</b>
+        <p>Data can be accessed and grounded from without duplicating it into separate stores. This means access policies are enforced at the source, classification stays consistent, and there's no "shadow copy" that bypasses governance controls.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- How It Enables Each Pillar -->
+    <h2><b>How Data Cloud Enables Each Governance Pillar</b></h2>
+
+    <div class="pillar-box">
+      <b>Design-Time: Grounding Context for AI Generation</b>
+      <p>When developers use AI to generate code that touches customer data, Data Cloud provides the schema, relationships, and classification metadata that should inform the generation. A governed prompt can reference the actual data model &mdash; "this field is classified as PII, apply appropriate handling" &mdash; rather than leaving the AI to guess.</p>
+    </div>
+
+    <div class="pillar-box">
+      <b>Build-Time: Validation Against the Actual Data Model</b>
+      <p>AI-generated queries and data transforms can be validated against Data Cloud's actual schema before deployment. Does the query reference real fields? Are the join conditions valid? Does the code respect the classification tags on sensitive fields? These checks happen in the pipeline, not in production.</p>
+    </div>
+
+    <div class="pillar-box">
+      <b>Runtime: Trusted Grounding for Agent Execution</b>
+      <p>When Agentforce agents need context to make decisions, Data Cloud provides grounded, up-to-date information through a governed access layer. The agent doesn't hallucinate customer details &mdash; it retrieves them from the unified profile. And the retrieval respects the same access controls that apply everywhere else on the platform.</p>
+    </div>
+
+    <div class="pillar-box">
+      <b>Data Controls: Classification and Access at the Source</b>
+      <p>Data Detect identifies sensitive data across the unified layer. Classification tags propagate through to every downstream consumer. Platform Encryption protects fields at rest. Field Audit Trail tracks every modification. The governance controls live in the data layer itself &mdash; not in each application that accesses it.</p>
+    </div>
+
+    <div class="pillar-box">
+      <b>People: Auditable AI Decisions</b>
+      <p>When a stakeholder asks "why did the agent recommend this?" or "what data informed this decision?", Data Cloud's lineage capabilities provide the answer. You can trace from an agent action back through the grounding data to the original source &mdash; making AI decisions explainable and auditable.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Controls -->
+    <h2><b>Data Cloud Governance Controls for AI</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Consent &amp; Purpose Management</div>
+      <div class="control-body">
+        <p>Data Cloud manages consent as a first-class data entity, not just a boolean flag. This means:</p>
+        <p><b>Purpose-based access.</b> Data collected for one purpose (e.g., order fulfillment) isn't automatically available for another (e.g., marketing personalization). AI agents inherit these purpose constraints &mdash; they can only access data aligned to their defined function.</p>
+        <p><b>Consent versioning and audit.</b> When a regulator asks "did this person consent to AI processing at the time of this interaction?", the answer is forensically available. Consent records include timestamps, version history, and the specific scope that was agreed to.</p>
+        <p><b>Dynamic enforcement.</b> When consent is revoked, the change propagates through Data Cloud's access policies in real time. Agents that previously had access to that person's data lose it immediately &mdash; no manual cleanup required.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Data Quality for AI Grounding</div>
+      <div class="control-body">
+        <p>AI agents make decisions based on the data they read. If the data is stale, duplicated, or inconsistent, the decisions will be wrong &mdash; regardless of how well the agent logic is governed. Data Cloud provides:</p>
+        <p><b>Freshness tracking.</b> Every data element carries a "last updated" timestamp. Agents can be configured to flag or escalate when they're making decisions based on data older than a defined threshold.</p>
+        <p><b>Conflict resolution rules.</b> When multiple sources provide different values for the same attribute, Data Cloud's harmonization rules determine which source wins. These rules are explicit and auditable &mdash; not hidden in code.</p>
+        <p><b>Completeness monitoring.</b> For AI grounding to be reliable, the unified profile needs to be sufficiently complete. Data Cloud can surface where profiles are thin (missing key attributes) so that agent recommendations are appropriately caveated.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Segmentation &amp; Activation Governance</div>
+      <div class="control-body">
+        <p>Data Cloud powers audience segmentation for Marketing Cloud, agent grounding for Agentforce, and analytics across all clouds. Governance controls on segmentation and activation include:</p>
+        <p><b>Segment definition audit trail.</b> Every segment query is versioned. When an AI-generated segment produces unexpected results, you can trace exactly what criteria were applied and when they changed.</p>
+        <p><b>Activation policies.</b> Not all data is appropriate for all destinations. Activation policies control which data can flow to which channels &mdash; preventing sensitive fields from being activated to advertising platforms or external systems without explicit approval.</p>
+        <p><b>Data minimization.</b> Agents and activations receive only the fields they need for their function. The full unified profile isn't exposed to every consumer &mdash; each gets a scoped view based on its purpose and permission level.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Map -->
+    <h2><b>Data Cloud Governance Map</b></h2>
+
+    <table class="governance-map">
+      <thead>
+        <tr>
+          <th>AI Use Case</th>
+          <th>Data Cloud Governance Role</th>
+          <th>Control Mechanism</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Agent grounding</b> (Agentforce retrieving customer context)</td>
+          <td>Provides unified, access-controlled profiles for agent reasoning</td>
+          <td>Purpose-based access + data minimization + freshness tracking</td>
+        </tr>
+        <tr>
+          <td><b>AI-generated queries</b> (code that reads customer data)</td>
+          <td>Schema validation and classification-aware access policies</td>
+          <td>Data classification tags + USER_MODE enforcement</td>
+        </tr>
+        <tr>
+          <td><b>Personalization</b> (Marketing Cloud content generation)</td>
+          <td>Verified identity + consent-gated access to preferences</td>
+          <td>Identity resolution + consent management + activation policies</td>
+        </tr>
+        <tr>
+          <td><b>Analytics &amp; reporting</b> (AI-generated dashboards)</td>
+          <td>Consistent, harmonized metrics from a single source of truth</td>
+          <td>Conflict resolution rules + lineage tracking</td>
+        </tr>
+        <tr>
+          <td><b>Regulatory response</b> (GDPR/CCPA subject access requests)</td>
+          <td>Complete view of all data held on an individual, with provenance</td>
+          <td>Unified profile + lineage + consent audit trail</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The data governance principle:</b> In the AI era, the data layer isn't just storage &mdash; it's the trust boundary. Data Cloud ensures that every AI interaction, every agent decision, and every AI-generated query operates on data that is unified, classified, consented, and access-controlled. This is what makes the platform a governance layer rather than just an execution environment.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="marketing-cloud.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Marketing Cloud</a>
+      <a href="agentforce.html" class="w3-button w3-blue">Agentforce<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
