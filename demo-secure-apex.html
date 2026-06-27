@@ -1,1 +1,546 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Secure Apex — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 20px 24px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.88em;
+  line-height: 1.6;
+  margin: 16px 0;
+}
+pre .comment { color: #64748b; }
+pre .keyword { color: #7dd3fc; }
+pre .string { color: #86efac; }
+pre .danger { color: #fca5a5; }
+pre .safe { color: #86efac; }
+pre .annotation { color: #c4b5fd; }
+
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+@media (max-width: 900px) {
+  .comparison-container { grid-template-columns: 1fr; }
+}
+
+.comparison-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 12px 16px;
+  font-weight: bold;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-header i { font-size: 1.1em; }
+.panel-bad .panel-header {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.panel-good .panel-header {
+  background: #dcfce7;
+  color: #166534;
+}
+.panel-body {
+  padding: 0;
+}
+.panel-body pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.callout-red {
+  background: #fef2f2;
+  border-left: 4px solid #dc2626;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.issue-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+.issue-list li {
+  padding: 10px 16px;
+  border-left: 3px solid;
+  margin-bottom: 8px;
+  background: #f9fafb;
+}
+.issue-list li.bad { border-color: #dc2626; }
+.issue-list li.good { border-color: #16a34a; }
+.issue-list li b { display: block; margin-bottom: 2px; }
+
+.taxonomy-tag {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <span class="taxonomy-tag"><i class="fa fa-bug w3-margin-right"></i>Failure Mode #2: Security Bypass</span>
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Secure Apex: Unsafe vs. Governed</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">What AI-generated code looks like without governance &mdash; and with it</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        A developer asks an AI assistant: <i>"Write an Apex method that updates Account revenue and creates a follow-up Task for the account owner."</i> What comes back compiles, works in sandbox, and silently bypasses every access control on the platform.
+      </p>
+    </div>
+
+    <!-- The Scenario -->
+    <h2><b>The Scenario</b></h2>
+
+    <p>This is the most common security failure in AI-generated Salesforce code. The developer gives a reasonable prompt. The AI gives back reasonable-looking code. Everything works in the sandbox (because the developer is testing as a System Administrator). Nobody notices that the code runs in system mode &mdash; meaning it ignores sharing rules, CRUD permissions, and field-level security entirely.</p>
+
+    <p>In production, a standard user runs this code and gets access to records and fields they should never see. Or worse &mdash; the code modifies records the user has no business touching. There's no error, no exception, no audit flag. It just works &mdash; in the wrong way.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Side by Side -->
+    <h2><b>What the AI Generates vs. What You Need</b></h2>
+
+    <div class="comparison-container">
+      <div class="comparison-panel panel-bad">
+        <div class="panel-header"><i class="fa fa-times-circle"></i> What the AI generates (unsafe)</div>
+        <div class="panel-body">
+<pre>
+<span class="comment">// No 'with sharing' declaration</span>
+<span class="keyword">public class</span> <span class="danger">AccountRevenueUpdater</span> {
+
+  <span class="keyword">public static void</span> updateRevenue(
+    Id accountId, Decimal newRevenue
+  ) {
+
+    <span class="comment">// Naked SOQL — runs in system mode</span>
+    Account acc = [
+      <span class="danger">SELECT Id, AnnualRevenue, OwnerId
+      FROM Account
+      WHERE Id = :accountId</span>
+    ];
+
+    acc.AnnualRevenue = newRevenue;
+    <span class="danger">update acc;</span> <span class="comment">// Naked DML — no access check</span>
+
+    Task followUp = <span class="keyword">new</span> Task(
+      Subject = 'Revenue Updated',
+      WhatId = accountId,
+      OwnerId = acc.OwnerId,
+      ActivityDate = Date.today().addDays(7)
+    );
+    <span class="danger">insert followUp;</span> <span class="comment">// No FLS check</span>
+  }
+}
+</pre>
+        </div>
+      </div>
+
+      <div class="comparison-panel panel-good">
+        <div class="panel-header"><i class="fa fa-check-circle"></i> What governed code looks like</div>
+        <div class="panel-body">
+<pre>
+<span class="comment">// Enforces sharing rules</span>
+<span class="keyword">public</span> <span class="safe">with sharing</span> <span class="keyword">class</span> AccountRevenueUpdater {
+
+  <span class="keyword">public static void</span> updateRevenue(
+    Id accountId, Decimal newRevenue
+  ) {
+
+    <span class="comment">// USER_MODE — respects CRUD + FLS + sharing</span>
+    Account acc = [
+      SELECT Id, AnnualRevenue, OwnerId
+      FROM Account
+      WHERE Id = :accountId
+      <span class="safe">WITH USER_MODE</span>
+    ];
+
+    acc.AnnualRevenue = newRevenue;
+    <span class="comment">// AccessLevel.USER_MODE on DML</span>
+    Database.update(
+      acc, <span class="safe">AccessLevel.USER_MODE</span>
+    );
+
+    Task followUp = <span class="keyword">new</span> Task(
+      Subject = 'Revenue Updated',
+      WhatId = accountId,
+      OwnerId = acc.OwnerId,
+      ActivityDate = Date.today().addDays(7)
+    );
+    Database.insert(
+      followUp, <span class="safe">AccessLevel.USER_MODE</span>
+    );
+  }
+}
+</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's Wrong -->
+    <h2><b>What's Wrong With the Left Side</b></h2>
+
+    <p>Both versions compile. Both pass basic functional tests. Both produce the correct result when run by an administrator in sandbox. The difference only becomes visible in production, with real users and real data access rules. Here's what the unsafe version ignores:</p>
+
+    <ul class="issue-list">
+      <li class="bad">
+        <b>Missing <code>with sharing</code></b>
+        Without this keyword, the class runs in system mode. It can query and modify ANY record in the org &mdash; regardless of the running user's role hierarchy, sharing rules, or record ownership. A sales rep could modify accounts they've never been granted access to.
+      </li>
+      <li class="bad">
+        <b>Naked SOQL (no <code>WITH USER_MODE</code>)</b>
+        The query returns all fields regardless of whether the user has FLS (Field-Level Security) access. Sensitive fields like revenue figures, internal notes, or custom fields restricted to specific profiles are silently exposed.
+      </li>
+      <li class="bad">
+        <b>Naked DML (no <code>AccessLevel.USER_MODE</code>)</b>
+        The <code>update</code> and <code>insert</code> statements execute without checking whether the user has CRUD permissions on Account or Task, or write access to the specific fields being modified.
+      </li>
+    </ul>
+
+    <div class="callout-red">
+      <p style="margin:0;"><b>Why the AI produces this:</b> Most publicly available Apex code examples don't use <code>USER_MODE</code> (it's relatively new, introduced in Spring '23). The AI's training data is dominated by system-mode patterns. Without explicit instruction, it defaults to the most common pattern &mdash; which happens to be the insecure one.</p>
+    </div>
+
+    <!-- What's Right -->
+    <h2><b>What the Right Side Does Differently</b></h2>
+
+    <ul class="issue-list">
+      <li class="good">
+        <b><code>with sharing</code> on the class</b>
+        The class now respects the running user's sharing rules. They can only query and modify records they have legitimate access to through ownership, role hierarchy, sharing rules, or manual shares.
+      </li>
+      <li class="good">
+        <b><code>WITH USER_MODE</code> on SOQL</b>
+        The query enforces the user's CRUD and FLS at the database level. If the user doesn't have read access to <code>AnnualRevenue</code>, the query throws an exception rather than silently returning the data.
+      </li>
+      <li class="good">
+        <b><code>AccessLevel.USER_MODE</code> on DML</b>
+        The insert and update operations respect the user's object-level and field-level permissions. If they can't write to a field, the operation fails cleanly rather than succeeding in system mode.
+      </li>
+    </ul>
+
+    <div class="key-insight">
+      <p>The secure version doesn't just "add security checks." It <b>delegates security enforcement to the platform</b>. The code doesn't need to know what the user can or can't access &mdash; the database layer enforces it automatically. This is the architectural advantage: security lives below the application, not inside it.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- How to Prevent This -->
+    <h2><b>How to Prevent This at Scale</b></h2>
+
+    <p>You can't rely on developers catching this in review &mdash; especially when AI is generating 3-5x more code than before. You need automated enforcement at multiple layers:</p>
+
+    <h4><b>1. Design-Time: Prompt Templates</b></h4>
+    <p>Create organizational prompt templates that pre-inject security requirements. When a developer asks for Apex code, the template automatically includes constraints like "all classes must use <code>with sharing</code>, all SOQL must use <code>WITH USER_MODE</code>, all DML must use <code>AccessLevel.USER_MODE</code>." The AI generates secure code by default because the prompt demands it.</p>
+
+    <h4><b>2. Build-Time: Code Analyzer in CI/CD</b></h4>
+    <p>Salesforce Code Analyzer with Data Flow Analysis runs in your deployment pipeline. It detects naked SOQL, naked DML, missing <code>with sharing</code>, and other security anti-patterns <i>before</i> the code reaches production. The deployment fails automatically &mdash; no human reviewer needs to catch it.</p>
+
+    <h4><b>3. Data-Time: Platform Enforcement</b></h4>
+    <p>Even if unsafe code somehow makes it to production, the platform's security model provides a backstop. Transaction Security Policies can detect unusual data access patterns. Event Monitoring surfaces who accessed what data and when. Shield Platform Encryption protects sensitive field values even if queried by unauthorized code.</p>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The governed approach in practice:</b> Teams that adopt <code>USER_MODE</code> as the default pattern report that the initial adjustment takes about a week. After that, it becomes muscle memory &mdash; and they never have to think about whether individual methods are secure. The platform handles it.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Real-World Impact -->
+    <h2><b>Why This Matters Beyond Compliance</b></h2>
+
+    <p>This isn't just about passing a security audit. Consider what happens at scale:</p>
+
+    <p>A team of five developers using AI assistants generates 20+ Apex classes per week. If even 30% of those classes have security gaps (which is conservative &mdash; research suggests AI-generated code has security issues in over 40% of cases), you're adding 6+ vulnerable classes to your org every week. Over a quarter, that's 75+ classes that bypass your access model.</p>
+
+    <p>The compounding effect is what makes this dangerous. Each class on its own might be low-risk. But collectively, they create an environment where data access rules exist on paper (in profiles and permission sets) but are silently ignored in practice (by code running in system mode). Your security posture looks correct in Setup. It's completely undermined in execution.</p>
+
+    <p>The governed approach eliminates this entire category of risk. Not by adding more review burden &mdash; but by making the secure path the default path.</p>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="governance-model.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>The Governance Model</a>
+      <a href="demo-logic-hallucination.html" class="w3-button w3-blue">Logic Hallucination<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
