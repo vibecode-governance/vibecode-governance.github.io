@@ -542,35 +542,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <!-- Rules File Section -->
     <hr style="margin: 40px 0;">
 
-    <h2><b>Put It to Work: The Governance Rules File</b></h2>
+    <h2><b>Sidebar: An Experiment with AI Rules Files</b></h2>
 
-    <p>This entire framework distilled into a single file you upload to your AI coding tool &mdash; ChatGPT, Gemini, Claude, Copilot, whatever your team uses. The developer describes intent. The AI applies the governance constraints automatically. No encyclopedia to memorize. <a href="rules-file.html" style="font-weight:bold;">View the full rules file and copy it &rarr;</a></p>
+    <p>As a small experiment, I put together a rules file that nudges AI coding tools to be a bit more careful when generating Salesforce code. It's not a governance solution &mdash; the real governance comes from the platform controls described throughout this framework (Shield, Code Analyzer, Trust Layer, Transaction Security). This is just a lightweight way to get the AI to remember things like <code>WITH USER_MODE</code> and bulk-safety without the developer having to ask every time. <a href="rules-file.html" style="color:#1a73e8;">See the example &rarr;</a></p>
 
     <div class="w3-panel w3-leftbar w3-pale-red w3-padding-16" style="border-left-color: #e53935; margin: 24px 0;">
-      <p style="margin:0;"><b>Disclaimer:</b> This is a demonstration of the VibeOps governance framework concept. It is <b>not an official Salesforce product, tool, or endorsed artifact.</b> 
-       .</p>
+      <p style="margin:0;"><b>Disclaimer:</b> This is a personal experiment, not an official Salesforce product, tool, or endorsed artifact.</p>
     </div>
 
-    <p><b>How to use it:</b> Upload the file at the start of any AI session and say "follow these rules when generating Salesforce code for me." That's it. The AI handles the governance. You review the output.</p>
-
-    <p><b>What it covers:</b> Security patterns (USER_MODE, with sharing, no naked SOQL/DML), automation safety (existing automation check, bulk-safe, fault paths), agent governance (bounded autonomy, scoped actions), data cloud guardrails, integration rules, and code quality standards.</p>
-
-    <p><b>What it explicitly won't catch</b> (and the AI will warn you about these at the end of every response):</p>
-
-    <div style="margin: 16px 0 24px; padding: 16px 20px; background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 4px;">
-      <p style="margin: 0 0 12px;"><b>Code Analyzer / Static Analysis</b> &mdash; Complex data flow vulnerabilities, cross-class taint analysis, and performance anti-patterns require <code>sf scanner run</code> or Code Analyzer in your CI/CD pipeline.</p>
-      <p style="margin: 0 0 12px;"><b>Platform Controls</b> &mdash; Transaction Security Policies, Event Monitoring, Platform Encryption, and Field Audit Trail must be configured in Setup. No rules file substitutes for these runtime controls.</p>
-      <p style="margin: 0 0 12px;"><b>Business Logic Correctness</b> &mdash; AI implements the rule you describe but cannot validate whether your business rule is actually correct. Validate with stakeholders and production-representative data.</p>
-      <p style="margin: 0;"><b>Automation Interaction</b> &mdash; Order-of-execution conflicts, managed package automation, scheduled jobs, and async processes are not fully visible to AI. Run integration tests with bulk data.</p>
-    </div>
-
-    <p>Think of it this way: <b>the rules file is the soft guardrail at generation time. Code Analyzer is the hard gate at merge time. Platform controls are the architectural wall at runtime.</b> Any single layer can fail. The stack doesn't.</p>
+    <p>It won't catch complex vulnerabilities (that's Code Analyzer), won't block risky actions at runtime (that's Transaction Security and platform controls), and can't validate business logic correctness. It just makes the AI slightly less likely to generate the obvious mistakes. The heavy lifting is still done by the platform.</p>
 
     <!-- Collapsible rules file content -->
     <details style="margin: 24px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
-      <summary style="padding: 16px 20px; background: #f3f4f6; cursor: pointer; font-weight: bold; font-size: 1.05em;">View / Copy the Governance Rules File</summary>
+      <summary style="padding: 16px 20px; background: #f3f4f6; cursor: pointer; font-weight: bold; font-size: 1.05em;">View the Example Rules File</summary>
       <div style="padding: 20px; background: #fafafa;">
-        <p style="margin: 0 0 12px; font-size: 0.9em; color: #555;">Copy everything below and save as a file (e.g., <code>salesforce-vibeops-rules.md</code>). Upload it to your AI tool at the start of each session.</p>
+        <p style="margin: 0 0 12px; font-size: 0.9em; color: #555;">Example content. Also available as: <a href="salesforce-vibeops-rules.md" style="color:#1a73e8;">salesforce-vibeops-rules.md</a></p>
         <pre style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 6px; overflow-x: auto; font-size: 0.85em; line-height: 1.6; white-space: pre-wrap;">
 # Salesforce VibeOps Governance Rules
 
@@ -647,7 +633,7 @@ https://vibecode-governance.github.io</pre>
       </div>
     </details>
 
-    <p style="color:#555; font-size: 0.95em;">This is how the VibeOps framework becomes zero-effort governance at development time. The site explains <i>why</i> each rule exists. The file tells the AI <i>what to do</i>. The developer just describes intent.</p>
+    <p style="color:#555; font-size: 0.95em;">The real governance is in the platform &mdash; Shield, Code Analyzer, Trust Layer, bounded autonomy. A rules file just helps the AI avoid the obvious pitfalls at generation time.</p>
 
     <!-- Footer -->
     <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
