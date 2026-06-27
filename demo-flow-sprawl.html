@@ -443,207 +443,96 @@ pre .highlight { color: #fde68a; }
 
     <span class="taxonomy-tag"><i class="fa fa-bug w3-margin-right"></i>Failure Mode #4: State Corruption &amp; Automation Sprawl</span>
 
-    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Flow Sprawl: The Haunted Database</b></h1>
-    <p style="font-size:1.1em; color:#555; margin-top:0;">When AI-generated automation works in sandbox, collides in production, and corrupts data nobody notices for weeks</p>
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Flow Sprawl: Sandbox Success, Production Failure</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">AI generates Flows that work in isolation but produce cascading side effects at scale</p>
 
     <!-- Opening -->
     <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
       <p class="w3-large" style="margin:0;">
-        Three developers independently ask AI to solve three different problems on the Opportunity object. Each Flow works perfectly in sandbox. In production, they fire on the same record in an undefined order &mdash; and the org becomes a haunted database where nobody knows why fields have the values they have.
+        A good CI/CD pipeline catches the obvious problems &mdash; naming violations, missing fault paths, bulk-unsafe patterns. What it doesn't catch is semantic interaction: Flows that individually pass every gate but produce cascading side effects when they execute together on the same record at scale.
       </p>
     </div>
 
-    <!-- The Scenario -->
-    <h2><b>The Scenario</b></h2>
+    <hr style="margin: 32px 0;">
 
-    <p>This isn't a security vulnerability. It's a governance failure that accelerates under AI-assisted velocity. When one developer builds one Flow at a time, there's a natural pace that allows teams to notice conflicts. When AI generates Flows as fast as developers can describe requirements, the automation layer accumulates faster than anyone can track.</p>
+    <!-- Bad Prompt -->
+    <h2><b>Bad Prompt</b></h2>
 
-    <p>The result is what experienced Salesforce architects call a "haunted database" &mdash; an org where field values change unpredictably, automation fires in chains nobody planned, and debugging means tracing through multiple layers of interacting logic that were never designed to work together.</p>
+    <div class="callout-red">
+      <p style="margin:0; font-size: 1.05em; font-style: italic;">"Create a Salesforce Flow that updates Opportunities when stage changes and sends a notification to sales."</p>
+    </div>
+
+    <h3>Likely Bad Output</h3>
+
+    <p>The AI generates a Flow that:</p>
+    <p style="margin: 4px 0;">&mdash; Has too many elements and unnecessary loops</p>
+    <p style="margin: 4px 0;">&mdash; Is not bulk-safe (works for 1 record, crashes at 200+)</p>
+    <p style="margin: 4px 0;">&mdash; Lacks fault paths (failures are silent)</p>
+    <p style="margin: 4px 0;">&mdash; Has no awareness of other automation already on the same object</p>
+    <p style="margin: 4px 0;">&mdash; Gets a generic name with no description or ownership metadata</p>
+    <p style="margin: 4px 0;">&mdash; Does not account for FLS or sharing</p>
+
+    <h3>What Goes Wrong</h3>
+
+    <p>The Flow works fine in sandbox with one test record. In production, three developers have independently generated three Flows on the same object. Each passes its own tests. Each passes CI/CD individually. But when a batch operation fires all three on the same records:</p>
+
+    <p>Flow B reassigns the owner &rarr; that field change re-triggers Flow A &rarr; close dates get recalculated &rarr; Flow C fires a notification on every cascading update. Result: wrong data on hundreds of records, thousands of spurious notifications, and hours to trace which Flow caused what.</p>
+
+    <p>No individual test caught it because no test ran them together on the same batch. The pipeline saw no structural overlap because they trigger on different field conditions. The conflict is emergent, not structural &mdash; it only surfaces at runtime, at scale.</p>
 
     <hr style="margin: 32px 0;">
 
-    <!-- How It Happens -->
-    <h2><b>How It Accumulates: A Six-Week Timeline</b></h2>
-
-    <div class="timeline">
-      <div class="timeline-item neutral">
-        <div class="week">Week 1</div>
-        <b>Developer A: "Create a Flow that updates the Opportunity close date when stage changes to Negotiation"</b>
-        <p>AI generates a Record-Triggered Flow on Opportunity. Works perfectly in sandbox. Deployed to production. No issues.</p>
-      </div>
-
-      <div class="timeline-item neutral">
-        <div class="week">Week 3</div>
-        <b>Developer B: "Build automation that assigns the Opportunity to a new owner based on territory when amount exceeds $500K"</b>
-        <p>AI generates another Record-Triggered Flow on Opportunity. Works perfectly in sandbox (tested with a single record). Deployed to production.</p>
-      </div>
-
-      <div class="timeline-item neutral">
-        <div class="week">Week 5</div>
-        <b>Developer C: "Create a Flow that sends a Slack notification and creates a Task when an Opportunity moves to Closed Won"</b>
-        <p>AI generates a third Record-Triggered Flow on Opportunity. Tested with one record in sandbox. Works fine. Deployed.</p>
-      </div>
-
-      <div class="timeline-item bad">
-        <div class="week">Week 6 &mdash; Quarter End</div>
-        <b>A data migration updates 2,000 Opportunities in a single batch</b>
-        <p>All three Flows fire on every record. Flow A changes close dates. Flow B reassigns owners (which triggers Flow A again because owner change triggers a re-evaluation). Flow C sends 2,000 Slack messages and creates 2,000 Tasks. Some records hit Flow A twice due to cascading updates. Close dates are now wrong on 400+ records. The pipeline report shows $12M less than yesterday. Nobody knows which Flow changed what.</p>
-      </div>
-    </div>
-
-    <!-- The Conflict Diagram -->
-    <div class="sprawl-diagram">
-      <div class="object-name">Opportunity (Record-Triggered Flows)</div>
-      <div class="connector-arrow">All fire on the same DML event &mdash; order is not guaranteed</div>
-      <div class="automation-list">
-        <div class="auto-item conflict">Flow A: Update CloseDate on Stage change</div>
-        <div class="auto-item conflict">Flow B: Reassign Owner on Amount > $500K</div>
-        <div class="auto-item conflict">Flow C: Notify + Task on Closed Won</div>
-        <div class="auto-item">Existing Trigger: Roll up to Account</div>
-        <div class="auto-item">Existing Process Builder: Legacy notification (forgotten)</div>
-      </div>
-      <div class="connector-arrow" style="margin-top:12px; color: #dc2626;">+ a forgotten Process Builder nobody knows about that also fires on Stage change</div>
-    </div>
-
-    <div class="impact-grid">
-      <div class="impact-item">
-        <div class="number">2,000</div>
-        <div class="label">Slack messages sent in 3 minutes</div>
-      </div>
-      <div class="impact-item">
-        <div class="number">400+</div>
-        <div class="label">records with wrong close dates</div>
-      </div>
-      <div class="impact-item">
-        <div class="number">8 hours</div>
-        <div class="label">to identify which Flow caused what</div>
-      </div>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Why AI Makes This Worse -->
-    <h2><b>Why AI Accelerates This Problem</b></h2>
-
-    <p>Flow sprawl isn't new. Salesforce orgs have always accumulated automation over time. What's new is the <i>rate</i>. When AI generates Flows in minutes rather than days, the accumulation speed outpaces the team's ability to maintain a mental model of what's already there.</p>
-
-    <div class="comparison-container">
-      <div class="comparison-panel panel-bad">
-        <div class="panel-header"><i class="fa fa-times-circle"></i> What AI produces by default</div>
-        <div class="panel-body">
-          <p><b>No awareness of existing automation.</b> Each Flow is generated in isolation. The AI doesn't query what's already deployed on the same object.</p>
-          <p><b>No bulk-safety consideration.</b> The generated Flow works for one record. It has no fault paths, no bulkification patterns, no consideration for what happens at 200+ records.</p>
-          <p><b>No naming or ownership metadata.</b> The Flow gets a generic name. No description field. No documentation of when it should fire or what it depends on.</p>
-          <p><b>No conflict detection.</b> There's no check for whether another Flow already updates the same fields under the same conditions.</p>
-        </div>
-      </div>
-
-      <div class="comparison-panel panel-good">
-        <div class="panel-header"><i class="fa fa-check-circle"></i> What governed automation looks like</div>
-        <div class="panel-body">
-          <p><b>Automation registry.</b> Before generating a new Flow, check the registry of existing automation on the target object. Identify potential conflicts before development begins.</p>
-          <p><b>Bulk-safe by design.</b> Fault paths are mandatory. Loop limits are enforced. The Flow is tested with 200-record batches before deployment.</p>
-          <p><b>Ownership and naming standards.</b> Every Flow has: a standardized name, a description, an owner, a creation date, and a link to the requirement it satisfies.</p>
-          <p><b>Overlap analysis in CI/CD.</b> The deployment pipeline checks for other automation on the same object and flags potential conflicts before promotion.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="key-insight">
-      <p>The problem isn't that the AI made a bad Flow. Each Flow in isolation is fine. The problem is that <b>AI generates automation with no operating model around it</b> &mdash; no awareness of context, no interaction analysis, no lifecycle management. Governance means providing that operating model before the automation reaches production.</p>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- The Governed Approach -->
-    <h2><b>The Governed Approach: Before, During, and After</b></h2>
-
-    <h4><b>Before Generation: Automation Registry</b></h4>
-
-    <p>Maintain a metadata registry of all automation on each object. Before asking AI to generate a new Flow, check what already exists. This can be as simple as a custom metadata type or as sophisticated as a DevOps Center integration that maps automation dependencies.</p>
-
-    <p>The governed prompt includes context: "There is already a Record-Triggered Flow on Opportunity that fires on Stage change and updates CloseDate. Your new automation must not conflict with this existing behavior."</p>
-
-    <h4><b>During Build: Metadata Validation in CI/CD</b></h4>
-
-    <p>Your deployment pipeline should validate:</p>
-
-<pre>
-<span class="comment">// Metadata validation checks (conceptual)</span>
-
-<span class="keyword">1. Naming convention</span>
-   Flow name matches pattern: {Object}_{Action}_{Version}
-   <span class="safe">✓ Opportunity_ReassignOwner_v1</span>
-   <span class="danger">✗ My New Flow</span>
-
-<span class="keyword">2. Description populated</span>
-   Description field is non-empty and contains:
-   - Business requirement reference
-   - Owner/team
-   - Objects and fields affected
-   <span class="safe">✓ "Reassigns Opp owner based on territory rules when Amount > $500K. Owner: Rev Ops. Req: JIRA-1234"</span>
-   <span class="danger">✗ "" (empty)</span>
-
-<span class="keyword">3. Fault path present</span>
-   Flow contains at least one Fault connector
-   <span class="safe">✓ Fault path routes to error-handling subflow</span>
-   <span class="danger">✗ No fault path (failures are silent)</span>
-
-<span class="keyword">4. Overlap detection</span>
-   No other active Flow on same object + same trigger condition
-   <span class="safe">✓ No conflict detected</span>
-   <span class="danger">✗ CONFLICT: "Opportunity_UpdateCloseDate_v1" also fires on Stage change</span>
-
-<span class="keyword">5. Bulk safety</span>
-   No Get/Update inside loops
-   Record collection used for DML
-   <span class="safe">✓ Bulk-safe pattern confirmed</span>
-   <span class="danger">✗ DML inside loop detected — will fail at 200+ records</span>
-</pre>
-
-    <h4><b>After Deployment: Monitoring and Lifecycle</b></h4>
-
-    <p>Automation that deploys isn't "done." It needs ongoing governance:</p>
-
-    <p><b>Event Monitoring</b> surfaces Flow execution patterns. If a Flow starts firing 10x more than usual (like during a bulk data load), you see it in real time rather than discovering it from corrupted reports.</p>
-
-    <p><b>Periodic automation audits</b> identify Flows that are redundant, conflicting, or no longer needed. This is especially important when AI makes it easy to create new automation rather than modifying existing logic.</p>
-
-    <p><b>Flow ownership and expiration.</b> Every Flow should have an owner and a review date. If the owner leaves the team and nobody claims it, it enters a deprecation queue &mdash; not silent neglect.</p>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- The Haunted Database -->
-    <h2><b>Recognizing the Haunted Database</b></h2>
-
-    <p>Most orgs don't realize they have this problem until a specific incident forces a forensic investigation. Here are the signals that tell you the automation layer is ungoverned:</p>
-
-    <div class="callout-amber">
-      <p style="margin:0 0 12px 0;"><b>Signals you already have Flow sprawl:</b></p>
-      <p style="margin:4px 0;"><b>"I don't know why this field has this value."</b> When investigating a data issue, nobody can trace which automation set a field. There's no single source of truth for field ownership.</p>
-      <p style="margin:4px 0;"><b>"It works when I edit one record but breaks in bulk."</b> Classic sign of automation that was never tested beyond single-record execution.</p>
-      <p style="margin:4px 0;"><b>"We have 3 Flows and 2 Process Builders on the same object."</b> Some fire on the same conditions. Some were supposed to replace others but the old ones were never deactivated.</p>
-      <p style="margin:4px 0;"><b>"Our data migration took 10x longer than estimated."</b> Automation firing on every record during the load, cascading into more automation, hitting governor limits.</p>
-      <p style="margin:4px 0;"><b>"Reports show different numbers depending on when you run them."</b> Automation is still modifying records in unpredictable patterns after the initial transaction.</p>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Platform Controls -->
-    <h2><b>Platform Controls That Help</b></h2>
-
-    <p><b>Metadata API + DevOps Center:</b> Query existing automation programmatically before deploying new components. Build overlap detection into your CI/CD pipeline as a required gate.</p>
-
-    <p><b>Flow Trigger Explorer:</b> A built-in Salesforce tool that shows all automation on a given object in execution order. Use it during design review to identify conflicts before they reach production.</p>
-
-    <p><b>Event Monitoring:</b> Track Flow execution frequency, duration, and failure rates. Set up alerts for anomalous patterns (sudden spikes in execution count, cascading triggers).</p>
-
-    <p><b>Custom Metadata Types:</b> Build an automation registry as custom metadata &mdash; it deploys alongside your automation and provides a queryable index of what exists, who owns it, and what it does.</p>
-
-    <p><b>Field Audit Trail:</b> When you can't prevent the haunting, at least you can trace it. Field Audit Trail gives you a forensic record of what changed, when, and (critically) what process was responsible &mdash; for up to 10 years.</p>
+    <!-- Good Prompt -->
+    <h2><b>Good Prompt</b></h2>
 
     <div class="callout-blue">
-      <p style="margin:0;"><b>The governance principle:</b> AI makes it trivially easy to create new automation. Governance makes it equally easy to understand what exists, verify it doesn't conflict, and trace what happened when it does. The platform provides the tools &mdash; the operating model puts them into practice.</p>
+      <p style="margin:0; font-size: 1.05em; font-style: italic;">"Generate a production-safe Salesforce Flow design for Opportunity stage change handling. Keep it bulk-safe, minimize elements, avoid unnecessary loops, include fault paths, assume enterprise scale. There is already a Record-Triggered Flow on Opportunity that reassigns owner when Amount exceeds $500K &mdash; your new automation must not conflict with this existing behavior. Provide recommended naming, ownership metadata, and deployment controls."</p>
+    </div>
+
+    <h3>Better Output</h3>
+
+    <p>The AI now generates a Flow that:</p>
+    <p style="margin: 4px 0;">&mdash; Is simplified with minimal element count</p>
+    <p style="margin: 4px 0;">&mdash; Includes fault paths that route to error handling</p>
+    <p style="margin: 4px 0;">&mdash; Is bulk-safe (no DML/SOQL inside loops)</p>
+    <p style="margin: 4px 0;">&mdash; Explicitly avoids conflict with the existing owner-reassignment Flow</p>
+    <p style="margin: 4px 0;">&mdash; Follows naming convention: <code>Opportunity_StageChangeNotify_v1</code></p>
+    <p style="margin: 4px 0;">&mdash; Includes description with owner, requirement reference, and fields affected</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Prevention Pattern -->
+    <h2><b>Prevention Pattern</b></h2>
+
+    <p><b>Constrain generation with context, then validate in pipeline.</b></p>
+
+    <p>CI/CD catches structural problems. The prompt itself must prevent semantic conflicts &mdash; because cascading side effects between Flows are invisible to static analysis.</p>
+
+<pre>
+<span class="comment">// What CI/CD catches (structural)</span>
+<span class="safe">✓ Naming convention enforced</span>
+<span class="safe">✓ Description populated with owner + requirement</span>
+<span class="safe">✓ Fault paths present</span>
+<span class="safe">✓ No DML/SOQL inside loops</span>
+<span class="safe">✓ Basic overlap detection (same object + same trigger)</span>
+
+<span class="comment">// What the prompt must prevent (semantic)</span>
+<span class="highlight">→ Cascading field updates that re-trigger other Flows</span>
+<span class="highlight">→ Side effects that interact at scale but not in single-record tests</span>
+<span class="highlight">→ Automation that duplicates or contradicts existing logic</span>
+</pre>
+
+    <h3>Best Practices</h3>
+
+    <p style="margin: 6px 0;"><b>Include existing automation context in the prompt.</b> Tell the AI what's already deployed on the target object before it generates anything new.</p>
+    <p style="margin: 6px 0;"><b>Prompt for bulk-safe design and minimal elements.</b> Explicitly request fault paths and no unnecessary loops.</p>
+    <p style="margin: 6px 0;"><b>Require naming and ownership metadata.</b> Every Flow needs a standardized name, description, owner, and requirement reference.</p>
+    <p style="margin: 6px 0;"><b>Use Flow Trigger Explorer during design review.</b> Check all automation on the object in execution order before building.</p>
+    <p style="margin: 6px 0;"><b>Monitor with Event Monitoring post-deployment.</b> Watch for execution spikes that indicate cascading interactions at scale.</p>
+    <p style="margin: 6px 0;"><b>Use Field Audit Trail for forensics.</b> When interactions do occur, trace exactly which process changed what.</p>
+
+    <div class="key-insight">
+      <p>CI/CD catches bad Flows. <b>Good prompts prevent conflicting Flows.</b> The governance layer here is the context you feed the AI before generation &mdash; not just the pipeline that validates after.</p>
     </div>
 
     <hr style="margin: 40px 0;">
