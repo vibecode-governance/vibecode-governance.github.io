@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Agentforce — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.control-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.control-header {
+  padding: 14px 20px;
+  background: #f0fdf4;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-header i { color: #16a34a; }
+.control-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.governance-map {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.governance-map th, .governance-map td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+.governance-map th {
+  background: #f3f4f6;
+  font-size: 0.9em;
+}
+.governance-map td {
+  font-size: 0.9em;
+}
+
+.architecture-block {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.architecture-block b {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.05em;
+}
+.architecture-block p {
+  margin: 0 0 8px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.bounded-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 768px) {
+  .bounded-grid { grid-template-columns: 1fr; }
+}
+.bounded-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: center;
+}
+.bounded-item .icon {
+  font-size: 1.8em;
+  margin-bottom: 8px;
+  color: #1d4ed8;
+}
+.bounded-item b {
+  display: block;
+  margin-bottom: 6px;
+}
+.bounded-item p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #555;
+  line-height: 1.4;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Gap</span>
+      <span class="nav-desc">Why vibe coding changes the risk equation</span></span>
+    </a>
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Failure Taxonomy</span>
+      <span class="nav-desc">Four vectors of agentic SDLC failure</span></span>
+    </a>
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Model</span>
+      <span class="nav-desc">Five pillars of vibe coding control</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Secure Apex</span>
+      <span class="nav-desc">Security bypass — unsafe vs governed code</span></span>
+    </a>
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Logic Hallucination</span>
+      <span class="nav-desc">Looks correct, is wrong</span></span>
+    </a>
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Prompt Injection</span>
+      <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span></span>
+    </a>
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Flow Sprawl</span>
+      <span class="nav-desc">Sandbox success, production failure</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Sales Cloud</span>
+      <span class="nav-desc">Revenue guardrails for autonomous pipeline</span></span>
+    </a>
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Service Cloud</span>
+      <span class="nav-desc">Trusted agent execution across service channels</span></span>
+    </a>
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Marketing Cloud</span>
+      <span class="nav-desc">Governed personalization at campaign scale</span></span>
+    </a>
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Data Cloud</span>
+      <span class="nav-desc">Trusted data foundation for AI and identity</span></span>
+    </a>
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Agentforce</span>
+      <span class="nav-desc">Deterministic execution with observable reasoning</span></span>
+    </a>
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">MuleSoft</span>
+      <span class="nav-desc">Controlled agent-to-API execution</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">People &amp; Organization</span>
+      <span class="nav-desc">Roles, scorecards, interviews, and taste</span></span>
+    </a>
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Platform as Governance Layer</span>
+      <span class="nav-desc">How Salesforce primitives map to each control</span></span>
+    </a>
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Maturity &amp; Roadmap</span>
+      <span class="nav-desc">Self-assessment and 30/60/90 day plan</span></span>
+    </a>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Agentforce</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Deterministic execution with observable reasoning and bounded autonomy</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Agentforce is where the governance model becomes most tangible. It's not a black-box AI that makes opaque decisions &mdash; it's a structured execution framework where every agent has defined topics, explicit actions, observable reasoning, and platform-enforced boundaries. Governance isn't bolted on afterward. It's the architecture.
+      </p>
+    </div>
+
+    <p>Most conversations about "AI agents" treat them as unpredictable black boxes that need to be constrained. Agentforce inverts this. The agent's behavior is <i>defined</i> through a structured framework: topics define scope, actions define capability, guardrails define boundaries, and the Trust Layer provides the observation and enforcement layer. The result is an agent system where governance is a design choice, not an afterthought.</p>
+
+    <div class="key-insight">
+      <p>The difference between Agentforce and a generic LLM-powered agent: <b>the platform constrains execution regardless of what the reasoning produces.</b> Even if the LLM's reasoning is perfect, it can only execute actions in its catalog. Even if its reasoning is compromised, it still can't exceed its defined boundaries. Governance lives in the execution layer, not the reasoning layer.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Architecture -->
+    <h2><b>The Governance Architecture</b></h2>
+
+    <p>Agentforce agents are built from composable, governed primitives. Each layer adds a governance control:</p>
+
+    <div class="architecture-block">
+      <b>Topics &amp; Scope</b>
+      <p>Every agent has explicitly defined topics that determine what it can reason about. A "Case Resolution" agent has topics related to troubleshooting and resolution &mdash; not pricing, not HR, not financial data. If a user (or injected instruction) asks the agent to operate outside its topics, it recognizes the boundary and declines.</p>
+      <p>This is scope governance: the agent knows what it's for, and it won't be repurposed through conversational manipulation.</p>
+    </div>
+
+    <div class="architecture-block">
+      <b>Action Catalog</b>
+      <p>Each topic maps to a defined set of actions the agent can execute. Actions are explicitly registered &mdash; they're not arbitrary API calls. The agent can only do what's in its catalog, and each action has defined inputs, outputs, and permission requirements.</p>
+      <p>This is capability governance: regardless of what the reasoning layer produces, execution is limited to the registered action set.</p>
+    </div>
+
+    <div class="architecture-block">
+      <b>Guardrails &amp; Instructions</b>
+      <p>System-level instructions define behavioral boundaries: what the agent must always do, what it must never do, and under what conditions it must escalate. These are set at the agent definition level &mdash; not in the conversation &mdash; so they can't be overridden by user input.</p>
+      <p>This is behavioral governance: the rules are in the system prompt, not the user prompt, and they persist across all interactions.</p>
+    </div>
+
+    <div class="architecture-block">
+      <b>Trust Layer</b>
+      <p>Every LLM interaction routes through the Trust Layer &mdash; a centralized gateway that provides injection defense, toxicity detection, PII masking, and a complete audit trail. The agent doesn't access the LLM directly. The Trust Layer mediates every interaction.</p>
+      <p>This is interaction governance: every reasoning step is screened, logged, and defensible.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Bounded Autonomy -->
+    <h2><b>Bounded Autonomy in Practice</b></h2>
+
+    <p>The term "bounded autonomy" means the agent can act independently within defined limits, and must escalate beyond those limits. Agentforce implements this through three mechanisms:</p>
+
+    <div class="bounded-grid">
+      <div class="bounded-item">
+        <div class="icon"><i class="fa fa-check-square-o"></i></div>
+        <b>confirmationRequired</b>
+        <p>Mark high-risk actions so they require explicit user approval before execution. The agent recommends; the human confirms.</p>
+      </div>
+      <div class="bounded-item">
+        <div class="icon"><i class="fa fa-list"></i></div>
+        <b>Action Catalogs</b>
+        <p>Whitelist what each agent role can do. Actions not in the catalog physically cannot execute, regardless of reasoning.</p>
+      </div>
+      <div class="bounded-item">
+        <div class="icon"><i class="fa fa-hand-stop-o"></i></div>
+        <b>Escalation Triggers</b>
+        <p>Define conditions that force human handoff: confidence below threshold, topic outside scope, financial impact above limit.</p>
+      </div>
+    </div>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>Why this matters for governance:</b> On generic LLM agent frameworks, the boundary between "what the agent can reason about" and "what the agent can do" is often blurred. Agentforce makes this separation architectural. The reasoning layer can consider anything. The execution layer only permits what's cataloged. This is how you get the benefit of flexible AI reasoning with the safety of deterministic execution.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Controls -->
+    <h2><b>Agentforce Governance Controls</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Observable Reasoning</div>
+      <div class="control-body">
+        <p>Every agent interaction produces an observable trace of the reasoning steps, actions considered, actions taken, and data accessed. This isn't just logging &mdash; it's structured observability that answers:</p>
+        <p><b>Why did the agent do this?</b> The reasoning trace shows what information the agent considered and how it arrived at its decision.</p>
+        <p><b>What data did it access?</b> Every query the agent executed is logged with the specific records and fields retrieved.</p>
+        <p><b>What did it not do?</b> Actions considered but not taken (because of guardrails, confidence thresholds, or scope boundaries) are also visible in the trace.</p>
+        <p>This observability is what makes agent behavior auditable. When a stakeholder asks "why did the agent send this response?" you have a complete, structured answer.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Permission-Scoped Execution</div>
+      <div class="control-body">
+        <p>Agentforce agents execute with defined permission sets &mdash; not as system administrators. This means:</p>
+        <p><b>Minimum necessary access.</b> A "Lead Qualification" agent gets access to Leads and relevant custom objects. It doesn't get access to Opportunities, Contracts, or Financial data it doesn't need.</p>
+        <p><b>Sharing model enforcement.</b> Agent queries respect the same sharing rules as any other user. An agent running on behalf of a specific user can only access records that user can access.</p>
+        <p><b>Field-level security.</b> Even within accessible objects, the agent only sees fields its permission set grants access to. Sensitive fields can be excluded from agent access without removing them from the object entirely.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Testing &amp; Deployment Governance</div>
+      <div class="control-body">
+        <p>Agents go through a governed deployment lifecycle:</p>
+        <p><b>Sandbox testing with defined scenarios.</b> Before production deployment, agents are tested against a suite of expected interactions, edge cases, and (critically) adversarial inputs. Does the agent stay within its topic when pushed? Does it escalate when it should?</p>
+        <p><b>Graduated rollout.</b> Agents deploy to a subset of users first. Performance metrics (resolution accuracy, escalation rates, user satisfaction) are evaluated before full rollout.</p>
+        <p><b>Continuous monitoring post-deployment.</b> Event Monitoring tracks agent behavior patterns. Anomalies (unusual action frequency, unexpected data access, high escalation rates) trigger review.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Map -->
+    <h2><b>Agentforce Governance Map</b></h2>
+
+    <table class="governance-map">
+      <thead>
+        <tr>
+          <th>Governance Pillar</th>
+          <th>Agentforce Implementation</th>
+          <th>What It Prevents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Design</b></td>
+          <td>Topic definitions, system instructions, guardrail specifications</td>
+          <td>Agent operating outside intended scope; behavioral drift</td>
+        </tr>
+        <tr>
+          <td><b>Build</b></td>
+          <td>Action catalog registration, permission set definition, test scenario suites</td>
+          <td>Unauthorized actions; over-privileged agents; untested edge cases</td>
+        </tr>
+        <tr>
+          <td><b>Runtime</b></td>
+          <td>Trust Layer mediation, confirmationRequired, escalation triggers, Transaction Security</td>
+          <td>Injection attacks; unauthorized execution; unbounded agent behavior</td>
+        </tr>
+        <tr>
+          <td><b>Data</b></td>
+          <td>Permission-scoped queries, USER_MODE enforcement, Data Cloud grounding</td>
+          <td>Data exposure beyond agent's need; hallucinated responses; stale data decisions</td>
+        </tr>
+        <tr>
+          <td><b>People</b></td>
+          <td>Human-in-the-loop for high-risk actions, observable reasoning for audit, graduated rollout</td>
+          <td>Unaccountable decisions; comprehension debt; silent failures at scale</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The Agentforce principle:</b> Governance isn't a tax on agent capability &mdash; it's what makes autonomous agents deployable in production. Without bounded autonomy, observable reasoning, and permission-scoped execution, you can't put an agent in front of customers or let it touch revenue data. With them, you can. That's the business value of governance-by-architecture.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="data-cloud.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Data Cloud</a>
+      <a href="mulesoft.html" class="w3-button w3-blue">MuleSoft<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
