@@ -279,161 +279,50 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
 
     <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Agentforce</b></h1>
-    <p style="font-size:1.1em; color:#555; margin-top:0;">Deterministic execution with observable reasoning and bounded autonomy</p>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Deterministic agent execution with observable reasoning paths</p>
 
     <!-- Opening -->
     <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
       <p class="w3-large" style="margin:0;">
-        Agentforce is where the governance model becomes most tangible. It's not a black-box AI that makes opaque decisions &mdash; it's a structured execution framework where every agent has defined topics, explicit actions, observable reasoning, and platform-enforced boundaries. Governance isn't bolted on afterward. It's the architecture.
+        Agentforce combines generative conversation, topic classification, action selection, Flow/Apex invocation, knowledge retrieval, and Agent Script into an execution layer that can act on Salesforce data. The main concern is not just what the agent says, but what the agent decides to do: which topic it selects, which action it invokes, what data it retrieves, and whether the execution path is deterministic, auditable, and bounded.
       </p>
     </div>
 
-    <p>Most conversations about "AI agents" treat them as unpredictable black boxes that need to be constrained. Agentforce inverts this. The agent's behavior is <i>defined</i> through a structured framework: topics define scope, actions define capability, guardrails define boundaries, and the Trust Layer provides the observation and enforcement layer. The result is an agent system where governance is a design choice, not an afterthought.</p>
+    <hr style="margin: 32px 0;">
+
+    <!-- Key Considerations -->
+    <h2><b>Key Considerations</b></h2>
+
+    <p>Secure Agentforce practices must cover topic design, prompt templates, Agent Script, action catalog scope, <code>confirmationRequired</code>, least-privilege permissions, Trace Panel observability, escalation logic, and deterministic handling of regulated or high-impact workflows.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Example Guardrails -->
+    <h2><b>Example Guardrails</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Agent Script for Deterministic Logic</div>
+      <div class="control-body">
+        <p>Use Agent Script, not open-ended prompts, for business rules, routing, escalation thresholds, CUD operations, regulated workflows, financial commitments, and action chaining. Agent Script provides deterministic execution paths that are auditable and predictable &mdash; the agent follows a defined script rather than reasoning its way through high-stakes decisions.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Role-Scoped Agent Actions</div>
+      <div class="control-body">
+        <p>Give each agent only the Flow, Apex, prompt, and external actions required for its assigned role. A sales coach, service agent, or campaign agent should not see a broad action catalog that lets it update records, call systems, or trigger workflows outside its intended job. Actions not in the catalog physically cannot execute, regardless of what the reasoning layer produces.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Trace Panel + Runtime Observability</div>
+      <div class="control-body">
+        <p>Enable Trace Panel and route agent telemetry to audit/logging pipelines so topic classification, condition evaluation, action selection, data access, and handoff decisions are attributable. When a stakeholder asks "why did the agent do this?" you have a complete, structured answer &mdash; not a black box.</p>
+      </div>
+    </div>
 
     <div class="key-insight">
-      <p>The difference between Agentforce and a generic LLM-powered agent: <b>the platform constrains execution regardless of what the reasoning produces.</b> Even if the LLM's reasoning is perfect, it can only execute actions in its catalog. Even if its reasoning is compromised, it still can't exceed its defined boundaries. Governance lives in the execution layer, not the reasoning layer.</p>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Architecture -->
-    <h2><b>The Governance Architecture</b></h2>
-
-    <p>Agentforce agents are built from composable, governed primitives. Each layer adds a governance control:</p>
-
-    <div class="architecture-block">
-      <b>Topics &amp; Scope</b>
-      <p>Every agent has explicitly defined topics that determine what it can reason about. A "Case Resolution" agent has topics related to troubleshooting and resolution &mdash; not pricing, not HR, not financial data. If a user (or injected instruction) asks the agent to operate outside its topics, it recognizes the boundary and declines.</p>
-      <p>This is scope governance: the agent knows what it's for, and it won't be repurposed through conversational manipulation.</p>
-    </div>
-
-    <div class="architecture-block">
-      <b>Action Catalog</b>
-      <p>Each topic maps to a defined set of actions the agent can execute. Actions are explicitly registered &mdash; they're not arbitrary API calls. The agent can only do what's in its catalog, and each action has defined inputs, outputs, and permission requirements.</p>
-      <p>This is capability governance: regardless of what the reasoning layer produces, execution is limited to the registered action set.</p>
-    </div>
-
-    <div class="architecture-block">
-      <b>Guardrails &amp; Instructions</b>
-      <p>System-level instructions define behavioral boundaries: what the agent must always do, what it must never do, and under what conditions it must escalate. These are set at the agent definition level &mdash; not in the conversation &mdash; so they can't be overridden by user input.</p>
-      <p>This is behavioral governance: the rules are in the system prompt, not the user prompt, and they persist across all interactions.</p>
-    </div>
-
-    <div class="architecture-block">
-      <b>Trust Layer</b>
-      <p>Every LLM interaction routes through the Trust Layer &mdash; a centralized gateway that provides injection defense, toxicity detection, PII masking, and a complete audit trail. The agent doesn't access the LLM directly. The Trust Layer mediates every interaction.</p>
-      <p>This is interaction governance: every reasoning step is screened, logged, and defensible.</p>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Bounded Autonomy -->
-    <h2><b>Bounded Autonomy in Practice</b></h2>
-
-    <p>The term "bounded autonomy" means the agent can act independently within defined limits, and must escalate beyond those limits. Agentforce implements this through three mechanisms:</p>
-
-    <div class="bounded-grid">
-      <div class="bounded-item">
-        <div class="icon"><i class="fa fa-check-square-o"></i></div>
-        <b>confirmationRequired</b>
-        <p>Mark high-risk actions so they require explicit user approval before execution. The agent recommends; the human confirms.</p>
-      </div>
-      <div class="bounded-item">
-        <div class="icon"><i class="fa fa-list"></i></div>
-        <b>Action Catalogs</b>
-        <p>Whitelist what each agent role can do. Actions not in the catalog physically cannot execute, regardless of reasoning.</p>
-      </div>
-      <div class="bounded-item">
-        <div class="icon"><i class="fa fa-hand-stop-o"></i></div>
-        <b>Escalation Triggers</b>
-        <p>Define conditions that force human handoff: confidence below threshold, topic outside scope, financial impact above limit.</p>
-      </div>
-    </div>
-
-    <div class="callout-blue">
-      <p style="margin:0;"><b>Why this matters for governance:</b> On generic LLM agent frameworks, the boundary between "what the agent can reason about" and "what the agent can do" is often blurred. Agentforce makes this separation architectural. The reasoning layer can consider anything. The execution layer only permits what's cataloged. This is how you get the benefit of flexible AI reasoning with the safety of deterministic execution.</p>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Governance Controls -->
-    <h2><b>Agentforce Governance Controls</b></h2>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> Observable Reasoning</div>
-      <div class="control-body">
-        <p>Every agent interaction produces an observable trace of the reasoning steps, actions considered, actions taken, and data accessed. This isn't just logging &mdash; it's structured observability that answers:</p>
-        <p><b>Why did the agent do this?</b> The reasoning trace shows what information the agent considered and how it arrived at its decision.</p>
-        <p><b>What data did it access?</b> Every query the agent executed is logged with the specific records and fields retrieved.</p>
-        <p><b>What did it not do?</b> Actions considered but not taken (because of guardrails, confidence thresholds, or scope boundaries) are also visible in the trace.</p>
-        <p>This observability is what makes agent behavior auditable. When a stakeholder asks "why did the agent send this response?" you have a complete, structured answer.</p>
-      </div>
-    </div>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> Permission-Scoped Execution</div>
-      <div class="control-body">
-        <p>Agentforce agents execute with defined permission sets &mdash; not as system administrators. This means:</p>
-        <p><b>Minimum necessary access.</b> A "Lead Qualification" agent gets access to Leads and relevant custom objects. It doesn't get access to Opportunities, Contracts, or Financial data it doesn't need.</p>
-        <p><b>Sharing model enforcement.</b> Agent queries respect the same sharing rules as any other user. An agent running on behalf of a specific user can only access records that user can access.</p>
-        <p><b>Field-level security.</b> Even within accessible objects, the agent only sees fields its permission set grants access to. Sensitive fields can be excluded from agent access without removing them from the object entirely.</p>
-      </div>
-    </div>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> Testing &amp; Deployment Governance</div>
-      <div class="control-body">
-        <p>Agents go through a governed deployment lifecycle:</p>
-        <p><b>Sandbox testing with defined scenarios.</b> Before production deployment, agents are tested against a suite of expected interactions, edge cases, and (critically) adversarial inputs. Does the agent stay within its topic when pushed? Does it escalate when it should?</p>
-        <p><b>Graduated rollout.</b> Agents deploy to a subset of users first. Performance metrics (resolution accuracy, escalation rates, user satisfaction) are evaluated before full rollout.</p>
-        <p><b>Continuous monitoring post-deployment.</b> Event Monitoring tracks agent behavior patterns. Anomalies (unusual action frequency, unexpected data access, high escalation rates) trigger review.</p>
-      </div>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Governance Map -->
-    <h2><b>Agentforce Governance Map</b></h2>
-
-    <table class="governance-map">
-      <thead>
-        <tr>
-          <th>Governance Pillar</th>
-          <th>Agentforce Implementation</th>
-          <th>What It Prevents</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>Design</b></td>
-          <td>Topic definitions, system instructions, guardrail specifications</td>
-          <td>Agent operating outside intended scope; behavioral drift</td>
-        </tr>
-        <tr>
-          <td><b>Build</b></td>
-          <td>Action catalog registration, permission set definition, test scenario suites</td>
-          <td>Unauthorized actions; over-privileged agents; untested edge cases</td>
-        </tr>
-        <tr>
-          <td><b>Runtime</b></td>
-          <td>Trust Layer mediation, confirmationRequired, escalation triggers, Transaction Security</td>
-          <td>Injection attacks; unauthorized execution; unbounded agent behavior</td>
-        </tr>
-        <tr>
-          <td><b>Data</b></td>
-          <td>Permission-scoped queries, USER_MODE enforcement, Data Cloud grounding</td>
-          <td>Data exposure beyond agent's need; hallucinated responses; stale data decisions</td>
-        </tr>
-        <tr>
-          <td><b>People</b></td>
-          <td>Human-in-the-loop for high-risk actions, observable reasoning for audit, graduated rollout</td>
-          <td>Unaccountable decisions; comprehension debt; silent failures at scale</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout-blue">
-      <p style="margin:0;"><b>The Agentforce principle:</b> Governance isn't a tax on agent capability &mdash; it's what makes autonomous agents deployable in production. Without bounded autonomy, observable reasoning, and permission-scoped execution, you can't put an agent in front of customers or let it touch revenue data. With them, you can. That's the business value of governance-by-architecture.</p>
+      <p>The platform constrains execution regardless of what the reasoning produces. Even if the LLM's reasoning is compromised, <b>it can only execute actions in its catalog, with its scoped permissions, through the Trust Layer.</b> Governance lives in the execution layer, not the reasoning layer.</p>
     </div>
 
     <hr style="margin: 40px 0;">
