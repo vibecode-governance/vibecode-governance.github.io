@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -379,17 +378,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="number">02</div>
         <div>
           <h3>Security Bypass</h3>
-          <div class="subtitle">FLS, CRUD, sharing rules &mdash; silently ignored.</div>
+          <div class="subtitle">AI defaults to system mode &mdash; platform security never invoked.</div>
         </div>
       </div>
       <div class="failure-body">
-        <p>AI-generated code optimizes for compilation and functional correctness. It does not optimize for the bipartite security model of the Salesforce platform. The result: code that works perfectly in an admin context but silently bypasses the user's record-level and field-level access controls.</p>
+        <p>AI-generated code optimizes for compilation and functional correctness. It does not optimize for the bipartite security model of the Salesforce platform. The result: code that runs in system mode by default and never explicitly invokes user-context enforcement &mdash; so FLS, CRUD, and sharing rules (which are database-level controls) are simply never applied to that transaction.</p>
 
         <p>The most common patterns on Salesforce: missing <code>with sharing</code>, naked SOQL (without <code>WITH USER_MODE</code>), naked DML (without <code>AccessLevel.USER_MODE</code>), deprecated <code>WITH SECURITY_ENFORCED</code> usage, and hardcoded credentials in integration classes. On general platforms: missing authentication, SSRF from hallucinated URLs, unvalidated redirects.</p>
 
         <div class="example-box">
           <b>Salesforce example</b>
-          A developer asks the AI to create an Apex method that updates Account revenue and creates a Task. The AI generates clean code that compiles and works. But it uses <code>update acc;</code> instead of <code>Database.update(acc, AccessLevel.USER_MODE)</code>, runs SOQL without <code>WITH USER_MODE</code>, and omits <code>with sharing</code> on the class. In sandbox with an admin user, it works perfectly. In production with a standard user, it bypasses every access control.
+          A developer asks the AI to create an Apex method that updates Account revenue and creates a Task. The AI generates clean code that compiles and works. But it uses <code>update acc;</code> instead of <code>Database.update(acc, AccessLevel.USER_MODE)</code>, runs SOQL without <code>WITH USER_MODE</code>, and omits <code>with sharing</code> on the class. In sandbox with an admin user, it works perfectly. In production, it runs in system mode — the platform's access controls exist but the code never invokes them, so every user gets admin-equivalent data access.
         </div>
 
         <div class="example-box">
@@ -564,7 +563,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </tr>
         <tr>
           <td><b>Security Bypass</b></td>
-          <td>FLS/CRUD/sharing silently ignored</td>
+          <td>Code runs in system mode, platform controls never invoked</td>
           <td>Code Analyzer + DFA in CI/CD</td>
           <td>Build-time (pipeline gates)</td>
           <td><a href="demo-secure-apex.html">View</a></td>
