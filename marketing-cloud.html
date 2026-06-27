@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Marketing Cloud — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.risk-scenario {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.risk-header {
+  padding: 14px 20px;
+  background: #fef2f2;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.risk-header i { color: #dc2626; }
+.risk-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.control-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.control-header {
+  padding: 14px 20px;
+  background: #f0fdf4;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-header i { color: #16a34a; }
+.control-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.governance-map {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.governance-map th, .governance-map td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+.governance-map th {
+  background: #f3f4f6;
+  font-size: 0.9em;
+}
+.governance-map td {
+  font-size: 0.9em;
+}
+
+.scale-box {
+  background: #fef2f2;
+  border: 2px solid #fca5a5;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  text-align: center;
+}
+.scale-box .big-text {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #991b1b;
+  margin-bottom: 8px;
+}
+.scale-box .sub-text {
+  font-size: 0.9em;
+  color: #555;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Marketing Cloud</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Governed personalization at campaign scale</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Marketing Cloud is where AI governance meets blast radius. A logic error in a single Apex method affects one transaction. A logic error in a campaign journey affects 500,000 recipients simultaneously. The governance challenge: enable AI-driven personalization at scale while preventing errors that propagate to your entire customer base in a single send.
+      </p>
+    </div>
+
+    <p>AI in Marketing Cloud generates content, selects audiences, personalizes journeys, and optimizes send times. Each of these actions is high-leverage &mdash; a single decision affects thousands or millions of contacts. This means governance failures don't trickle out slowly. They detonate across your entire audience in minutes.</p>
+
+    <div class="scale-box">
+      <div class="big-text">One AI error × 500,000 recipients = brand incident</div>
+      <div class="sub-text">In Marketing Cloud, every governance failure is amplified by audience scale. There is no "minor" error at campaign volume.</div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Marketing-Specific Risks -->
+    <h2><b>Marketing-Specific AI Risks</b></h2>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Personalization Hallucination → Brand Damage</div>
+      <div class="risk-body">
+        <p>AI-generated content that personalizes at scale can hallucinate details, misattribute preferences, or generate messaging that's inappropriate for specific segments. Unlike a typo, personalization errors feel personal to the recipient &mdash; they signal that your brand doesn't actually know them.</p>
+        <p><b>Marketing Cloud example:</b> An AI agent generates personalized subject lines using customer purchase history. A logic error in the segment query pulls the wrong product category for 10% of the audience. 50,000 customers receive emails referencing products they never bought. Social media complaints spike within the hour.</p>
+      </div>
+    </div>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Consent &amp; Preference Violations</div>
+      <div class="risk-body">
+        <p>AI-generated audience selection logic may not properly respect consent records, communication preferences, or regulatory opt-outs (GDPR, CAN-SPAM, CCPA). A hallucinated query boundary &mdash; similar to the discount threshold error &mdash; can include contacts who explicitly opted out.</p>
+        <p><b>Marketing Cloud example:</b> An AI-generated journey entry criteria includes contacts where <code>HasOptedOutOfEmail = false</code>, but a separate consent field (<code>GDPR_Consent_Status__c</code>) is not checked because the AI didn't know about the custom field. 2,000 GDPR-protected contacts receive marketing email. The regulatory exposure is immediate.</p>
+      </div>
+    </div>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Segment Corruption → Wrong Audience, Wrong Message</div>
+      <div class="risk-body">
+        <p>AI-generated segmentation logic can produce audiences that look right at small scale but include or exclude wrong populations at production scale. Combined with Flow sprawl on the Contact/Lead object, segment membership can change unpredictably between journey build and journey send.</p>
+        <p><b>Marketing Cloud example:</b> An AI-generated SQL query for a "high-value churning customers" segment uses <code>>=</code> instead of <code>></code> on the inactivity threshold. The segment includes 30,000 active customers who get a "we miss you" win-back email. Your most engaged customers now think they've been forgotten.</p>
+      </div>
+    </div>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Journey Sprawl → Conflicting Customer Experiences</div>
+      <div class="risk-body">
+        <p>The Marketing Cloud equivalent of Flow Sprawl. Multiple AI-generated journeys target overlapping audiences without coordination. A customer enters three journeys simultaneously and receives conflicting messages: a loyalty reward, a churn prevention offer, and a cold-prospect nurture sequence all in the same week.</p>
+        <p><b>Marketing Cloud example:</b> Three marketers each build AI-generated journeys for different campaigns. Nobody checks for audience overlap. 15% of the database is in all three journeys simultaneously, receiving 12 emails in 5 days. Unsubscribe rates triple.</p>
+      </div>
+    </div>
+
+    <div class="key-insight">
+      <p>Marketing Cloud governance is <b>brand governance at scale</b>. Every failure is multiplied by audience size and visible to customers directly. A security bypass is invisible to end users. A marketing error lands in their inbox with your logo on it.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Controls -->
+    <h2><b>Marketing Cloud Governance Controls</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Audience Validation Gates</div>
+      <div class="control-body">
+        <p>Before any campaign sends, automated validation checks catch the most dangerous errors:</p>
+        <p><b>Consent verification layer.</b> Every audience query must pass through a consent check that validates ALL relevant opt-out fields (standard and custom). This is a pipeline gate &mdash; if the consent check fails, the send is blocked regardless of what the journey logic says.</p>
+        <p><b>Audience size anomaly detection.</b> If a segment is significantly larger or smaller than expected (±25% from projected), flag for manual review before send. An AI-generated query error often manifests as an unexpected audience size.</p>
+        <p><b>Overlap analysis.</b> Before activating a new journey, check what percentage of the target audience is already active in other journeys. If overlap exceeds threshold, require explicit approval and frequency capping.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Content Safety &amp; Brand Compliance</div>
+      <div class="control-body">
+        <p>AI-generated marketing content needs guardrails before it reaches customers:</p>
+        <p><b>Trust Layer content screening.</b> All AI-generated copy passes through toxicity detection and brand safety checks before approval. Hallucinated claims, inappropriate language, and off-brand messaging are caught before human review.</p>
+        <p><b>Personalization validation.</b> Dynamic content blocks that reference customer data are validated against the actual data source. If the referenced field is empty or contains unexpected values for >5% of the audience, flag for review.</p>
+        <p><b>Legal and compliance review gate.</b> For regulated industries (financial services, healthcare), AI-generated content must pass compliance review before send. Claims, disclaimers, and regulatory language are validated against approved templates.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Send Governance &amp; Blast Radius Control</div>
+      <div class="control-body">
+        <p>Limit the damage radius of any single error:</p>
+        <p><b>Staged sends.</b> Large campaigns (>50K recipients) send to a small test segment first (1-5%). Performance metrics and error rates are evaluated before full send proceeds. This is the marketing equivalent of canary deployment.</p>
+        <p><b>Frequency capping.</b> Platform-enforced limits on how many messages any individual contact receives per time period. Even if journey sprawl puts a contact in multiple paths, they don't receive more than N messages per week.</p>
+        <p><b>Kill switch capability.</b> Ability to halt a send mid-execution if real-time metrics (bounce rates, unsubscribes, complaints) exceed thresholds. Automated circuit-breakers for sends that are clearly going wrong.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Data Foundation for Personalization</div>
+      <div class="control-body">
+        <p>AI-driven personalization is only as good as the data it reads. Governance starts at the data layer:</p>
+        <p><b>Data Detect &amp; classification</b> identifies PII across marketing data extensions. Ensures personalization logic never surfaces sensitive data (like account balances or health information) in marketing communications.</p>
+        <p><b>Identity resolution governance.</b> When Data Cloud merges profiles for personalization, the merge rules must be deterministic and auditable. Probabilistic merges that combine distinct individuals create personalization errors that are nearly impossible to debug.</p>
+        <p><b>Consent as data.</b> Consent preferences are treated as first-class data entities, not just boolean fields. They have audit trails, versioning, and timestamps. When regulators ask "did this person consent at the time of send?" you have the forensic answer.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Map -->
+    <h2><b>Marketing Cloud Governance Map</b></h2>
+
+    <table class="governance-map">
+      <thead>
+        <tr>
+          <th>Governance Pillar</th>
+          <th>Marketing Cloud Application</th>
+          <th>Platform Control</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Design</b></td>
+          <td>Audience specs with explicit inclusion/exclusion criteria; content briefs with brand guardrails and compliance requirements before AI generation</td>
+          <td>Prompt templates + content guidelines in Agent Builder</td>
+        </tr>
+        <tr>
+          <td><b>Build</b></td>
+          <td>Segment query validation; consent check gates; audience size anomaly detection before activation</td>
+          <td>Journey validation rules + deployment pipeline</td>
+        </tr>
+        <tr>
+          <td><b>Runtime</b></td>
+          <td>Staged sends with canary metrics; frequency capping; mid-send kill switch; real-time bounce/complaint monitoring</td>
+          <td>Trust Layer + send governance + circuit breakers</td>
+        </tr>
+        <tr>
+          <td><b>Data</b></td>
+          <td>Consent as first-class data entity; PII detection in data extensions; deterministic identity resolution rules; encrypted preference storage</td>
+          <td>Data Cloud governance + Shield + Data Detect</td>
+        </tr>
+        <tr>
+          <td><b>People</b></td>
+          <td>Marketing ops reviews AI-generated audiences before send; legal reviews regulated content; frequency governance owned by central team</td>
+          <td>Approval workflows + send authorization matrix</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The marketing-specific principle:</b> In every other cloud, you can catch errors after deployment and fix them before customers notice. In Marketing Cloud, the deployment IS the customer experience. Once a campaign sends, the error is in your customer's inbox. Governance must shift entirely left &mdash; validate before send, not after.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="service-cloud.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Service Cloud</a>
+      <a href="data-cloud.html" class="w3-button w3-blue">Data Cloud<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
