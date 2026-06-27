@@ -1,1 +1,624 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Failure Taxonomy — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.failure-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+.failure-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.failure-header .number {
+  font-size: 2em;
+  font-weight: bold;
+  opacity: 0.2;
+}
+.failure-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+}
+.failure-header .subtitle {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 2px;
+}
+.failure-body {
+  padding: 0 24px 24px;
+}
+.failure-body p {
+  line-height: 1.7;
+}
+
+.fm1 .failure-header { background: #fef3c7; }
+.fm2 .failure-header { background: #fee2e2; }
+.fm3 .failure-header { background: #ede9fe; }
+.fm4 .failure-header { background: #e0f2fe; }
+.fm5 .failure-header { background: #f3f4f6; }
+
+.example-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.example-box b {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+}
+
+.detection-tag {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.82em;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.link-arrow {
+  display: inline-block;
+  margin-top: 12px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.link-arrow:hover {
+  text-decoration: underline;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Failure Taxonomy</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">What actually goes wrong in AI-assisted Salesforce development</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Failures in the agentic SDLC are rarely syntax errors. They are semantic &mdash; the code compiles, the tests pass, and the business logic is wrong. Or the security model is silently bypassed. Or the agent treats customer text as an instruction.
+      </p>
+    </div>
+
+    <p>Before you can govern vibe coding effectively, you need a clear picture of what actually breaks. Not theoretical risks &mdash; practical failure modes that show up in Salesforce development when AI generates code and agents act on it.</p>
+
+    <p>This taxonomy covers four technical failure vectors plus one organizational failure mode. Each one maps to specific controls in the <a href="governance-model.html">Governance Model</a> and is illustrated with a concrete before/after example in the demos section.</p>
+
+    <div class="key-insight">
+      <p>Once agents can <b>act</b>, not just suggest, every gap in governance becomes an <b>execution path</b>. The taxonomy below isn't academic &mdash; each failure mode represents a way that AI-generated or AI-executed logic can affect production data, customer experience, or security posture.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Failure Mode 1 -->
+    <div class="failure-card fm1">
+      <div class="failure-header">
+        <div class="number">01</div>
+        <div>
+          <h3>Logic Hallucination</h3>
+          <div class="subtitle">The code works. The business rule is wrong.</div>
+        </div>
+      </div>
+      <div class="failure-body">
+        <p>This is the most insidious failure mode because everything <i>looks</i> correct. The code compiles. It may even have test coverage. But the underlying business logic doesn't match the actual requirement. The AI optimized for plausibility, not accuracy.</p>
+
+        <p>Classic patterns include: discounting logic that applies to all orders instead of only those above a threshold, boundary conditions handled backward, agents that optimize for a "reasonable-sounding" response over a factually correct one (sometimes called "LLM sycophancy" or "lies-in-the-loop").</p>
+
+        <div class="example-box">
+          <b>Salesforce example</b>
+          A developer asks the AI to "apply a 10% discount for orders above $100." The AI generates a method that applies the discount to <i>every</i> order &mdash; no threshold check. The code is clean, compiles perfectly, and even passes a basic test (because the test only checks orders above $100). The boundary condition at exactly $100 is never validated. Money leaks quietly.
+        </div>
+
+        <div class="example-box">
+          <b>Why traditional review misses it</b>
+          The code looks like correct Apex. There's no syntax error, no security warning, no governor limit violation. A human reviewer scanning for "does this look right" will often miss it &mdash; especially under the volume pressure of AI-generated PRs. Only spec-first development with explicit boundary assertions catches this reliably.
+        </div>
+
+        <p><b>Detection requires:</b></p>
+        <span class="detection-tag">Spec-driven development</span>
+        <span class="detection-tag">Test-first prompting</span>
+        <span class="detection-tag">Boundary assertions</span>
+        <span class="detection-tag">Negative test cases</span>
+
+        <p><b>Prevention pattern:</b> Write the tests first. When the AI writes tests before implementation, it's forced to align to the rule. When it writes code first, it optimizes for plausibility. The order matters.</p>
+
+        <a href="demo-logic-hallucination.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See the illustrative example: Logic Hallucination</a>
+      </div>
+    </div>
+
+    <!-- Failure Mode 2 -->
+    <div class="failure-card fm2">
+      <div class="failure-header">
+        <div class="number">02</div>
+        <div>
+          <h3>Security Bypass</h3>
+          <div class="subtitle">FLS, CRUD, sharing rules &mdash; silently ignored.</div>
+        </div>
+      </div>
+      <div class="failure-body">
+        <p>AI-generated code optimizes for compilation and functional correctness. It does not optimize for the bipartite security model of the Salesforce platform. The result: code that works perfectly in an admin context but silently bypasses the user's record-level and field-level access controls.</p>
+
+        <p>The most common patterns on Salesforce: missing <code>with sharing</code>, naked SOQL (without <code>WITH USER_MODE</code>), naked DML (without <code>AccessLevel.USER_MODE</code>), deprecated <code>WITH SECURITY_ENFORCED</code> usage, and hardcoded credentials in integration classes. On general platforms: missing authentication, SSRF from hallucinated URLs, unvalidated redirects.</p>
+
+        <div class="example-box">
+          <b>Salesforce example</b>
+          A developer asks the AI to create an Apex method that updates Account revenue and creates a Task. The AI generates clean code that compiles and works. But it uses <code>update acc;</code> instead of <code>Database.update(acc, AccessLevel.USER_MODE)</code>, runs SOQL without <code>WITH USER_MODE</code>, and omits <code>with sharing</code> on the class. In sandbox with an admin user, it works perfectly. In production with a standard user, it bypasses every access control.
+        </div>
+
+        <div class="example-box">
+          <b>Why this is a platform-specific risk</b>
+          Salesforce's security model is two-layered: record-level (sharing rules, role hierarchy, ownership) and attribute-level (CRUD on objects, FLS on fields). Generic AI models don't understand this architecture &mdash; they've seen thousands of examples of Apex written in system mode because that's what most public code looks like. The path of least resistance produces working-but-unsafe code every time.
+        </div>
+
+        <p><b>Detection requires:</b></p>
+        <span class="detection-tag">Code Analyzer + DFA in CI/CD</span>
+        <span class="detection-tag">WITH USER_MODE enforcement</span>
+        <span class="detection-tag">Naked SOQL/DML scanning</span>
+        <span class="detection-tag">with sharing policy</span>
+
+        <p><b>Prevention pattern:</b> Enforce security at the database boundary. Don't rely on the AI to "remember" security &mdash; push security enforcement into the query and DML layer. Make the secure pattern the default prompt pattern so the AI generates it automatically.</p>
+
+        <a href="demo-secure-apex.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See the illustrative example: Secure Apex</a>
+      </div>
+    </div>
+
+    <!-- Failure Mode 3 -->
+    <div class="failure-card fm3">
+      <div class="failure-header">
+        <div class="number">03</div>
+        <div>
+          <h3>Prompt Injection &amp; Agent Hijack</h3>
+          <div class="subtitle">Data becomes instruction. The agent is co-opted.</div>
+        </div>
+      </div>
+      <div class="failure-body">
+        <p>This is the failure mode that's unique to the agentic era. When an agent reads untrusted text &mdash; from a case description, a lead form, a web chat, a PDF &mdash; it may treat embedded instructions as commands rather than content. The agent's reasoning is hijacked without any authentication bypass, code exploit, or network intrusion.</p>
+
+        <p>Most dangerous when the agent sits in what researchers call the "lethal trifecta": (1) access to untrusted input, (2) access to private data, and (3) ability to produce external output. This is the ForcedLeak class of exploit.</p>
+
+        <div class="example-box">
+          <b>Salesforce example &mdash; the ForcedLeak chain</b>
+          An external attacker submits a Web-to-Lead form. The Description field (up to ~42,000 characters) contains embedded LLM instructions disguised as prose. The poisoned Lead sits in the org, unread. Later, an internal sales rep asks Agentforce to "summarize my newly assigned leads." The agent retrieves the poisoned Lead, treats the embedded instructions as commands, queries Opportunity data, and renders the results in a markdown image URL. The browser loads the "image" &mdash; and the query string contains the exfiltrated data. No code was executed. No authentication was needed. The rep never clicked anything suspicious.
+        </div>
+
+        <div class="example-box">
+          <b>What makes this different from traditional security vulnerabilities</b>
+          The attacker never authenticates. Never touches the Salesforce UI. Never runs code in the org. The internal user is the unwitting courier. Traditional perimeter defenses don't see this &mdash; it looks like normal agent activity from the inside.
+        </div>
+
+        <p><b>Defense requires layers (no single control is sufficient):</b></p>
+        <span class="detection-tag">Trust Layer injection defense</span>
+        <span class="detection-tag">Trusted URLs + strict CSP (img-src)</span>
+        <span class="detection-tag">confirmationRequired on CUD actions</span>
+        <span class="detection-tag">Least-privilege agent permissions</span>
+        <span class="detection-tag">Bounded autonomy with forced escalation</span>
+
+        <p><b>Prevention pattern:</b> Separate data from execution and bound the agent. Treat all CRM text fields as untrusted input. Restrict outbound image/connect sources to explicit allowlists. Require confirmation for high-risk actions. Limit the agent's action catalog to only what it needs for its assigned role.</p>
+
+        <a href="demo-prompt-injection.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See the illustrative example: Prompt Injection &amp; the ForcedLeak Chain</a>
+      </div>
+    </div>
+
+    <!-- Failure Mode 4 -->
+    <div class="failure-card fm4">
+      <div class="failure-header">
+        <div class="number">04</div>
+        <div>
+          <h3>State Corruption &amp; Automation Sprawl</h3>
+          <div class="subtitle">Sandbox success, production failure. The haunted database.</div>
+        </div>
+      </div>
+      <div class="failure-body">
+        <p>AI is excellent at generating a Flow, a trigger, or a data transform that "does the thing." It is not good at ensuring that artifact remains governable under scale, bulk processing, ownership boundaries, and interactions with existing automation. The result: automation that works in a test environment and creates silent corruption in production.</p>
+
+        <p>This failure mode is the most dangerous because it's not observable until a bulk data load, an audit, or a customer complaint surfaces the drift. By then, the damage is already embedded in your data.</p>
+
+        <div class="example-box">
+          <b>Salesforce example</b>
+          A developer asks the AI to create a Flow that updates Opportunities when stage changes and notifies sales. The AI generates a Flow that works for one record in sandbox. But it contains unnecessary loops, no fault paths, no consideration for existing automation on the same object, and no bulk-safety. When a data migration touches 5,000 records at once, the Flow fires 5,000 times, conflicts with an existing trigger, creates duplicate tasks, and corrupts stage history. The result is invisible for weeks &mdash; until someone runs a pipeline report and the numbers don't add up.
+        </div>
+
+        <div class="example-box">
+          <b>Related patterns</b>
+          Duplicate records from AI-generated data transforms. Redundant columns from schema hallucination. Conflicting automation on the same object with no conflict detection. Data Cloud identity resolution that probabilistically merges distinct individuals. "Haunted databases" where no one knows which of three automations is responsible for a field value.
+        </div>
+
+        <p><b>Detection requires:</b></p>
+        <span class="detection-tag">Bulk-safe design enforcement</span>
+        <span class="detection-tag">Automation overlap detection</span>
+        <span class="detection-tag">Metadata validation in CI/CD</span>
+        <span class="detection-tag">Naming and ownership standards</span>
+        <span class="detection-tag">Fault path requirements</span>
+
+        <p><b>Prevention pattern:</b> Constrain the generation before scale, then validate in the pipeline. The problem isn't that AI made a Flow. The problem is that it made one with no operating model around it &mdash; no ownership metadata, no bulk-safety, no interaction analysis, and no fault handling.</p>
+
+        <a href="demo-flow-sprawl.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See the illustrative example: Flow Sprawl</a>
+      </div>
+    </div>
+
+    <!-- Failure Mode 5 -->
+    <div class="failure-card fm5">
+      <div class="failure-header">
+        <div class="number">05</div>
+        <div>
+          <h3>Comprehension Debt</h3>
+          <div class="subtitle">The team can't debug what the AI wrote. A people problem, not a code problem.</div>
+        </div>
+      </div>
+      <div class="failure-body">
+        <p>This isn't a technical bug &mdash; it's an organizational risk. When developers approve AI-generated code faster than they can reason about it, the organization builds a system more sophisticated than any individual can debug. The AI generated it in seconds. Understanding it takes hours. And when it breaks at 3 AM, nobody has that mental model.</p>
+
+        <p>Comprehension debt is distinct from technical debt. Technical debt is code you understand but chose not to fix yet. Comprehension debt is code that's already in production that no one fully understands. It's harder to pay down because you don't even know where the balance is.</p>
+
+        <div class="example-box">
+          <b>How it accumulates</b>
+          A team of five developers uses AI assistants across 20 PRs per week. Each PR contains code that was generated in seconds and reviewed in minutes. The review catches obvious errors but doesn't build a deep mental model of what the code does or why it's structured the way it is. After six months, the codebase contains thousands of lines that were never fully understood by anyone currently on the team. When a production incident requires tracing through this code, resolution time explodes.
+        </div>
+
+        <div class="example-box">
+          <b>A sub-pattern: "Pattern Invention"</b>
+          LLMs sometimes generate code that calls APIs, libraries, or framework-specific methods that don't actually exist &mdash; they're hallucinated from plausible-sounding patterns in the training data. On Salesforce this might look like a call to a non-existent Apex method, a fabricated governor limit workaround, or reference to an LWC API that doesn't exist in the current version. If the developer doesn't catch it (and remember &mdash; 56% don't review line by line), it either fails in production or creates confusing behavior that's extremely hard to debug.
+        </div>
+
+        <p><b>Mitigation requires organizational practices:</b></p>
+        <span class="detection-tag">Knowledge transfer rituals (explain the AI code in the PR)</span>
+        <span class="detection-tag">Spec-driven development (human spec is source of truth)</span>
+        <span class="detection-tag">AI Code Review Standard (5-question checklist)</span>
+        <span class="detection-tag">Periodic "manual sprints" to prevent skill atrophy</span>
+        <span class="detection-tag">Code Turnover metric tracking</span>
+
+        <p><b>Prevention pattern:</b> The developer's primary cognitive load must shift from generating code to understanding, validating, and governing it. This requires organizational change &mdash; updated review standards, new metrics, and career incentives that reward comprehension over velocity.</p>
+
+        <a href="people.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See People &amp; Organization for the full operating model</a>
+      </div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- How These Map Together -->
+    <h2><b>How These Failure Modes Interact</b></h2>
+
+    <p>In practice, these failure modes rarely appear in isolation. A typical incident might combine multiple vectors:</p>
+
+    <div class="w3-container" style="margin-bottom:24px;">
+      <p><b>Logic hallucination + security bypass:</b> AI generates a discount method that applies to all orders (logic hallucination) and also uses naked DML without access checks (security bypass). The wrong discount gets applied to records the user shouldn't even be able to update.</p>
+
+      <p><b>Prompt injection + state corruption:</b> An agent is hijacked into updating records based on injected instructions. The updates are valid from a permissions standpoint but semantically wrong. The data is corrupted in a way that looks like normal agent activity.</p>
+
+      <p><b>Automation sprawl + comprehension debt:</b> AI generates multiple Flows over time, each solving a narrow problem. They interact in ways nobody planned for. When bulk data processing triggers all of them simultaneously, the interactions create state corruption that's almost impossible to trace because no one understands the full picture.</p>
+    </div>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>This is why the governance model has five pillars, not one.</b> A linter catches security bypass. Spec-first development catches logic hallucination. The Trust Layer catches prompt injection. Metadata validation catches automation sprawl. Organizational practices address comprehension debt. No single control covers all five failure modes.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Quick Reference -->
+    <h2><b>Quick Reference</b></h2>
+
+    <table class="w3-table w3-bordered w3-striped" style="margin-bottom:32px;">
+      <thead>
+        <tr class="w3-light-grey">
+          <th>Failure Mode</th>
+          <th>What Goes Wrong</th>
+          <th>Primary Detection</th>
+          <th>Primary Control</th>
+          <th>Demo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Logic Hallucination</b></td>
+          <td>Business rule is wrong; code is syntactically fine</td>
+          <td>Test-first + boundary assertions</td>
+          <td>Design-time (spec-driven)</td>
+          <td><a href="demo-logic-hallucination.html">View</a></td>
+        </tr>
+        <tr>
+          <td><b>Security Bypass</b></td>
+          <td>FLS/CRUD/sharing silently ignored</td>
+          <td>Code Analyzer + DFA in CI/CD</td>
+          <td>Build-time (pipeline gates)</td>
+          <td><a href="demo-secure-apex.html">View</a></td>
+        </tr>
+        <tr>
+          <td><b>Prompt Injection</b></td>
+          <td>Agent treats untrusted text as instruction</td>
+          <td>Trust Layer + anomaly detection</td>
+          <td>Runtime (bounded autonomy)</td>
+          <td><a href="demo-prompt-injection.html">View</a></td>
+        </tr>
+        <tr>
+          <td><b>State Corruption</b></td>
+          <td>Automation conflicts, bulk failures, data drift</td>
+          <td>Metadata validation + overlap analysis</td>
+          <td>Build-time + Data controls</td>
+          <td><a href="demo-flow-sprawl.html">View</a></td>
+        </tr>
+        <tr>
+          <td><b>Comprehension Debt</b></td>
+          <td>Team can't debug or maintain AI-generated code</td>
+          <td>Code Turnover metric + review audits</td>
+          <td>People/Org controls</td>
+          <td><a href="people.html">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="governance-gap.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>The Governance Gap</a>
+      <a href="governance-model.html" class="w3-button w3-blue">The Governance Model<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
