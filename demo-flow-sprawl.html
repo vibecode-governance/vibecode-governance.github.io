@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flow Sprawl — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 20px 24px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.88em;
+  line-height: 1.6;
+  margin: 16px 0;
+}
+pre .comment { color: #64748b; }
+pre .keyword { color: #7dd3fc; }
+pre .string { color: #86efac; }
+pre .danger { color: #fca5a5; }
+pre .safe { color: #86efac; }
+pre .highlight { color: #fde68a; }
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.callout-amber {
+  background: #fffbeb;
+  border-left: 4px solid #d97706;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.callout-red {
+  background: #fef2f2;
+  border-left: 4px solid #dc2626;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.taxonomy-tag {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #075985;
+  border: 1px solid #7dd3fc;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.timeline {
+  position: relative;
+  margin: 32px 0;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e5e7eb;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #6b7280;
+  border: 2px solid white;
+}
+.timeline-item.bad::before { background: #dc2626; }
+.timeline-item.good::before { background: #16a34a; }
+.timeline-item.neutral::before { background: #6b7280; }
+.timeline-item b {
+  display: block;
+  margin-bottom: 4px;
+}
+.timeline-item .week {
+  font-size: 0.8em;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+@media (max-width: 900px) {
+  .comparison-container { grid-template-columns: 1fr; }
+}
+
+.comparison-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 12px 16px;
+  font-weight: bold;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-header i { font-size: 1.1em; }
+.panel-bad .panel-header {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.panel-good .panel-header {
+  background: #dcfce7;
+  color: #166534;
+}
+.panel-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.sprawl-diagram {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  text-align: center;
+}
+.sprawl-diagram .object-name {
+  background: #1e293b;
+  color: white;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.sprawl-diagram .automation-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.sprawl-diagram .auto-item {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.85em;
+}
+.sprawl-diagram .auto-item.conflict {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+.sprawl-diagram .connector-arrow {
+  color: #9ca3af;
+  font-size: 0.9em;
+  margin: 8px 0;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 768px) {
+  .impact-grid { grid-template-columns: 1fr; }
+}
+.impact-item {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: center;
+}
+.impact-item .number {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #dc2626;
+}
+.impact-item .label {
+  font-size: 0.85em;
+  color: #555;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <span class="taxonomy-tag"><i class="fa fa-bug w3-margin-right"></i>Failure Mode #4: State Corruption &amp; Automation Sprawl</span>
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Flow Sprawl: The Haunted Database</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">When AI-generated automation works in sandbox, collides in production, and corrupts data nobody notices for weeks</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Three developers independently ask AI to solve three different problems on the Opportunity object. Each Flow works perfectly in sandbox. In production, they fire on the same record in an undefined order &mdash; and the org becomes a haunted database where nobody knows why fields have the values they have.
+      </p>
+    </div>
+
+    <!-- The Scenario -->
+    <h2><b>The Scenario</b></h2>
+
+    <p>This isn't a security vulnerability. It's a governance failure that accelerates under AI-assisted velocity. When one developer builds one Flow at a time, there's a natural pace that allows teams to notice conflicts. When AI generates Flows as fast as developers can describe requirements, the automation layer accumulates faster than anyone can track.</p>
+
+    <p>The result is what experienced Salesforce architects call a "haunted database" &mdash; an org where field values change unpredictably, automation fires in chains nobody planned, and debugging means tracing through multiple layers of interacting logic that were never designed to work together.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- How It Happens -->
+    <h2><b>How It Accumulates: A Six-Week Timeline</b></h2>
+
+    <div class="timeline">
+      <div class="timeline-item neutral">
+        <div class="week">Week 1</div>
+        <b>Developer A: "Create a Flow that updates the Opportunity close date when stage changes to Negotiation"</b>
+        <p>AI generates a Record-Triggered Flow on Opportunity. Works perfectly in sandbox. Deployed to production. No issues.</p>
+      </div>
+
+      <div class="timeline-item neutral">
+        <div class="week">Week 3</div>
+        <b>Developer B: "Build automation that assigns the Opportunity to a new owner based on territory when amount exceeds $500K"</b>
+        <p>AI generates another Record-Triggered Flow on Opportunity. Works perfectly in sandbox (tested with a single record). Deployed to production.</p>
+      </div>
+
+      <div class="timeline-item neutral">
+        <div class="week">Week 5</div>
+        <b>Developer C: "Create a Flow that sends a Slack notification and creates a Task when an Opportunity moves to Closed Won"</b>
+        <p>AI generates a third Record-Triggered Flow on Opportunity. Tested with one record in sandbox. Works fine. Deployed.</p>
+      </div>
+
+      <div class="timeline-item bad">
+        <div class="week">Week 6 &mdash; Quarter End</div>
+        <b>A data migration updates 2,000 Opportunities in a single batch</b>
+        <p>All three Flows fire on every record. Flow A changes close dates. Flow B reassigns owners (which triggers Flow A again because owner change triggers a re-evaluation). Flow C sends 2,000 Slack messages and creates 2,000 Tasks. Some records hit Flow A twice due to cascading updates. Close dates are now wrong on 400+ records. The pipeline report shows $12M less than yesterday. Nobody knows which Flow changed what.</p>
+      </div>
+    </div>
+
+    <!-- The Conflict Diagram -->
+    <div class="sprawl-diagram">
+      <div class="object-name">Opportunity (Record-Triggered Flows)</div>
+      <div class="connector-arrow">All fire on the same DML event &mdash; order is not guaranteed</div>
+      <div class="automation-list">
+        <div class="auto-item conflict">Flow A: Update CloseDate on Stage change</div>
+        <div class="auto-item conflict">Flow B: Reassign Owner on Amount > $500K</div>
+        <div class="auto-item conflict">Flow C: Notify + Task on Closed Won</div>
+        <div class="auto-item">Existing Trigger: Roll up to Account</div>
+        <div class="auto-item">Existing Process Builder: Legacy notification (forgotten)</div>
+      </div>
+      <div class="connector-arrow" style="margin-top:12px; color: #dc2626;">+ a forgotten Process Builder nobody knows about that also fires on Stage change</div>
+    </div>
+
+    <div class="impact-grid">
+      <div class="impact-item">
+        <div class="number">2,000</div>
+        <div class="label">Slack messages sent in 3 minutes</div>
+      </div>
+      <div class="impact-item">
+        <div class="number">400+</div>
+        <div class="label">records with wrong close dates</div>
+      </div>
+      <div class="impact-item">
+        <div class="number">8 hours</div>
+        <div class="label">to identify which Flow caused what</div>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Why AI Makes This Worse -->
+    <h2><b>Why AI Accelerates This Problem</b></h2>
+
+    <p>Flow sprawl isn't new. Salesforce orgs have always accumulated automation over time. What's new is the <i>rate</i>. When AI generates Flows in minutes rather than days, the accumulation speed outpaces the team's ability to maintain a mental model of what's already there.</p>
+
+    <div class="comparison-container">
+      <div class="comparison-panel panel-bad">
+        <div class="panel-header"><i class="fa fa-times-circle"></i> What AI produces by default</div>
+        <div class="panel-body">
+          <p><b>No awareness of existing automation.</b> Each Flow is generated in isolation. The AI doesn't query what's already deployed on the same object.</p>
+          <p><b>No bulk-safety consideration.</b> The generated Flow works for one record. It has no fault paths, no bulkification patterns, no consideration for what happens at 200+ records.</p>
+          <p><b>No naming or ownership metadata.</b> The Flow gets a generic name. No description field. No documentation of when it should fire or what it depends on.</p>
+          <p><b>No conflict detection.</b> There's no check for whether another Flow already updates the same fields under the same conditions.</p>
+        </div>
+      </div>
+
+      <div class="comparison-panel panel-good">
+        <div class="panel-header"><i class="fa fa-check-circle"></i> What governed automation looks like</div>
+        <div class="panel-body">
+          <p><b>Automation registry.</b> Before generating a new Flow, check the registry of existing automation on the target object. Identify potential conflicts before development begins.</p>
+          <p><b>Bulk-safe by design.</b> Fault paths are mandatory. Loop limits are enforced. The Flow is tested with 200-record batches before deployment.</p>
+          <p><b>Ownership and naming standards.</b> Every Flow has: a standardized name, a description, an owner, a creation date, and a link to the requirement it satisfies.</p>
+          <p><b>Overlap analysis in CI/CD.</b> The deployment pipeline checks for other automation on the same object and flags potential conflicts before promotion.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-insight">
+      <p>The problem isn't that the AI made a bad Flow. Each Flow in isolation is fine. The problem is that <b>AI generates automation with no operating model around it</b> &mdash; no awareness of context, no interaction analysis, no lifecycle management. Governance means providing that operating model before the automation reaches production.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Governed Approach -->
+    <h2><b>The Governed Approach: Before, During, and After</b></h2>
+
+    <h4><b>Before Generation: Automation Registry</b></h4>
+
+    <p>Maintain a metadata registry of all automation on each object. Before asking AI to generate a new Flow, check what already exists. This can be as simple as a custom metadata type or as sophisticated as a DevOps Center integration that maps automation dependencies.</p>
+
+    <p>The governed prompt includes context: "There is already a Record-Triggered Flow on Opportunity that fires on Stage change and updates CloseDate. Your new automation must not conflict with this existing behavior."</p>
+
+    <h4><b>During Build: Metadata Validation in CI/CD</b></h4>
+
+    <p>Your deployment pipeline should validate:</p>
+
+<pre>
+<span class="comment">// Metadata validation checks (conceptual)</span>
+
+<span class="keyword">1. Naming convention</span>
+   Flow name matches pattern: {Object}_{Action}_{Version}
+   <span class="safe">✓ Opportunity_ReassignOwner_v1</span>
+   <span class="danger">✗ My New Flow</span>
+
+<span class="keyword">2. Description populated</span>
+   Description field is non-empty and contains:
+   - Business requirement reference
+   - Owner/team
+   - Objects and fields affected
+   <span class="safe">✓ "Reassigns Opp owner based on territory rules when Amount > $500K. Owner: Rev Ops. Req: JIRA-1234"</span>
+   <span class="danger">✗ "" (empty)</span>
+
+<span class="keyword">3. Fault path present</span>
+   Flow contains at least one Fault connector
+   <span class="safe">✓ Fault path routes to error-handling subflow</span>
+   <span class="danger">✗ No fault path (failures are silent)</span>
+
+<span class="keyword">4. Overlap detection</span>
+   No other active Flow on same object + same trigger condition
+   <span class="safe">✓ No conflict detected</span>
+   <span class="danger">✗ CONFLICT: "Opportunity_UpdateCloseDate_v1" also fires on Stage change</span>
+
+<span class="keyword">5. Bulk safety</span>
+   No Get/Update inside loops
+   Record collection used for DML
+   <span class="safe">✓ Bulk-safe pattern confirmed</span>
+   <span class="danger">✗ DML inside loop detected — will fail at 200+ records</span>
+</pre>
+
+    <h4><b>After Deployment: Monitoring and Lifecycle</b></h4>
+
+    <p>Automation that deploys isn't "done." It needs ongoing governance:</p>
+
+    <p><b>Event Monitoring</b> surfaces Flow execution patterns. If a Flow starts firing 10x more than usual (like during a bulk data load), you see it in real time rather than discovering it from corrupted reports.</p>
+
+    <p><b>Periodic automation audits</b> identify Flows that are redundant, conflicting, or no longer needed. This is especially important when AI makes it easy to create new automation rather than modifying existing logic.</p>
+
+    <p><b>Flow ownership and expiration.</b> Every Flow should have an owner and a review date. If the owner leaves the team and nobody claims it, it enters a deprecation queue &mdash; not silent neglect.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Haunted Database -->
+    <h2><b>Recognizing the Haunted Database</b></h2>
+
+    <p>Most orgs don't realize they have this problem until a specific incident forces a forensic investigation. Here are the signals that tell you the automation layer is ungoverned:</p>
+
+    <div class="callout-amber">
+      <p style="margin:0 0 12px 0;"><b>Signals you already have Flow sprawl:</b></p>
+      <p style="margin:4px 0;"><b>"I don't know why this field has this value."</b> When investigating a data issue, nobody can trace which automation set a field. There's no single source of truth for field ownership.</p>
+      <p style="margin:4px 0;"><b>"It works when I edit one record but breaks in bulk."</b> Classic sign of automation that was never tested beyond single-record execution.</p>
+      <p style="margin:4px 0;"><b>"We have 3 Flows and 2 Process Builders on the same object."</b> Some fire on the same conditions. Some were supposed to replace others but the old ones were never deactivated.</p>
+      <p style="margin:4px 0;"><b>"Our data migration took 10x longer than estimated."</b> Automation firing on every record during the load, cascading into more automation, hitting governor limits.</p>
+      <p style="margin:4px 0;"><b>"Reports show different numbers depending on when you run them."</b> Automation is still modifying records in unpredictable patterns after the initial transaction.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Platform Controls -->
+    <h2><b>Platform Controls That Help</b></h2>
+
+    <p><b>Metadata API + DevOps Center:</b> Query existing automation programmatically before deploying new components. Build overlap detection into your CI/CD pipeline as a required gate.</p>
+
+    <p><b>Flow Trigger Explorer:</b> A built-in Salesforce tool that shows all automation on a given object in execution order. Use it during design review to identify conflicts before they reach production.</p>
+
+    <p><b>Event Monitoring:</b> Track Flow execution frequency, duration, and failure rates. Set up alerts for anomalous patterns (sudden spikes in execution count, cascading triggers).</p>
+
+    <p><b>Custom Metadata Types:</b> Build an automation registry as custom metadata &mdash; it deploys alongside your automation and provides a queryable index of what exists, who owns it, and what it does.</p>
+
+    <p><b>Field Audit Trail:</b> When you can't prevent the haunting, at least you can trace it. Field Audit Trail gives you a forensic record of what changed, when, and (critically) what process was responsible &mdash; for up to 10 years.</p>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The governance principle:</b> AI makes it trivially easy to create new automation. Governance makes it equally easy to understand what exists, verify it doesn't conflict, and trace what happened when it does. The platform provides the tools &mdash; the operating model puts them into practice.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="demo-prompt-injection.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Prompt Injection</a>
+      <a href="sales-cloud.html" class="w3-button w3-blue">Platform Applications<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
