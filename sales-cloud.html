@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sales Cloud — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.risk-scenario {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.risk-header {
+  padding: 14px 20px;
+  background: #fef2f2;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.risk-header i { color: #dc2626; }
+.risk-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.control-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.control-header {
+  padding: 14px 20px;
+  background: #f0fdf4;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-header i { color: #16a34a; }
+.control-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.governance-map {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.governance-map th, .governance-map td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+.governance-map th {
+  background: #f3f4f6;
+  font-size: 0.9em;
+}
+.governance-map td {
+  font-size: 0.9em;
+}
+
+.use-case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 768px) {
+  .use-case-grid { grid-template-columns: 1fr; }
+}
+.use-case-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.use-case-item b {
+  display: block;
+  margin-bottom: 6px;
+}
+.use-case-item p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Sales Cloud</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Revenue guardrails for autonomous pipeline management</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        AI agents in Sales Cloud can qualify leads, update forecasts, generate proposals, and advance pipeline stages. Every one of these actions directly affects revenue recognition. The governance question isn't whether to use AI in sales &mdash; it's how to ensure autonomous pipeline actions are auditable, bounded, and correct.
+      </p>
+    </div>
+
+    <p>Sales Cloud is where vibe coding governance hits revenue directly. A logic hallucination in a discount method costs money. A security bypass in an Opportunity query exposes deal intelligence to the wrong people. An uncontrolled agent that moves pipeline stages changes your forecast. The tolerance for error is zero because the data flows directly into financial reporting.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Revenue-Specific Risks -->
+    <h2><b>Revenue-Specific AI Risks</b></h2>
+
+    <p>Each failure mode from the <a href="taxonomy.html">taxonomy</a> manifests differently in a revenue context. Here's what they look like in Sales Cloud specifically:</p>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Logic Hallucination → Revenue Leakage</div>
+      <div class="risk-body">
+        <p>AI-generated pricing logic applies discounts incorrectly &mdash; wrong tiers, wrong thresholds, wrong product combinations. Each individual error may be small ($50-500 per deal), but across hundreds of transactions per month, the cumulative impact is material. Worse: the leakage is invisible in standard reporting because each deal looks individually reasonable.</p>
+        <p><b>Sales Cloud example:</b> An AI-generated CPQ formula applies a volume discount to all line items instead of only those in the qualifying product family. The sales rep sees a lower total and assumes it's correct. The deal closes. Margin erosion accumulates silently across the quarter.</p>
+      </div>
+    </div>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Security Bypass → Deal Intelligence Exposure</div>
+      <div class="risk-body">
+        <p>AI-generated code that queries Opportunities without <code>USER_MODE</code> can expose deal amounts, competitive positioning, and close dates to users who shouldn't have visibility. In a territory model, this means reps can see deals in other territories. In a channel model, this means partners can see direct deals.</p>
+        <p><b>Sales Cloud example:</b> An AI-generated dashboard component queries all Opportunities in system mode to build a "team performance" view. It inadvertently exposes pipeline data from a separate business unit that uses the same org but has restricted sharing rules.</p>
+      </div>
+    </div>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> Agent Hijack → Forecast Manipulation</div>
+      <div class="risk-body">
+        <p>An agent that can update Opportunity stages, amounts, or close dates can be manipulated through injected instructions in record fields. The impact is direct: your forecast changes, your commit numbers shift, and your CFO makes resource decisions based on corrupted data.</p>
+        <p><b>Sales Cloud example:</b> A poisoned Lead (via Web-to-Lead) contains instructions that cause an agent to update close dates on related Opportunities, making the pipeline appear stronger for the current quarter than it actually is.</p>
+      </div>
+    </div>
+
+    <div class="risk-scenario">
+      <div class="risk-header"><i class="fa fa-exclamation-triangle"></i> State Corruption → Pipeline Report Discrepancies</div>
+      <div class="risk-body">
+        <p>Multiple AI-generated automations on the Opportunity object update stages, amounts, or dates in conflicting ways. The pipeline report shows different numbers depending on when you run it. Quarter-end reconciliation reveals discrepancies that take days to trace.</p>
+        <p><b>Sales Cloud example:</b> Three Flows fire on Opportunity update: one updates forecast category, one recalculates weighted pipeline, one adjusts close date based on stage. During a bulk territory reassignment, they cascade into each other and produce forecast numbers that don't match any single rep's view.</p>
+      </div>
+    </div>
+
+    <div class="key-insight">
+      <p>In Sales Cloud, every governance failure is a <b>revenue failure</b>. Logic errors cost money directly. Security failures expose competitive intelligence. Agent manipulation distorts forecasting. Automation conflicts make the pipeline unreliable. The financial exposure is what makes Sales Cloud governance non-negotiable.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Controls -->
+    <h2><b>Sales Cloud Governance Controls</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Revenue-Critical Field Protection</div>
+      <div class="control-body">
+        <p>Identify the fields that directly affect financial reporting &mdash; Amount, Stage, CloseDate, Forecast Category, Discount Percentage &mdash; and apply layered protection:</p>
+        <p><b>Field Audit Trail</b> on all revenue-critical fields. Every change is recorded with timestamp, old value, new value, and the process that made the change. When the forecast shifts overnight, you can trace exactly what happened.</p>
+        <p><b>Validation Rules</b> that prevent impossible state transitions (e.g., Stage can't move backward without manager approval, Discount can't exceed tier maximum).</p>
+        <p><b>Transaction Security Policies</b> that trigger on bulk modifications to revenue fields. If an agent or automation updates Amount on more than 10 Opportunities in a single transaction, require elevated approval.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Bounded Agent Actions for Pipeline</div>
+      <div class="control-body">
+        <p>Sales agents (Agentforce SDR, pipeline assistants, forecast bots) need explicit boundaries around revenue-impacting actions:</p>
+        <p><b><code>confirmationRequired</code></b> on any action that modifies Amount, Stage, or CloseDate. The agent can recommend a stage change but can't execute it without rep confirmation.</p>
+        <p><b>Action catalogs</b> that whitelist what each agent role can do. An SDR agent can create Tasks and update Lead Status but cannot modify Opportunity fields. A forecast agent can read pipeline data but cannot write to it.</p>
+        <p><b>Spending limits</b> &mdash; agents that generate quotes or apply discounts have hard maximum thresholds. A discount above 20% requires human escalation regardless of what the agent's reasoning produces.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Forecast Integrity Monitoring</div>
+      <div class="control-body">
+        <p>The forecast is the most visible artifact of Sales Cloud data quality. Protecting it requires active monitoring:</p>
+        <p><b>Anomaly detection</b> on forecast movements. If weighted pipeline changes by more than 15% in a 24-hour period without corresponding human activity, flag it for review.</p>
+        <p><b>Attribution tracking</b> for every forecast change. Was it a rep updating their commit? Was it an automation recalculating weighted amounts? Was it an agent responding to a prompt? The audit trail should distinguish these.</p>
+        <p><b>Reconciliation checkpoints</b> at week boundaries. Automated comparison between current forecast and prior snapshot, with variance explanation for changes above threshold.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Deal Intelligence Access Control</div>
+      <div class="control-body">
+        <p>AI-generated code and agents that query Opportunity data must respect the sharing model rigorously:</p>
+        <p><b><code>WITH USER_MODE</code></b> on all Opportunity queries. The platform enforces territory visibility, role hierarchy, and sharing rules at the database level. No code-level bypass possible.</p>
+        <p><b>Platform Encryption</b> on sensitive deal fields (competitive notes, negotiation strategy, internal pricing). Even if queried through a security gap, the field values are encrypted at rest with your keys.</p>
+        <p><b>Data Detect</b> to identify and classify sensitive revenue data across the org. You can't protect deal intelligence you don't know exists in custom fields or notes.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Common AI Use Cases -->
+    <h2><b>Common AI Use Cases and Their Governance Requirements</b></h2>
+
+    <div class="use-case-grid">
+      <div class="use-case-item">
+        <b>AI-Generated Proposals &amp; Quotes</b>
+        <p>Governance: Pricing validation against approved rate cards. Discount ceiling enforcement. Legal language review gate before send. Audit trail of what was quoted vs. what was approved.</p>
+      </div>
+      <div class="use-case-item">
+        <b>Autonomous Lead Qualification</b>
+        <p>Governance: Scoring logic must be spec-driven (not AI-plausible). False positive/negative rate monitoring. Escalation path when confidence is below threshold. No auto-discard without human review.</p>
+      </div>
+      <div class="use-case-item">
+        <b>Pipeline Stage Advancement</b>
+        <p>Governance: Agent can recommend but not execute stage changes on deals above threshold. Backward movement requires manager confirmation. All stage changes attributed to source (human vs. agent).</p>
+      </div>
+      <div class="use-case-item">
+        <b>Forecast Rollup &amp; Adjustment</b>
+        <p>Governance: Read-only agent access to pipeline data. Any write to forecast fields requires human confirmation. Weekly snapshot comparison to detect drift. Clear attribution for adjustment source.</p>
+      </div>
+      <div class="use-case-item">
+        <b>Competitive Intelligence Summarization</b>
+        <p>Governance: Agent only surfaces data the requesting user has sharing access to. No cross-territory intelligence leakage. Summaries don't persist in fields visible to partner community users.</p>
+      </div>
+      <div class="use-case-item">
+        <b>Territory &amp; Account Assignment</b>
+        <p>Governance: Assignment logic validated against approved territory rules (not AI interpretation). Bulk reassignment requires elevated approval. Cascading automation on reassignment is controlled.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Map -->
+    <h2><b>Sales Cloud Governance Map</b></h2>
+
+    <table class="governance-map">
+      <thead>
+        <tr>
+          <th>Governance Pillar</th>
+          <th>Sales Cloud Application</th>
+          <th>Platform Control</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Design</b></td>
+          <td>Spec-driven pricing logic with explicit boundary conditions for every discount tier and product combination</td>
+          <td>Prompt templates with pricing rules pre-injected</td>
+        </tr>
+        <tr>
+          <td><b>Build</b></td>
+          <td>Code Analyzer gates on all Opportunity-touching Apex; metadata validation on pipeline automation</td>
+          <td>Code Analyzer + DevOps Center pipeline</td>
+        </tr>
+        <tr>
+          <td><b>Runtime</b></td>
+          <td>Bounded agents with <code>confirmationRequired</code> on revenue field modifications; spending limits on discount authority</td>
+          <td>Trust Layer + Transaction Security Policies</td>
+        </tr>
+        <tr>
+          <td><b>Data</b></td>
+          <td>Field Audit Trail on Amount/Stage/CloseDate; Platform Encryption on competitive intelligence; USER_MODE enforcement</td>
+          <td>Shield (FAT + Encryption + Event Monitoring)</td>
+        </tr>
+        <tr>
+          <td><b>People</b></td>
+          <td>Revenue operations team owns pricing logic review; quota-carrying reps confirm all AI-recommended stage changes</td>
+          <td>AI Code Review Standard + approval workflows</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The bottom line:</b> Sales Cloud governance is revenue governance. Every control in this framework has a direct financial justification &mdash; either preventing revenue leakage, protecting deal intelligence, or ensuring forecast accuracy. When you're positioning the governance investment to a CFO, this is the page that makes the business case.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="demo-flow-sprawl.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Flow Sprawl</a>
+      <a href="service-cloud.html" class="w3-button w3-blue">Service Cloud<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
