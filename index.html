@@ -1,2 +1,596 @@
-hi
-ho ho
+<!DOCTYPE html>
+<html>
+<head>
+<title>VibeOps — AI Development Governance Framework for Salesforce</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.stat-card {
+  background: #f9f9f9;
+  border-left: 4px solid #1a73e8;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.stat-number {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #1a73e8;
+  display: block;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.95em;
+  color: #333;
+}
+
+.soundbite {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+.soundbite .number {
+  font-size: 0.85em;
+  color: #7eb8ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.soundbite .quote {
+  font-size: 1.4em;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+.soundbite .explain {
+  font-size: 0.95em;
+  color: #b0c4de;
+  line-height: 1.6;
+}
+
+.section-card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+.section-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.section-card h3 {
+  margin-top: 0;
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.pillar-box {
+  background: #f4f8ff;
+  border: 1px solid #d0e3ff;
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+}
+.pillar-box i {
+  font-size: 1.8em;
+  color: #1a73e8;
+  margin-bottom: 8px;
+  display: block;
+}
+.pillar-box strong {
+  display: block;
+  margin-bottom: 4px;
+}
+.pillar-box span {
+  font-size: 0.85em;
+  color: #555;
+}
+
+.audience-tag {
+  display: inline-block;
+  background: #e8f0fe;
+  color: #1a56c4;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.advantage-item {
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+.advantage-item:last-child {
+  border-bottom: none;
+}
+.advantage-item b {
+  color: #1a73e8;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>VibeOps</b></h1>
+    <p style="font-size:1.2em; color:#555; margin-top:0;">Best Practices for AI-Assisted Development on the Salesforce Platform</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Your teams just got 10x faster at building. The question is: faster toward what?
+      </p>
+      <p style="margin-top:12px; margin-bottom:0;">
+        This is a practical governance framework for the vibe coding era. Not theory. Not a checklist.
+        A working model for how to keep the speed and kill the risk &mdash; specifically on Salesforce, where the platform
+        already has most of the answers built in. You just have to turn them on.
+      </p>
+    </div>
+
+    <!-- Three Soundbites -->
+    <h2><b>Three Ideas Worth Repeating</b></h2>
+    <p>If you remember nothing else from this framework, remember these:</p>
+
+    <div class="soundbite">
+      <div class="number">Soundbite 1</div>
+      <div class="quote">The velocity is a gift. The governance gap is the bill.</div>
+      <div class="explain">AI-assisted development is shipping code 10x faster. But 40-62% of that code contains security flaws, and 56% of developers admit they aren't reviewing it line by line. Speed without governance is just faster damage.</div>
+    </div>
+
+    <div class="soundbite">
+      <div class="number">Soundbite 2</div>
+      <div class="quote">The platform is not just where the risk lives. It's where the controls live.</div>
+      <div class="explain">Salesforce already has governance primitives purpose-built for this moment &mdash; injection defense, bounded autonomy, real-time blocking, data isolation, deterministic agent logic. The question isn't whether the controls exist. It's whether you've activated them.</div>
+    </div>
+
+    <div class="soundbite">
+      <div class="number">Soundbite 3</div>
+      <div class="quote">In the agentic era, your share of the shared responsibility model just got bigger, not smaller.</div>
+      <div class="explain">Salesforce secures the platform. You secure what you build on it. And you're now building more, faster, with less review than at any point in history. That's not a reason to panic &mdash; it's a reason to activate the governance layer that's already there.</div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- The Numbers -->
+    <h2><b>The Governance Gap in Numbers</b></h2>
+    <p>Everyone's talking about the velocity. Almost no one is talking about what's coming in with it.</p>
+
+    <div class="w3-row-padding" style="margin: 0 -8px;">
+      <div class="w3-half" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-number">40-62%</span>
+          <span class="stat-label">of AI-generated code samples contain actionable security vulnerabilities or design flaws</span>
+        </div>
+      </div>
+      <div class="w3-half" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-number">56%</span>
+          <span class="stat-label">of developers admit they rarely review AI-generated code line by line</span>
+        </div>
+      </div>
+      <div class="w3-half" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-number">10,000+</span>
+          <span class="stat-label">new security findings per month attributable to AI-generated code &mdash; a 10x increase over 2024</span>
+        </div>
+      </div>
+      <div class="w3-half" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-number">45%</span>
+          <span class="stat-label">of AI-assisted coding tasks introduce a critical flaw: omitted auth, missing sanitization, or hallucinated dependencies</span>
+        </div>
+      </div>
+      <div class="w3-half" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-number">75%</span>
+          <span class="stat-label">of tech leaders expect moderate-to-severe technical debt from rapid AI-assisted development</span>
+        </div>
+      </div>
+      <div class="w3-half" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-number">9%</span>
+          <span class="stat-label">of enterprises classified as "AI-ready" from a security posture standpoint</span>
+        </div>
+      </div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Why Salesforce Has the Structural Advantage -->
+    <h2><b>Why Salesforce Has the Structural Advantage</b></h2>
+    <p>Most platforms don't have a built-in answer to vibe coding risk. Salesforce does &mdash; because the governance primitives are already baked into the architecture. The challenge isn't building new controls. It's making sure teams actually use the ones that are already there.</p>
+
+    <div class="w3-container" style="margin-bottom:24px;">
+
+      <div class="advantage-item">
+        <p><b>A two-layer security model that AI can't accidentally bypass &mdash; if you enforce it.</b> Salesforce governs access through both record-level visibility (sharing rules, role hierarchies) and field-level visibility (CRUD/FLS). When developers use <code>WITH USER_MODE</code> and <code>AccessLevel.USER_MODE</code>, the platform enforces both layers at the database boundary. The AI doesn't need to "remember" security &mdash; it's pushed into the query layer itself.</p>
+      </div>
+
+      <div class="advantage-item">
+        <p><b>Governor limits that act as automatic circuit breakers.</b> On other platforms, bad AI-generated code can run wild in production for hours before anyone notices. On Salesforce, governor limits stop runaway code at the transaction boundary. Bulkification failures, infinite loops, and resource-hungry patterns hit a hard wall before they can do real damage. That's not a constraint &mdash; it's a safety net.</p>
+      </div>
+
+      <div class="advantage-item">
+        <p><b>A Trust Layer with built-in injection defense, toxicity detection, and audit trails.</b> Agentforce doesn't just call an LLM and hope for the best. The Trust Layer sits between the agent and the model &mdash; masking sensitive data, detecting prompt injection, evaluating output quality, and logging everything. This isn't something you bolt on after the fact. It's the architecture.</p>
+      </div>
+
+      <div class="advantage-item">
+        <p><b>Bounded autonomy as a first-class design pattern.</b> <code>confirmationRequired</code>, Agent Script, Trusted URLs, action catalogs &mdash; these aren't afterthoughts. They're how you give an agent enough power to be useful while preventing it from doing things you didn't intend. The platform was designed for this tension between autonomy and control.</p>
+      </div>
+
+      <div class="advantage-item">
+        <p><b>Real-time blocking, not after-the-fact alerting.</b> Transaction Security Policies can block a risky action the millisecond it happens &mdash; before data leaves the org. Most third-party security tools watch from outside and tell you what happened yesterday. Native controls operate inside the transaction.</p>
+      </div>
+
+      <div class="advantage-item">
+        <p><b>Multi-cloud governance from a single control plane.</b> Security Center, Event Monitoring, Data Detect, Platform Encryption, Data Spaces &mdash; these span the entire Salesforce estate. When your AI-assisted development touches Sales Cloud, Service Cloud, Data Cloud, and Agentforce simultaneously (and it will), the governance layer already spans all of them.</p>
+      </div>
+
+    </div>
+
+    <div class="w3-panel w3-leftbar w3-pale-green w3-padding-16" style="border-left-color: #34a853;">
+      <p style="margin:0;">
+        <b>The bottom line:</b> Generic advice like "use a linter and do threat modeling" doesn't cut it here.
+        Salesforce-specific governance is required because the platform has structural advantages that generic tools can't replicate.
+        This framework shows you how to activate them.
+      </p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Framework Structure -->
+    <h2><b>What's in This Framework</b></h2>
+    <p>Three layers. Understand the risk, apply the controls, then operate sustainably. Each section stands alone &mdash; pick the one that matters most to you and go deep.</p>
+
+    <!-- Audience -->
+    <div style="margin-bottom: 24px;">
+      <span class="audience-tag">CIO / CTO</span>
+      <span class="audience-tag">Enterprise Architects</span>
+      <span class="audience-tag">Release Management</span>
+      <span class="audience-tag">Security Leaders</span>
+      <span class="audience-tag">Salesforce CoE Leads</span>
+      <span class="audience-tag">Engineering Managers</span>
+    </div>
+
+    <!-- Layer 1 -->
+    <h3 style="color:#1a73e8;">Layer 1: Understand the Risk</h3>
+
+    <div class="section-card">
+      <h3><a href="governance-gap.html" style="text-decoration:none; color:#333;">The Governance Gap</a></h3>
+      <p>What vibe coding is, why it changes the risk equation, and why 2026 is the inflection point. 25% of YC startups are shipping 95% AI-generated code. Cursor hit $100M ARR in 12 months. Microsoft reports 20-30% machine-authored production code. The velocity is real. The governance isn't keeping up.</p>
+    </div>
+
+    <div class="section-card">
+      <h3><a href="taxonomy.html" style="text-decoration:none; color:#333;">Failure Taxonomy</a></h3>
+      <p>Failures in the agentic SDLC are rarely syntax errors. They're semantic &mdash; the code runs exactly as written but violates the designer's intent. Four vectors: <b>logic hallucination</b> (code works, business rule is wrong), <b>security bypass</b> (FLS/CRUD/sharing ignored), <b>prompt injection</b> (data becomes instruction), and <b>state corruption</b> (automation sprawl, haunted databases). Plus a fifth: <b>comprehension debt</b> &mdash; when your team can't debug what the AI wrote at 3 AM.</p>
+    </div>
+
+    <!-- Layer 2 -->
+    <h3 style="color:#1a73e8;">Layer 2: Apply Controls</h3>
+
+    <div class="section-card">
+      <h3><a href="governance-model.html" style="text-decoration:none; color:#333;">The Five-Pillar Governance Model</a></h3>
+      <p>The full control model. Each pillar maps directly to Salesforce platform capabilities you can activate today.</p>
+
+      <div class="pillar-grid">
+        <div class="pillar-box">
+          <i class="fa fa-pencil-square-o"></i>
+          <strong>Design</strong>
+          <span>Constraint architecture, spec-driven development</span>
+        </div>
+        <div class="pillar-box">
+          <i class="fa fa-cogs"></i>
+          <strong>Build</strong>
+          <span>CI/CD gates, Code Analyzer, vibe check pipeline</span>
+        </div>
+        <div class="pillar-box">
+          <i class="fa fa-play-circle"></i>
+          <strong>Runtime</strong>
+          <span>Bounded autonomy, HITL, injection defense</span>
+        </div>
+        <div class="pillar-box">
+          <i class="fa fa-database"></i>
+          <strong>Data</strong>
+          <span>Masking, zero-copy, provenance, identity</span>
+        </div>
+        <div class="pillar-box">
+          <i class="fa fa-users"></i>
+          <strong>People</strong>
+          <span>Roles, scorecards, interviews, taste</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3>Illustrative Examples: What "Taste" Looks Like</h3>
+      <p>Four before-and-after demonstrations. Each one maps to a failure mode from the taxonomy. The "bad" version is what the AI produces when unconstrained. The "good" version is what you get when you apply constraint architecture <i>before</i> generation. This is the difference between passing code through and governing it.</p>
+      <ul style="list-style:none; padding:0;">
+        <li style="padding:8px 0;"><a href="demo-secure-apex.html" style="text-decoration:none;"><i class="fa fa-lock w3-margin-right" style="color:#1a73e8;"></i><b>Secure Apex</b></a> &mdash; Same requirement, unsafe vs governed. The security bypass that "works in sandbox." <span style="color:#888;">(Security Bypass)</span></li>
+        <li style="padding:8px 0;"><a href="demo-logic-hallucination.html" style="text-decoration:none;"><i class="fa fa-calculator w3-margin-right" style="color:#1a73e8;"></i><b>Logic Hallucination</b></a> &mdash; The discount that applies to every order. Tests pass, business rule is wrong. <span style="color:#888;">(Logic Hallucination)</span></li>
+        <li style="padding:8px 0;"><a href="demo-prompt-injection.html" style="text-decoration:none;"><i class="fa fa-user-secret w3-margin-right" style="color:#1a73e8;"></i><b>Prompt Injection</b></a> &mdash; How a Web-to-Lead form exfiltrates your pipeline data. The full ForcedLeak attack chain. <span style="color:#888;">(Agent Hijack)</span></li>
+        <li style="padding:8px 0;"><a href="demo-flow-sprawl.html" style="text-decoration:none;"><i class="fa fa-sitemap w3-margin-right" style="color:#1a73e8;"></i><b>Flow Sprawl</b></a> &mdash; The AI-generated Flow that works for 5 records and crashes at 5,000. <span style="color:#888;">(State Corruption)</span></li>
+      </ul>
+    </div>
+
+    <div class="section-card">
+      <h3>Platform Applications</h3>
+      <p>Cloud-by-cloud governance guidance. Each page covers: primary risk, dominant dev paradigm, mandatory guardrails, and a concrete artifact you can implement.</p>
+      <div class="w3-row-padding" style="margin: 12px -8px 0;">
+        <div class="w3-half" style="margin-bottom:12px;"><a href="sales-cloud.html" style="text-decoration:none;"><i class="fa fa-line-chart w3-margin-right" style="color:#1a73e8;"></i>Sales Cloud</a> &mdash; Revenue guardrails</div>
+        <div class="w3-half" style="margin-bottom:12px;"><a href="service-cloud.html" style="text-decoration:none;"><i class="fa fa-headphones w3-margin-right" style="color:#1a73e8;"></i>Service Cloud</a> &mdash; Trusted agent execution</div>
+        <div class="w3-half" style="margin-bottom:12px;"><a href="marketing-cloud.html" style="text-decoration:none;"><i class="fa fa-bullhorn w3-margin-right" style="color:#1a73e8;"></i>Marketing Cloud</a> &mdash; Campaign-scale governance</div>
+        <div class="w3-half" style="margin-bottom:12px;"><a href="data-cloud.html" style="text-decoration:none;"><i class="fa fa-database w3-margin-right" style="color:#1a73e8;"></i>Data Cloud</a> &mdash; Trusted data foundation</div>
+        <div class="w3-half" style="margin-bottom:12px;"><a href="agentforce.html" style="text-decoration:none;"><i class="fa fa-bolt w3-margin-right" style="color:#1a73e8;"></i>Agentforce</a> &mdash; Observable deterministic execution</div>
+        <div class="w3-half" style="margin-bottom:12px;"><a href="mulesoft.html" style="text-decoration:none;"><i class="fa fa-exchange w3-margin-right" style="color:#1a73e8;"></i>MuleSoft</a> &mdash; Controlled API execution</div>
+      </div>
+    </div>
+
+    <!-- Layer 3 -->
+    <h3 style="color:#1a73e8;">Layer 3: Operate Sustainably</h3>
+
+    <div class="section-card">
+      <h3><a href="people.html" style="text-decoration:none; color:#333;">People &amp; Organization</a></h3>
+      <p>This is the section nobody else is talking about. The four technical pillars tell you what to configure. This one tells you how to run the team that does the configuring. Role redefinition (your juniors are now curators, your seniors are constraint architects). A new developer scorecard that replaces lines-of-code with metrics that actually mean something. A three-stage interview loop because whiteboarding is dead. And the concept of "Taste" &mdash; the single most important engineering competency of 2026.</p>
+    </div>
+
+    <div class="section-card">
+      <h3><a href="platform-governance.html" style="text-decoration:none; color:#333;">Platform as Governance Layer</a></h3>
+      <p>The thesis of the entire framework, made concrete. A complete mapping of every governance control to its corresponding Salesforce platform primitive. The shared responsibility model for the agentic era. And the argument for why native controls &mdash; operating inside the trust boundary, synchronous with the transaction, updating automatically with every release &mdash; are structurally different from anything bolted on from outside.</p>
+    </div>
+
+    <div class="section-card">
+      <h3><a href="maturity-model.html" style="text-decoration:none; color:#333;">Maturity Model &amp; 30/60/90 Day Plan</a></h3>
+      <p>Where are you today? A five-level self-assessment calibrated to Salesforce orgs. (Spoiler: most enterprise customers are Level 2 trending to 3.) Followed by an executable 90-day plan &mdash; no additional budget, no new tools, just activating what you already have. The goal: go from "it worked in sandbox" to blocking CI/CD gates, bounded agent permissions, and a scorecard that measures what actually matters.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- How to Use -->
+    <h2><b>How to Navigate</b></h2>
+
+    <div class="w3-container">
+      <p><b>If you're a CIO/CTO</b> and you have 10 minutes: read the three soundbites above, then jump to the <a href="maturity-model.html">Maturity Model</a>. That's where you'll find out where your org actually sits and what the first 90 days look like.</p>
+
+      <p><b>If you're an architect or security leader:</b> The <a href="governance-model.html">Governance Model</a> and <a href="platform-governance.html">Platform as Governance Layer</a> are your primary references. The per-product pages give you implementation specifics for your cloud.</p>
+
+      <p><b>If you run an engineering team or CoE:</b> Start with <a href="people.html">People &amp; Organization</a>. That's where the scorecard, career architecture, and interview redesign live. Then look at the illustrative examples for patterns your team can adopt as standards.</p>
+
+      <p><b>If you own release management or DevOps:</b> The Build-time controls in the <a href="governance-model.html">Governance Model</a> are your section. Then the <a href="maturity-model.html">30/60/90 plan</a> gives you the specific CI/CD gates to implement by month.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+      <p>Built from publicly available research, platform documentation, and field experience.
+         Designed as actionable thought leadership for enterprise customers navigating AI-assisted development at scale.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
