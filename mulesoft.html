@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MuleSoft — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.control-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.control-header {
+  padding: 14px 20px;
+  background: #f0fdf4;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-header i { color: #16a34a; }
+.control-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.governance-map {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.governance-map th, .governance-map td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+.governance-map th {
+  background: #f3f4f6;
+  font-size: 0.9em;
+}
+.governance-map td {
+  font-size: 0.9em;
+}
+
+.layer-diagram {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.layer-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 6px;
+}
+.layer-row .layer-label {
+  min-width: 140px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.layer-row .layer-desc {
+  font-size: 0.9em;
+  color: #555;
+}
+.layer-agent { background: #eff6ff; }
+.layer-mule { background: #f0fdf4; }
+.layer-api { background: #fef3c7; }
+.layer-data { background: #ede9fe; }
+
+.pattern-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 768px) {
+  .pattern-grid { grid-template-columns: 1fr; }
+}
+.pattern-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.pattern-item b {
+  display: block;
+  margin-bottom: 6px;
+}
+.pattern-item p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Gap</span>
+      <span class="nav-desc">Why vibe coding changes the risk equation</span></span>
+    </a>
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Failure Taxonomy</span>
+      <span class="nav-desc">Four vectors of agentic SDLC failure</span></span>
+    </a>
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Model</span>
+      <span class="nav-desc">Five pillars of vibe coding control</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Secure Apex</span>
+      <span class="nav-desc">Security bypass — unsafe vs governed code</span></span>
+    </a>
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Logic Hallucination</span>
+      <span class="nav-desc">Looks correct, is wrong</span></span>
+    </a>
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Prompt Injection</span>
+      <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span></span>
+    </a>
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Flow Sprawl</span>
+      <span class="nav-desc">Sandbox success, production failure</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Sales Cloud</span>
+      <span class="nav-desc">Revenue guardrails for autonomous pipeline</span></span>
+    </a>
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Service Cloud</span>
+      <span class="nav-desc">Trusted agent execution across service channels</span></span>
+    </a>
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Marketing Cloud</span>
+      <span class="nav-desc">Governed personalization at campaign scale</span></span>
+    </a>
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Data Cloud</span>
+      <span class="nav-desc">Trusted data foundation for AI and identity</span></span>
+    </a>
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Agentforce</span>
+      <span class="nav-desc">Deterministic execution with observable reasoning</span></span>
+    </a>
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">MuleSoft</span>
+      <span class="nav-desc">Controlled agent-to-API execution</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">People &amp; Organization</span>
+      <span class="nav-desc">Roles, scorecards, interviews, and taste</span></span>
+    </a>
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Platform as Governance Layer</span>
+      <span class="nav-desc">How Salesforce primitives map to each control</span></span>
+    </a>
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Maturity &amp; Roadmap</span>
+      <span class="nav-desc">Self-assessment and 30/60/90 day plan</span></span>
+    </a>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>MuleSoft</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Controlled agent-to-API execution and multi-agent orchestration</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Agents don't operate in isolation. They need to call external APIs, access enterprise systems, and increasingly coordinate with other agents. MuleSoft provides the governed integration layer that sits between agent intent and external execution &mdash; ensuring that every API call, every data retrieval, and every agent-to-agent interaction is policy-controlled, observable, and secure.
+      </p>
+    </div>
+
+    <p>In the governance model, MuleSoft occupies a critical position: it's the control point between what happens inside the Salesforce platform (where the Trust Layer, permissions, and bounded autonomy apply) and what happens outside (where external APIs, third-party systems, and other agent frameworks operate). Without a governed integration layer, every external call is an uncontrolled exit point from your governance boundary.</p>
+
+    <div class="key-insight">
+      <p>Think of MuleSoft as the <b>API governance layer for agents</b>. Inside the platform, Agentforce controls what agents can do. At the integration boundary, MuleSoft controls what agents can reach &mdash; which APIs, with what credentials, at what rate, with what data transformation and policy enforcement.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Integration Governance Stack -->
+    <h2><b>The Integration Governance Stack</b></h2>
+
+    <p>When an Agentforce agent needs to interact with an external system &mdash; checking inventory, processing a payment, calling a third-party AI model, or coordinating with another agent &mdash; the request flows through MuleSoft's governance layers:</p>
+
+    <div class="layer-diagram">
+      <div class="layer-row layer-agent">
+        <div class="layer-label">Agent Layer</div>
+        <div class="layer-desc">Agentforce agent decides it needs external data or wants to trigger an external action (constrained by its action catalog)</div>
+      </div>
+      <div class="layer-row layer-mule">
+        <div class="layer-label">MuleSoft Layer</div>
+        <div class="layer-desc">API governance: authentication, rate limiting, data transformation, policy enforcement, logging &mdash; all before the external call executes</div>
+      </div>
+      <div class="layer-row layer-api">
+        <div class="layer-label">API / Agent Layer</div>
+        <div class="layer-desc">External system receives a well-formed, authenticated, policy-compliant request &mdash; not a raw agent output</div>
+      </div>
+      <div class="layer-row layer-data">
+        <div class="layer-label">Response Layer</div>
+        <div class="layer-desc">Response flows back through MuleSoft: validated, transformed, PII-masked if needed, before reaching the agent</div>
+      </div>
+    </div>
+
+    <p>This layered architecture means the agent never directly touches an external API. Every interaction is mediated, logged, and policy-checked. If an agent's reasoning is compromised (through prompt injection or logic hallucination), the integration layer still enforces its policies independently.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Controls -->
+    <h2><b>MuleSoft Governance Controls for AI</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> API Access Governance</div>
+      <div class="control-body">
+        <p>Not every agent should be able to call every API. MuleSoft provides granular control over which agents can access which integrations:</p>
+        <p><b>API policies per consumer.</b> Each Agentforce agent (or agent role) gets a defined API access policy. A "Lead Research" agent can call the company enrichment API but not the payment processing API. These policies are enforced at the gateway level.</p>
+        <p><b>Rate limiting per agent.</b> Prevent runaway agents from overwhelming external systems. If an agent enters a reasoning loop that generates repeated API calls, the rate limit catches it before it becomes an incident.</p>
+        <p><b>Credential isolation.</b> Agents don't hold API credentials directly. MuleSoft manages credentials centrally and injects them at call time. If an agent is compromised, the attacker doesn't gain credential access.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Data Transformation &amp; Masking</div>
+      <div class="control-body">
+        <p>Data flowing between agents and external systems often needs transformation for governance reasons:</p>
+        <p><b>PII masking on outbound requests.</b> Before sending data to a third-party API (especially third-party AI models for enrichment or analysis), MuleSoft can mask or tokenize sensitive fields. The external system never sees raw PII.</p>
+        <p><b>Response validation.</b> Data returning from external APIs is validated against expected schemas before reaching the agent. Malformed or unexpected responses (which could be an indicator of API compromise) are caught at the integration layer.</p>
+        <p><b>Data minimization.</b> Transform requests to send only the fields the external API needs. Don't send the entire customer record when the API only requires an email address for lookup.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Multi-Agent Orchestration Governance</div>
+      <div class="control-body">
+        <p>As agent architectures evolve from single agents to multi-agent systems, MuleSoft's Agent Fabric provides the governance layer for agent-to-agent coordination:</p>
+        <p><b>Agent discovery and registration.</b> Agents are registered with defined capabilities (via Agent Cards in A2A protocol or MCP tool definitions). An agent can only invoke another agent's capabilities if the registration and policy allows it.</p>
+        <p><b>Orchestration policies.</b> Define which agents can coordinate with which, under what conditions, and with what approval requirements. Prevent unauthorized agent chains where one compromised agent triggers a cascade across the enterprise.</p>
+        <p><b>Cross-agent audit trail.</b> When multiple agents collaborate on a task, the orchestration layer maintains a unified trace that shows which agent did what, in what order, and with what data. Essential for debugging and compliance in multi-agent workflows.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Observability &amp; Anomaly Detection</div>
+      <div class="control-body">
+        <p>MuleSoft provides integration-level observability that complements Salesforce's Event Monitoring:</p>
+        <p><b>API call pattern monitoring.</b> Baseline normal agent API usage patterns. Alert when patterns deviate &mdash; unusual endpoints called, abnormal data volumes, unexpected time-of-day activity.</p>
+        <p><b>Error rate tracking.</b> If an agent's API calls suddenly start failing at a high rate, it may indicate reasoning problems (hallucinated API parameters) or external system issues. Either way, it warrants investigation.</p>
+        <p><b>Latency and dependency monitoring.</b> Track how external API performance affects agent response times. When a downstream system degrades, surface it before it cascades into poor agent performance or timeout-induced errors.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Integration Patterns -->
+    <h2><b>Common AI Integration Patterns</b></h2>
+
+    <div class="pattern-grid">
+      <div class="pattern-item">
+        <b>Agent → External AI Model</b>
+        <p>Agentforce agent needs enrichment from a specialized model (translation, document analysis, code review). MuleSoft routes to the model, masks PII, enforces rate limits, and validates the response before returning to the agent.</p>
+      </div>
+      <div class="pattern-item">
+        <b>Agent → Enterprise System (ERP, HRIS)</b>
+        <p>Agent needs real-time data from SAP, Workday, or similar. MuleSoft authenticates, transforms the request to the target system's format, and returns only the fields the agent's policy permits.</p>
+      </div>
+      <div class="pattern-item">
+        <b>Agent → Agent (Cross-Platform)</b>
+        <p>Agentforce agent coordinates with a non-Salesforce agent (e.g., a specialized inventory agent). MuleSoft's Agent Fabric brokers the interaction with policy enforcement, preventing unauthorized data sharing or action execution.</p>
+      </div>
+      <div class="pattern-item">
+        <b>External Agent → Salesforce</b>
+        <p>An external system's agent needs to trigger a Salesforce action. MuleSoft provides the authentication gateway, validates the request against allowed operations, and routes through appropriate Salesforce APIs with proper access controls.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Governance Map -->
+    <h2><b>MuleSoft Governance Map</b></h2>
+
+    <table class="governance-map">
+      <thead>
+        <tr>
+          <th>Governance Pillar</th>
+          <th>MuleSoft Implementation</th>
+          <th>What It Prevents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Design</b></td>
+          <td>API specifications (RAML/OAS) define contracts before agents consume them; MCP tool definitions declare capabilities explicitly</td>
+          <td>Agents calling undefined endpoints; hallucinated API parameters</td>
+        </tr>
+        <tr>
+          <td><b>Build</b></td>
+          <td>API policy configuration in Anypoint Platform; integration testing with agent scenarios; credential management setup</td>
+          <td>Over-privileged integrations; untested error paths; credential exposure</td>
+        </tr>
+        <tr>
+          <td><b>Runtime</b></td>
+          <td>Gateway policy enforcement; rate limiting; PII masking; response validation; anomaly detection</td>
+          <td>Runaway agents; data leakage to external systems; API abuse</td>
+        </tr>
+        <tr>
+          <td><b>Data</b></td>
+          <td>Data minimization on outbound calls; transformation to remove sensitive fields; inbound validation against schemas</td>
+          <td>PII exposure to third parties; malformed data corrupting agent context</td>
+        </tr>
+        <tr>
+          <td><b>People</b></td>
+          <td>Integration team owns API policies; agent developers consume registered APIs (not arbitrary endpoints); cross-agent audit trail for accountability</td>
+          <td>Shadow integrations; unaccountable agent-to-agent interactions; debugging blind spots</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The integration governance principle:</b> Inside the platform, Agentforce governs what agents can do. At the boundary, MuleSoft governs what agents can reach. Together, they create an end-to-end governance model that extends from agent reasoning through platform execution to external system interaction &mdash; with policy enforcement, observability, and audit at every layer.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="agentforce.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Agentforce</a>
+      <a href="people.html" class="w3-button w3-blue">People &amp; Organization<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
