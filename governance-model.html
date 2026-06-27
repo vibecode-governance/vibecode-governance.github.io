@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Governance Model — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.pillar-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+.pillar-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pillar-header .pillar-icon {
+  font-size: 1.8em;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pillar-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+}
+.pillar-header .subtitle {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 2px;
+}
+.pillar-body {
+  padding: 0 24px 24px;
+}
+.pillar-body p {
+  line-height: 1.7;
+}
+
+.p1 .pillar-header { background: #eff6ff; }
+.p1 .pillar-icon { background: #1d4ed8; color: white; }
+.p2 .pillar-header { background: #f0fdf4; }
+.p2 .pillar-icon { background: #16a34a; color: white; }
+.p3 .pillar-header { background: #fef3c7; }
+.p3 .pillar-icon { background: #d97706; color: white; }
+.p4 .pillar-header { background: #ede9fe; }
+.p4 .pillar-icon { background: #7c3aed; color: white; }
+.p5 .pillar-header { background: #fce7f3; }
+.p5 .pillar-icon { background: #db2777; color: white; }
+
+.control-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+@media (max-width: 768px) {
+  .control-grid { grid-template-columns: 1fr; }
+}
+.control-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+.control-item b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9em;
+}
+.control-item span {
+  font-size: 0.85em;
+  color: #555;
+}
+
+.addresses-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.82em;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border: 1px solid;
+}
+.addr-fm1 { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+.addr-fm2 { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.addr-fm3 { background: #ede9fe; border-color: #c4b5fd; color: #5b21b6; }
+.addr-fm4 { background: #e0f2fe; border-color: #7dd3fc; color: #075985; }
+.addr-fm5 { background: #f3f4f6; border-color: #d1d5db; color: #374151; }
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.link-arrow {
+  display: inline-block;
+  margin-top: 12px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.link-arrow:hover {
+  text-decoration: underline;
+}
+
+.mapping-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.mapping-table th, .mapping-table td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+.mapping-table th {
+  background: #f3f4f6;
+  font-size: 0.9em;
+}
+.mapping-table td {
+  font-size: 0.9em;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>The Governance Model</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Five pillars of control for AI-assisted Salesforce development</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        You can't govern vibe coding with a single checkpoint. You need controls at every stage of the lifecycle &mdash; from the moment the developer describes their intent, through the build pipeline, into production execution, across the data layer, and into the organizational practices that sustain it.
+      </p>
+    </div>
+
+    <p>The <a href="taxonomy.html">failure taxonomy</a> showed you what breaks. This page shows you where to put the controls. The model has five pillars, each addressing a different stage of the AI-assisted development lifecycle. Miss one pillar and at least one failure mode has a clear path to production.</p>
+
+    <div class="key-insight">
+      <p>The goal is not to slow down AI-assisted development. It's to <b>make velocity safe by default</b>. Each pillar makes the governed path the path of least resistance &mdash; so teams stay fast and stay compliant without extra effort.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Pillar 1: Design -->
+    <div class="pillar-card p1">
+      <div class="pillar-header">
+        <div class="pillar-icon"><i class="fa fa-pencil"></i></div>
+        <div>
+          <h3>Pillar 1: Design-Time Controls</h3>
+          <div class="subtitle">Define the constraints before the AI writes anything.</div>
+        </div>
+      </div>
+      <div class="pillar-body">
+        <p>This is the most overlooked pillar &mdash; and the one with the highest leverage. Design-time controls shape what the AI generates in the first place. If you get this right, you prevent failures at the source rather than catching them downstream.</p>
+
+        <p>The core principle: <b>the human writes the specification, the AI writes the implementation.</b> When developers skip the spec and jump straight to "build me a thing," the AI optimizes for plausibility. When they provide a structured spec with boundary conditions, the AI is constrained to generate something that matches.</p>
+
+        <h4><b>Key Practices</b></h4>
+
+        <div class="control-grid">
+          <div class="control-item">
+            <b>Spec-Driven Prompting</b>
+            <span>Define inputs, outputs, boundary conditions, and error states before the AI generates a single line. The spec becomes the acceptance test.</span>
+          </div>
+          <div class="control-item">
+            <b>Test-First Generation</b>
+            <span>Ask the AI to write tests from the spec before writing implementation. Forces alignment to requirements, not plausibility.</span>
+          </div>
+          <div class="control-item">
+            <b>Prompt Templates with Security Defaults</b>
+            <span>Organizational templates that pre-inject <code>with sharing</code>, <code>USER_MODE</code>, and security patterns so AI output is safe by default.</span>
+          </div>
+          <div class="control-item">
+            <b>Constraint Definition</b>
+            <span>Explicitly state what the code must NOT do. "Must not expose fields beyond the user's FLS." "Must not execute DML without access checks."</span>
+          </div>
+        </div>
+
+        <p><b>Addresses:</b></p>
+        <span class="addresses-tag addr-fm1">Logic Hallucination</span>
+        <span class="addresses-tag addr-fm2">Security Bypass</span>
+        <span class="addresses-tag addr-fm5">Comprehension Debt</span>
+
+        <div class="callout-blue">
+          <p style="margin:0;"><b>Think of it this way:</b> In traditional development, design review happens before coding begins. In vibe coding, the "design" IS the prompt. If your prompt has no constraints, your output has no guardrails. Making the prompt rigorous is equivalent to making the design rigorous.</p>
+        </div>
+
+        <p><b>On Salesforce:</b> This is where developer-level System Prompts in Agentforce Builder come in. You can pre-load security requirements, naming standards, and architectural constraints directly into the agent's instruction set &mdash; so every code generation starts from a governed baseline.</p>
+      </div>
+    </div>
+
+    <!-- Pillar 2: Build -->
+    <div class="pillar-card p2">
+      <div class="pillar-header">
+        <div class="pillar-icon"><i class="fa fa-cogs"></i></div>
+        <div>
+          <h3>Pillar 2: Build-Time Controls</h3>
+          <div class="subtitle">Validate in the pipeline before it reaches production.</div>
+        </div>
+      </div>
+      <div class="pillar-body">
+        <p>Design-time controls reduce the probability of bad output. Build-time controls catch what slips through. This is your CI/CD pipeline &mdash; the automated quality gate between "AI generated it" and "it's running in production."</p>
+
+        <p>The principle here: <b>trust the output of the AI exactly as much as you'd trust a new junior hire's first PR &mdash; which is to say, validate everything before it ships.</b> The pipeline doesn't care who (or what) wrote the code. It enforces the same standards regardless.</p>
+
+        <h4><b>Key Practices</b></h4>
+
+        <div class="control-grid">
+          <div class="control-item">
+            <b>Salesforce Code Analyzer + DFA</b>
+            <span>Static analysis with data-flow analysis in CI. Catches naked SOQL/DML, missing <code>with sharing</code>, hardcoded credentials, SSRF patterns.</span>
+          </div>
+          <div class="control-item">
+            <b>Metadata Validation Rules</b>
+            <span>Enforce naming conventions, ownership fields, description requirements. Reject Flows/triggers without fault paths or bulk-safety annotations.</span>
+          </div>
+          <div class="control-item">
+            <b>AI Code Review Standard (5 Questions)</b>
+            <span>Every PR that contains AI-generated code gets a structured review: Does it match the spec? Does it handle boundaries? Is it secure? Is it bulk-safe? Can the team maintain it?</span>
+          </div>
+          <div class="control-item">
+            <b>Automation Overlap Detection</b>
+            <span>Before deploying a new Flow or trigger, verify it doesn't conflict with existing automation on the same object. Map trigger order and identify potential race conditions.</span>
+          </div>
+        </div>
+
+        <p><b>Addresses:</b></p>
+        <span class="addresses-tag addr-fm2">Security Bypass</span>
+        <span class="addresses-tag addr-fm4">State Corruption</span>
+        <span class="addresses-tag addr-fm1">Logic Hallucination</span>
+
+        <div class="callout-blue">
+          <p style="margin:0;"><b>The volume problem:</b> AI-assisted teams can generate 3-5x more PRs per week. Your pipeline needs to handle this without becoming a bottleneck. The answer isn't less review &mdash; it's smarter, automated review. Code Analyzer catches 80% of security issues without a human reviewer needing to scan every line.</p>
+        </div>
+
+        <p><b>On Salesforce:</b> The DevOps Center + Code Analyzer pipeline gives you an automated gate that enforces security and quality standards at deploy time. Shield's Event Monitoring adds a post-deployment audit trail so you can trace what was deployed, by whom, and when.</p>
+      </div>
+    </div>
+
+    <!-- Pillar 3: Runtime -->
+    <div class="pillar-card p3">
+      <div class="pillar-header">
+        <div class="pillar-icon"><i class="fa fa-bolt"></i></div>
+        <div>
+          <h3>Pillar 3: Runtime Controls</h3>
+          <div class="subtitle">Govern what agents and code do while they're executing.</div>
+        </div>
+      </div>
+      <div class="pillar-body">
+        <p>Design and build controls cover code that humans deploy. Runtime controls cover what happens when agents execute autonomously. This is the most critical pillar for the agentic era &mdash; because once an agent can act, the gap between "misconfiguration" and "incident" shrinks to zero.</p>
+
+        <p>The principle: <b>bounded autonomy.</b> The agent can act within defined limits. Beyond those limits, it must escalate. The boundaries are enforced by the platform, not by the agent's good judgment.</p>
+
+        <h4><b>Key Practices</b></h4>
+
+        <div class="control-grid">
+          <div class="control-item">
+            <b>Trust Layer (LLM Gateway)</b>
+            <span>Every LLM call routes through a centralized gateway with injection defense, toxicity detection, PII masking, and a full audit trail. No direct model access.</span>
+          </div>
+          <div class="control-item">
+            <b>Bounded Autonomy</b>
+            <span><code>confirmationRequired</code> on high-risk actions. Forced escalation paths. Action catalogs that whitelist what an agent can do. Hard spending/record limits.</span>
+          </div>
+          <div class="control-item">
+            <b>Transaction Security Policies</b>
+            <span>Real-time blocking rules that fire when agent behavior matches a threat pattern. Can block or require MFA before the action completes.</span>
+          </div>
+          <div class="control-item">
+            <b>Event Monitoring &amp; Anomaly Detection</b>
+            <span>Continuous observation of agent activity. Surface unusual patterns: bulk data access, cross-object queries that don't match the agent's expected behavior, off-hours execution.</span>
+          </div>
+        </div>
+
+        <p><b>Addresses:</b></p>
+        <span class="addresses-tag addr-fm3">Prompt Injection &amp; Agent Hijack</span>
+        <span class="addresses-tag addr-fm2">Security Bypass</span>
+        <span class="addresses-tag addr-fm4">State Corruption</span>
+
+        <div class="callout-blue">
+          <p style="margin:0;"><b>The key shift:</b> In traditional development, runtime monitoring is about availability &mdash; is the system up? In the agentic era, runtime monitoring is about <i>intent</i> &mdash; is the agent doing what we asked? This requires observable reasoning (seeing why the agent made a decision) and behavioral baselines (knowing what "normal" looks like for each agent role).</p>
+        </div>
+
+        <p><b>On Salesforce:</b> The Trust Layer provides the gateway. Transaction Security Policies provide real-time blocking. Event Monitoring provides the audit trail. Together, they create a runtime governance layer that works whether the agent is a human-triggered Agentforce action or a fully autonomous background process.</p>
+
+        <a href="agentforce.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See Agentforce for bounded autonomy in practice</a>
+      </div>
+    </div>
+
+    <!-- Pillar 4: Data -->
+    <div class="pillar-card p4">
+      <div class="pillar-header">
+        <div class="pillar-icon"><i class="fa fa-database"></i></div>
+        <div>
+          <h3>Pillar 4: Data Controls</h3>
+          <div class="subtitle">Protect what the AI reads, writes, and reasons over.</div>
+        </div>
+      </div>
+      <div class="pillar-body">
+        <p>Code runs. Agents act. But what matters is the data. Every failure mode in the taxonomy ultimately manifests as a data problem: wrong values written (logic hallucination), unauthorized data exposed (security bypass), data exfiltrated (prompt injection), or records corrupted (state corruption). The data layer is your last line of defense.</p>
+
+        <p>The principle: <b>enforce security at the data boundary, not in the application logic.</b> If access control lives in the code layer, every new AI-generated method needs to re-implement it. If access control lives in the platform's data layer, it's enforced regardless of what code the AI generates.</p>
+
+        <h4><b>Key Practices</b></h4>
+
+        <div class="control-grid">
+          <div class="control-item">
+            <b>USER_MODE Enforcement</b>
+            <span><code>WITH USER_MODE</code> on all queries, <code>AccessLevel.USER_MODE</code> on all DML. The database enforces the user's actual access &mdash; sharing rules, CRUD, FLS &mdash; regardless of what the code tries to do.</span>
+          </div>
+          <div class="control-item">
+            <b>Platform Encryption (Shield)</b>
+            <span>Encrypt sensitive fields at rest with tenant-controlled keys. Data remains protected even if unauthorized access occurs at the application layer.</span>
+          </div>
+          <div class="control-item">
+            <b>Data Detect &amp; Classification</b>
+            <span>Automatically identify and classify sensitive data (PII, PHI, PCI) across the org. You can't protect what you can't find.</span>
+          </div>
+          <div class="control-item">
+            <b>Field Audit Trail</b>
+            <span>Retain field-level change history for up to 10 years. When an agent modifies data, you have a forensic record of what changed, from what value, and when.</span>
+          </div>
+        </div>
+
+        <p><b>Addresses:</b></p>
+        <span class="addresses-tag addr-fm2">Security Bypass</span>
+        <span class="addresses-tag addr-fm3">Prompt Injection &amp; Agent Hijack</span>
+        <span class="addresses-tag addr-fm4">State Corruption</span>
+
+        <div class="callout-blue">
+          <p style="margin:0;"><b>This is Salesforce's structural advantage:</b> On general-purpose platforms, you build access control into your application. On Salesforce, access control is baked into the database layer. When you use <code>USER_MODE</code>, the platform enforces the user's permissions at the query level &mdash; the AI-generated code physically cannot bypass sharing rules, CRUD, or FLS. Security becomes a platform property, not an application responsibility.</p>
+        </div>
+
+        <p><b>On Salesforce:</b> Shield (Platform Encryption + Event Monitoring + Field Audit Trail) provides the foundation. Data Detect classifies what's sensitive. Security Center gives you a single dashboard across all your orgs. Together they ensure that even if AI-generated code has a flaw, the data layer enforces the rules.</p>
+
+        <a href="data-cloud.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See Data Cloud for AI-era data governance</a>
+      </div>
+    </div>
+
+    <!-- Pillar 5: People -->
+    <div class="pillar-card p5">
+      <div class="pillar-header">
+        <div class="pillar-icon"><i class="fa fa-users"></i></div>
+        <div>
+          <h3>Pillar 5: People &amp; Organizational Controls</h3>
+          <div class="subtitle">Align roles, metrics, and incentives to the new reality.</div>
+        </div>
+      </div>
+      <div class="pillar-body">
+        <p>Technology controls catch 80% of the failures. The remaining 20% require people who know what good looks like, metrics that measure the right things, and an organizational structure that rewards governance over raw velocity.</p>
+
+        <p>The principle: <b>the developer's role shifts from "person who writes code" to "person who validates AI output against business intent."</b> This isn't a demotion &mdash; it's an elevation. The cognitive work moves from syntax to judgment. But organizations need to explicitly build for this shift, or it doesn't happen.</p>
+
+        <h4><b>Key Practices</b></h4>
+
+        <div class="control-grid">
+          <div class="control-item">
+            <b>New Metrics: TrueThroughput</b>
+            <span>Measure value delivered, not volume produced. Lines of code and PRs merged mean nothing if the code gets reverted or creates incidents. Track: Code Turnover (&lt;12%), Maintainability Index (&gt;70), PR Cycle Time (&lt;8hr).</span>
+          </div>
+          <div class="control-item">
+            <b>Career Path Evolution</b>
+            <span>Junior = Curator (evaluates AI output). Mid = Pipeline Owner (designs constraints). Senior = Constraint Architect (defines organizational policy). Promotion requires demonstrated "taste."</span>
+          </div>
+          <div class="control-item">
+            <b>AI Code Review Standard</b>
+            <span>Five questions per PR: Spec alignment? Boundary handling? Security enforcement? Bulk safety? Team maintainability? No PR ships without documented answers.</span>
+          </div>
+          <div class="control-item">
+            <b>Interview &amp; Hiring Redesign</b>
+            <span>Three-stage assessment: Constraint definition (can they spec it?), Debugging hallucinations (can they catch the AI's errors?), Demonstrating taste (can they reject plausible-but-wrong output?).</span>
+          </div>
+        </div>
+
+        <p><b>Addresses:</b></p>
+        <span class="addresses-tag addr-fm5">Comprehension Debt</span>
+        <span class="addresses-tag addr-fm1">Logic Hallucination</span>
+
+        <div class="callout-blue">
+          <p style="margin:0;"><b>The "taste" concept:</b> In a world where AI can generate any plausible-looking code, the critical skill is <i>rejection</i> &mdash; the ability to look at functionally correct output and say "this is wrong for our architecture, our scale, our security model." We call this "taste." It can't be automated. It must be cultivated through deliberate organizational practice.</p>
+        </div>
+
+        <a href="people.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See People &amp; Organization for the full operating model</a>
+      </div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- How They Work Together -->
+    <h2><b>How the Pillars Work Together</b></h2>
+
+    <p>No single pillar is sufficient. Each addresses different failure modes at different stages. The model works because it's layered &mdash; a failure that slips past one pillar gets caught by the next.</p>
+
+    <table class="mapping-table">
+      <thead>
+        <tr>
+          <th>Failure Mode</th>
+          <th>Primary Pillar</th>
+          <th>Backup Pillar</th>
+          <th>Why Both</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Logic Hallucination</b></td>
+          <td>Design (spec-first)</td>
+          <td>Build (test validation)</td>
+          <td>Specs prevent wrong logic; tests catch what specs missed</td>
+        </tr>
+        <tr>
+          <td><b>Security Bypass</b></td>
+          <td>Build (Code Analyzer)</td>
+          <td>Data (USER_MODE)</td>
+          <td>Static analysis catches most; platform enforcement catches all</td>
+        </tr>
+        <tr>
+          <td><b>Prompt Injection</b></td>
+          <td>Runtime (Trust Layer)</td>
+          <td>Data (least privilege)</td>
+          <td>Detect injection at inference; limit damage through access control</td>
+        </tr>
+        <tr>
+          <td><b>State Corruption</b></td>
+          <td>Build (metadata validation)</td>
+          <td>Data (audit trail)</td>
+          <td>Prevent bad automation from deploying; trace damage when it occurs</td>
+        </tr>
+        <tr>
+          <td><b>Comprehension Debt</b></td>
+          <td>People (review standards)</td>
+          <td>Design (spec requirement)</td>
+          <td>People practices build understanding; specs make code traceable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="key-insight">
+      <p><b>Shared Responsibility:</b> Salesforce secures the platform. You secure what you build on it. The five pillars tell you exactly where your responsibility lies &mdash; and where the platform already has you covered.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- The Salesforce Advantage -->
+    <h2><b>Why This Maps Naturally to Salesforce</b></h2>
+
+    <p>Most platforms require you to build governance from scratch. On Salesforce, three of the five pillars already have built-in platform primitives:</p>
+
+    <table class="mapping-table">
+      <thead>
+        <tr>
+          <th>Pillar</th>
+          <th>Platform Primitive</th>
+          <th>What It Gives You</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Build</b></td>
+          <td>Code Analyzer, DevOps Center, Metadata API</td>
+          <td>Automated security scanning, deployment gates, metadata enforcement</td>
+        </tr>
+        <tr>
+          <td><b>Runtime</b></td>
+          <td>Trust Layer, Transaction Security, Event Monitoring</td>
+          <td>LLM gateway, real-time blocking, behavioral audit trail</td>
+        </tr>
+        <tr>
+          <td><b>Data</b></td>
+          <td>Shield (Encryption + FAT + EM), Data Detect, Security Center</td>
+          <td>Encryption at rest, 10-year audit, classification, cross-org visibility</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The remaining two pillars (Design and People) require organizational investment &mdash; but the framework gives you a clear playbook for both. And because the platform pillars are already in place, you're not starting from zero.</p>
+
+    <p>The <a href="platform-governance.html">Platform as Governance Layer</a> page maps each specific control to its Salesforce product implementation. The <a href="maturity-model.html">Maturity &amp; Roadmap</a> page gives you a 30/60/90 day plan to activate all five pillars progressively.</p>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="taxonomy.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Failure Taxonomy</a>
+      <a href="demo-secure-apex.html" class="w3-button w3-blue">Illustrative Examples<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
