@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Governance Rules File — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.rules-block {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 28px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.88em;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  margin: 24px 0;
+}
+.rules-block .heading {
+  color: #7eb8ff;
+  font-weight: bold;
+}
+.rules-block .comment {
+  color: #6a9955;
+}
+.rules-block .warning {
+  color: #ffcc02;
+}
+
+.copy-btn {
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+}
+.copy-btn:hover { background: #1557b0; }
+
+.step-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.step-box b {
+  color: #1a73e8;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Gap</span>
+      <span class="nav-desc">Why vibe coding changes the risk equation</span></span>
+    </a>
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Failure Taxonomy</span>
+      <span class="nav-desc">Four vectors of agentic SDLC failure</span></span>
+    </a>
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Model</span>
+      <span class="nav-desc">Five pillars of vibe coding control</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Secure Apex</span>
+      <span class="nav-desc">Security bypass — unsafe vs governed code</span></span>
+    </a>
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Logic Hallucination</span>
+      <span class="nav-desc">Looks correct, is wrong</span></span>
+    </a>
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Prompt Injection</span>
+      <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span></span>
+    </a>
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Flow Sprawl</span>
+      <span class="nav-desc">Sandbox success, production failure</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Sales Cloud</span>
+      <span class="nav-desc">Revenue guardrails for autonomous pipeline</span></span>
+    </a>
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Service Cloud</span>
+      <span class="nav-desc">Trusted agent execution across service channels</span></span>
+    </a>
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Marketing Cloud</span>
+      <span class="nav-desc">Governed personalization at campaign scale</span></span>
+    </a>
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Data Cloud</span>
+      <span class="nav-desc">Trusted data foundation for AI and identity</span></span>
+    </a>
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Agentforce</span>
+      <span class="nav-desc">Deterministic execution with observable reasoning</span></span>
+    </a>
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">MuleSoft</span>
+      <span class="nav-desc">Controlled agent-to-API execution</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">People &amp; Organization</span>
+      <span class="nav-desc">Roles, scorecards, interviews, and taste</span></span>
+    </a>
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Platform as Governance Layer</span>
+      <span class="nav-desc">How Salesforce primitives map to each control</span></span>
+    </a>
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Maturity &amp; Roadmap</span>
+      <span class="nav-desc">Self-assessment and 30/60/90 day plan</span></span>
+    </a>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Governance Rules File</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Zero-effort governance &mdash; upload once, every AI generation is governed</p>
+
+    <!-- Disclaimer -->
+    <div class="w3-panel w3-leftbar w3-pale-red w3-padding-16" style="border-left-color: #e53935; margin-bottom:32px;">
+      <p style="margin:0; font-size: 0.95em;"><b>Disclaimer:</b> This is a demonstration of the VibeOps governance framework concept. It is <b>not an official Salesforce product, tool, or endorsed artifact.</b> It is provided as a starting point for teams exploring AI-assisted development governance. Adapt, extend, and validate against your own org's security policies before use.</p>
+    </div>
+
+    <!-- What this is -->
+    <h2><b>What This Is</b></h2>
+
+    <p>The entire VibeOps governance framework distilled into a single file you upload to your AI coding tool. The developer describes intent. The AI applies governance constraints automatically. No framework to memorize, no checklist to follow.</p>
+
+    <p>This is the governance instruction set I use before asking ChatGPT, Gemini, or Claude to generate any Salesforce code, Flow, agent configuration, or integration for me.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- How to use -->
+    <h2><b>How to Use</b></h2>
+
+    <div class="step-box">
+      <p style="margin:0;"><b>Step 1.</b> Copy the rules below (or download the file).</p>
+    </div>
+    <div class="step-box">
+      <p style="margin:0;"><b>Step 2.</b> Upload it at the start of your AI session &mdash; ChatGPT, Gemini, Claude, Copilot, or any tool.</p>
+    </div>
+    <div class="step-box">
+      <p style="margin:0;"><b>Step 3.</b> Say: <i>"Follow these rules when generating Salesforce code for me."</i></p>
+    </div>
+    <div class="step-box">
+      <p style="margin:0;"><b>Step 4.</b> Describe your intent normally. The AI handles governance. You review the output.</p>
+    </div>
+    <div class="step-box">
+      <p style="margin:0;"><b>Step 5.</b> Read the warnings at the end of the AI's response &mdash; those are the things you handle outside the chat.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- What it won't catch -->
+    <h2><b>What This File Will NOT Catch</b></h2>
+
+    <p>A rules file guides AI generation. It does not replace the other two governance layers:</p>
+
+    <div style="margin: 16px 0 24px; padding: 20px 24px; background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 4px;">
+      <p style="margin: 0 0 16px;"><b><i class="fa fa-code w3-margin-right"></i>Code Analyzer / Static Analysis (merge-time gate)</b><br>
+      Cross-class vulnerabilities, complex taint analysis, performance anti-patterns, and graph-based vulnerability detection require <code>sf scanner run</code> or Code Analyzer in your CI/CD pipeline. The rules file can't see across files.</p>
+
+      <p style="margin: 0 0 16px;"><b><i class="fa fa-shield w3-margin-right"></i>Platform Controls (runtime enforcement)</b><br>
+      Transaction Security Policies, Event Monitoring, Platform Encryption, Field Audit Trail, and Data Detect must be configured in Setup. These are architectural walls that operate regardless of what the code says. No rules file substitutes for them.</p>
+
+      <p style="margin: 0 0 16px;"><b><i class="fa fa-question-circle w3-margin-right"></i>Business Logic Correctness</b><br>
+      AI implements the rule you describe but cannot validate whether your business rule is actually correct &mdash; discount thresholds, territory assignments, approval matrices. Validate with stakeholders and production-representative data.</p>
+
+      <p style="margin: 0;"><b><i class="fa fa-sitemap w3-margin-right"></i>Automation Interaction at Runtime</b><br>
+      Order-of-execution conflicts, managed package automation, scheduled jobs, platform events, and async processes are not fully visible to AI even with context. Run integration tests with bulk data that exercises the full execution order.</p>
+    </div>
+
+    <div style="background: #f3f4f6; padding: 16px 20px; border-radius: 6px; margin-bottom: 32px;">
+      <p style="margin:0;"><b>The three-layer model:</b> Rules file = soft guardrail at generation. Code Analyzer = hard gate at merge. Platform controls = architectural wall at runtime. Any single layer can fail. The stack doesn't.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The rules file -->
+    <h2><b>The Rules File</b></h2>
+
+    <p>Copy everything in the block below and save as <code>salesforce-vibeops-rules.md</code> (or any filename). Upload to your AI tool at the start of each coding session.</p>
+
+    <button class="copy-btn" onclick="copyRules()"><i class="fa fa-copy w3-margin-right"></i>Copy to Clipboard</button>
+
+    <div class="rules-block" id="rulesContent"><span class="heading"># Salesforce VibeOps Governance Rules</span>
+
+<span class="comment">Upload this file at the start of any AI coding session (ChatGPT, Gemini, Claude, Copilot, etc.)
+when generating Salesforce code — Apex, LWC, Flows, SOQL, agents, integrations.</span>
+
+---
+
+<span class="heading">## Security</span>
+
+- All SOQL must use WITH USER_MODE — never write naked SOQL. FLS and CRUD are
+  database-level controls; USER_MODE is how you invoke them.
+- All DML must use AccessLevel.USER_MODE — e.g. Database.insert(records, AccessLevel.USER_MODE).
+  Never use naked insert, update, delete, upsert.
+- All Apex classes must declare "with sharing" unless there is an explicit, documented reason
+  for "without sharing" (state the reason in a comment).
+- Never hardcode credentials, tokens, or secrets. Use Named Credentials or Custom Metadata.
+- Never build dynamic SOQL from user input without strict allowlisting. Prefer bind variables.
+- LWC: never use @AuraEnabled without cacheable=true on read operations.
+
+<span class="heading">## Automation (Flows, Triggers)</span>
+
+- Before generating any automation, ASK ME what existing automation already runs on this object.
+  Do not create a Flow or trigger without knowing what else fires on the same object.
+- All Flows must include a fault path on every DML element. Never leave fault handling empty.
+- All automation must be bulk-safe. Design for 200+ records in a single transaction.
+  No SOQL or DML inside loops.
+- Never create a Record-Triggered Flow without specifying entry conditions that exclude
+  irrelevant record changes.
+- Include ownership metadata in the description: who owns it, what it does, which fields it writes.
+
+<span class="heading">## Agents (Agentforce)</span>
+
+- Use Agent Script, not open-ended prompts, for any CUD operation, financial commitment,
+  or regulated workflow.
+- Set confirmationRequired: true on any action that creates, updates, or deletes records
+  or calls an external system.
+- Scope the action catalog to the agent's role. Do not give an agent access to actions
+  outside its specific job.
+- Never pass raw inbound data (web forms, emails, case comments) directly into a prompt
+  template without sanitization. Treat all inbound text as untrusted.
+
+<span class="heading">## Data Cloud</span>
+
+- Prefer zero-copy / ZETL access over ingesting data copies. Ask me whether the use case
+  requires physical data movement.
+- Any pipeline processing unstructured text (case notes, transcripts, documents) must include
+  PII detection and masking before vectorization or RAG grounding.
+- Validate Data Space boundaries — never activate data to a destination outside its intended
+  Data Space without explicit confirmation.
+
+<span class="heading">## MuleSoft / Integrations</span>
+
+- Use short-lived, user-scoped tokens (OBO) instead of static API keys or broad service accounts.
+- All write-side integrations must be idempotent — include idempotency keys for order, billing,
+  fulfillment, or record-mutating APIs.
+- Apply rate limits and token budgets at the gateway level. Ask me what limits are appropriate.
+
+<span class="heading">## Code Quality</span>
+
+- Generate tests that validate the business rule — positive, negative, boundary, and bulk (200+).
+- Every test must assert a specific expected outcome, not just "no exception thrown."
+- Name all components descriptively — purpose clear from the name alone.
+- Limit methods to 40 lines. Refactor into named sub-methods if longer.
+
+---
+
+<span class="heading warning">## What These Rules Will NOT Catch — Warn Me About These</span>
+
+<span class="comment">At the end of every code generation response, include warnings about:</span>
+
+<span class="warning">1. CODE ANALYZER:</span> "Run sf scanner run or Code Analyzer in CI/CD before deploying.
+   These rules guide generation but cannot catch cross-class vulnerabilities or complex
+   data flow issues."
+
+<span class="warning">2. PLATFORM CONTROLS:</span> "This code is only safe in production if platform controls
+   (Transaction Security, Event Monitoring, Platform Encryption) are configured for this object."
+
+<span class="warning">3. BUSINESS LOGIC:</span> "I implemented the rule as described. Validate with business
+   stakeholders and test with production-representative data — AI cannot verify
+   business correctness."
+
+<span class="warning">4. AUTOMATION CONFLICTS:</span> "Check for automation conflicts using metadata queries.
+   I cannot see managed packages, scheduled jobs, or async processes on this object."
+
+---
+
+<span class="comment">For the full framework behind these rules: https://vibecode-governance.github.io</span></div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- IDE integration note -->
+    <h2><b>For IDE-Based AI Tools</b></h2>
+
+    <p>If your team uses AI coding tools integrated into their IDE, the same rules content auto-loads from the project repo &mdash; no upload required:</p>
+
+    <div style="margin: 16px 0;">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#f3f4f6;">
+          <td style="padding:12px 16px; border:1px solid #e5e7eb; font-weight:bold;">Tool</td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb; font-weight:bold;">File name</td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb; font-weight:bold;">Location</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">Claude Code</td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;"><code>CLAUDE.md</code></td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">Project root</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">Cursor</td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;"><code>.cursorrules</code></td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">Project root</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">GitHub Copilot</td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;"><code>.github/copilot-instructions.md</code></td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;"><code>.github/</code> folder</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">Windsurf</td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;"><code>.windsurfrules</code></td>
+          <td style="padding:12px 16px; border:1px solid #e5e7eb;">Project root</td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="color:#555;">Save the same rules content with the appropriate filename and commit it to the repo. Every developer who clones the project gets governed generation automatically.</p>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="maturity-model.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Maturity Model</a>
+      <a href="index.html" class="w3-button w3-blue">Back to Overview<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+function copyRules() {
+    var el = document.getElementById("rulesContent");
+    var text = el.innerText || el.textContent;
+    navigator.clipboard.writeText(text).then(function() {
+        var btn = document.querySelector('.copy-btn');
+        btn.innerHTML = '<i class="fa fa-check w3-margin-right"></i>Copied!';
+        setTimeout(function() {
+            btn.innerHTML = '<i class="fa fa-copy w3-margin-right"></i>Copy to Clipboard';
+        }, 2000);
+    });
+}
+</script>
+
+</body>
+</html>
