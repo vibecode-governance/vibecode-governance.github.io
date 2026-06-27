@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>People &amp; Organization — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.role-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.role-header {
+  padding: 14px 20px;
+  font-weight: bold;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.role-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+.role-junior .role-header { background: #eff6ff; color: #1d4ed8; }
+.role-mid .role-header { background: #f0fdf4; color: #166534; }
+.role-senior .role-header { background: #ede9fe; color: #5b21b6; }
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 768px) {
+  .metric-grid { grid-template-columns: 1fr; }
+}
+.metric-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.metric-item b {
+  display: block;
+  margin-bottom: 4px;
+}
+.metric-item .target {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #1d4ed8;
+  margin: 4px 0;
+}
+.metric-item p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #555;
+  line-height: 1.4;
+}
+
+.interview-stage {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+.interview-header {
+  padding: 14px 20px;
+  background: #f3f4f6;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+.interview-body {
+  padding: 16px 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.review-checklist {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.review-checklist ol {
+  margin: 0;
+  padding-left: 20px;
+}
+.review-checklist li {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Gap</span>
+      <span class="nav-desc">Why vibe coding changes the risk equation</span></span>
+    </a>
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Failure Taxonomy</span>
+      <span class="nav-desc">Four vectors of agentic SDLC failure</span></span>
+    </a>
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">The Governance Model</span>
+      <span class="nav-desc">Five pillars of vibe coding control</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Secure Apex</span>
+      <span class="nav-desc">Security bypass — unsafe vs governed code</span></span>
+    </a>
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Logic Hallucination</span>
+      <span class="nav-desc">Looks correct, is wrong</span></span>
+    </a>
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Prompt Injection</span>
+      <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span></span>
+    </a>
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Flow Sprawl</span>
+      <span class="nav-desc">Sandbox success, production failure</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Sales Cloud</span>
+      <span class="nav-desc">Revenue guardrails for autonomous pipeline</span></span>
+    </a>
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Service Cloud</span>
+      <span class="nav-desc">Trusted agent execution across service channels</span></span>
+    </a>
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Marketing Cloud</span>
+      <span class="nav-desc">Governed personalization at campaign scale</span></span>
+    </a>
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Data Cloud</span>
+      <span class="nav-desc">Trusted data foundation for AI and identity</span></span>
+    </a>
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Agentforce</span>
+      <span class="nav-desc">Deterministic execution with observable reasoning</span></span>
+    </a>
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">MuleSoft</span>
+      <span class="nav-desc">Controlled agent-to-API execution</span></span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">People &amp; Organization</span>
+      <span class="nav-desc">Roles, scorecards, interviews, and taste</span></span>
+    </a>
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Platform as Governance Layer</span>
+      <span class="nav-desc">How Salesforce primitives map to each control</span></span>
+    </a>
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Maturity &amp; Roadmap</span>
+      <span class="nav-desc">Self-assessment and 30/60/90 day plan</span></span>
+    </a>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>People &amp; Organization</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Roles, metrics, interviews, and the concept of "taste" in AI-assisted development</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        Platform controls catch the technical failures. People controls address the organizational ones. When developers can generate code faster than they can understand it, and when traditional metrics reward volume over value, the governance model needs a human layer that's intentionally designed for the AI-assisted world.
+      </p>
+    </div>
+
+    <p>This is Pillar 5 of the governance model &mdash; and in many ways the hardest to implement because it requires changing how we measure, hire, promote, and organize development teams. The technical pillars require configuration. The people pillar requires culture.</p>
+
+    <div class="key-insight">
+      <p>The developer's role is evolving from <b>"person who writes code" to "person who validates AI output against business intent."</b> This isn't a reduction in skill &mdash; it's a shift in the cognitive load from syntax to judgment, from generation to evaluation, from typing to thinking. Organizations that recognize and reward this shift will govern AI-assisted development effectively. Those that don't will accumulate comprehension debt until it becomes unmanageable.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Career Path -->
+    <h2><b>The Evolving Career Path</b></h2>
+
+    <p>In the AI-assisted era, seniority is no longer defined by how much code you can write. It's defined by how much complexity you can govern. Here's what the career ladder looks like:</p>
+
+    <div class="role-card role-junior">
+      <div class="role-header"><i class="fa fa-user"></i> Junior Developer → Curator</div>
+      <div class="role-body">
+        <p><b>Core responsibility:</b> Evaluate AI output. Can the developer look at generated code and determine if it's correct, secure, and aligned with the requirement?</p>
+        <p><b>Key skills:</b> Reading code critically. Identifying boundary conditions the AI missed. Running and interpreting test results. Flagging code they don't understand (rather than approving it).</p>
+        <p><b>Growth signal:</b> They catch errors that the AI generated confidently. They ask "what happens at the boundary?" before approving. They can explain WHY the code works, not just that it works.</p>
+      </div>
+    </div>
+
+    <div class="role-card role-mid">
+      <div class="role-header"><i class="fa fa-user-plus"></i> Mid-Level Developer → Pipeline Owner</div>
+      <div class="role-body">
+        <p><b>Core responsibility:</b> Design the constraints that shape AI output. Write the specs. Define the test boundaries. Own the prompt templates and review standards for their area.</p>
+        <p><b>Key skills:</b> Spec-driven development. Designing prompt constraints that produce secure code by default. Building and maintaining CI/CD validation rules. Mentoring juniors on evaluation techniques.</p>
+        <p><b>Growth signal:</b> The AI generates better code in their area because their constraints are well-defined. Fewer issues escape to production from their team. They can articulate why a particular AI output is wrong at an architectural level, not just a syntactic one.</p>
+      </div>
+    </div>
+
+    <div class="role-card role-senior">
+      <div class="role-header"><i class="fa fa-star"></i> Senior Developer → Constraint Architect</div>
+      <div class="role-body">
+        <p><b>Core responsibility:</b> Define organizational policy for AI-assisted development. Set the governance standards. Design the automation registries. Establish the review protocols that scale across teams.</p>
+        <p><b>Key skills:</b> System-level thinking. Understanding how multiple AI-generated components interact. Designing governance frameworks that enable velocity without sacrificing safety. Making the secure path the easy path.</p>
+        <p><b>Growth signal:</b> The organization produces better AI-assisted code because of frameworks they put in place. They can look at a codebase and identify comprehension debt before it becomes an incident. They define what "taste" means for their organization.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Concept of Taste -->
+    <h2><b>The Concept of "Taste"</b></h2>
+
+    <p>In a world where AI can generate any plausible-looking code, the critical skill is <i>rejection</i> &mdash; the ability to look at functionally correct output and say "this is wrong for our architecture, our scale, our security model." We call this skill "taste."</p>
+
+    <p>Taste is what separates a developer who approves AI output from one who governs it. It's the judgment to recognize:</p>
+
+    <p><b>"This works but won't scale."</b> The AI generated a solution that handles 10 records. Your production environment processes 100,000. The code is correct but architecturally inappropriate.</p>
+
+    <p><b>"This is secure but unmaintainable."</b> The AI generated a complex, deeply nested method that's technically safe but that nobody on the team can debug when it breaks at 3 AM.</p>
+
+    <p><b>"This passes tests but violates our patterns."</b> The AI generated an implementation that works but contradicts the architectural decisions the team has already made. Accepting it creates inconsistency that compounds over time.</p>
+
+    <p><b>"This looks right but the business rule is wrong."</b> The most subtle form of taste &mdash; recognizing that plausible code implements the wrong intent. This requires domain knowledge that no linter can replicate.</p>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>How to develop taste:</b> It doesn't come from reading documentation. It comes from experience with production systems, exposure to incidents, and deliberate practice evaluating AI output. Organizations that want to build taste need to create the conditions for it: code review rituals that reward critical evaluation, periodic "manual sprints" where teams implement without AI to maintain hands-on skills, and post-incident reviews that trace failures back to governance gaps.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- New Metrics -->
+    <h2><b>Metrics That Matter in the AI Era</b></h2>
+
+    <p>Traditional development metrics (lines of code, PRs merged, velocity points) reward volume. In AI-assisted development, volume is trivially achievable. The metrics that matter now measure value, quality, and sustainability:</p>
+
+    <div class="metric-grid">
+      <div class="metric-item">
+        <b>TrueThroughput</b>
+        <div class="target">Value delivered, not volume produced</div>
+        <p>Features that reach production and stay there (don't get reverted). Measures actual business value rather than raw output.</p>
+      </div>
+      <div class="metric-item">
+        <b>Code Turnover</b>
+        <div class="target">&lt; 12% (30-day)</div>
+        <p>Percentage of code modified or deleted within 30 days of creation. High turnover indicates the team is generating code faster than they can get it right.</p>
+      </div>
+      <div class="metric-item">
+        <b>Maintainability Index</b>
+        <div class="target">&gt; 70</div>
+        <p>Composite score measuring code complexity, documentation, and test coverage. Ensures AI-generated code is understandable and maintainable by the team.</p>
+      </div>
+      <div class="metric-item">
+        <b>PR Cycle Time</b>
+        <div class="target">&lt; 8 hours</div>
+        <p>Time from PR creation to merge. A balance point: too fast may indicate rubber-stamping; too slow indicates review bottleneck.</p>
+      </div>
+      <div class="metric-item">
+        <b>Spec Coverage</b>
+        <div class="target">100% for critical paths</div>
+        <p>Percentage of AI-generated code that has a corresponding human-written spec. No spec = no governance over what the AI produces.</p>
+      </div>
+      <div class="metric-item">
+        <b>Cost Realization</b>
+        <div class="target">Positive ROI within quarter</div>
+        <p>Are AI tools actually saving time when you account for rework, debugging, and incident response? The velocity gain only counts if it sticks.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- AI Code Review Standard -->
+    <h2><b>The AI Code Review Standard</b></h2>
+
+    <p>Every PR that contains AI-generated code should receive a structured review against five questions. This isn't about slowing things down &mdash; it's about making review intentional rather than cursory:</p>
+
+    <div class="review-checklist">
+      <ol>
+        <li><b>Does it match the spec?</b> Compare the implementation against the human-written requirement. Not "does it look right" but "does it do what we specified, including edge cases?"</li>
+        <li><b>Does it handle boundaries correctly?</b> Test the threshold conditions, the zero cases, the null cases, the maximum cases. These are where logic hallucinations hide.</li>
+        <li><b>Is it secure?</b> <code>with sharing</code> present? <code>USER_MODE</code> on queries and DML? No hardcoded credentials? No naked SOQL/DML? Code Analyzer clean?</li>
+        <li><b>Is it bulk-safe?</b> No DML in loops? No queries in loops? Handles 200+ records without hitting governor limits? Has fault paths?</li>
+        <li><b>Can the team maintain it?</b> Can another developer on the team explain what this code does and why? If not, it's adding comprehension debt regardless of whether it works.</li>
+      </ol>
+    </div>
+
+    <p>The standard isn't meant to be a gate that blocks everything. It's meant to focus reviewer attention on the five areas where AI-generated code most commonly fails. Questions 1 and 2 catch logic hallucination. Question 3 catches security bypass. Question 4 catches state corruption. Question 5 addresses comprehension debt.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Interview Redesign -->
+    <h2><b>Hiring for the AI-Assisted World</b></h2>
+
+    <p>Traditional coding interviews test whether a candidate can write code from scratch under time pressure. This is no longer the primary skill. The interview process should evaluate what matters now: can they govern AI output effectively?</p>
+
+    <div class="interview-stage">
+      <div class="interview-header">Stage 1: Constraint Definition</div>
+      <div class="interview-body">
+        <p>Give the candidate a business requirement. Ask them to write the spec &mdash; not the code. Can they define inputs, outputs, boundary conditions, error states, and security requirements clearly enough that an AI would generate correct output?</p>
+        <p><b>What you're evaluating:</b> Do they think about edge cases before implementation? Do they consider security as part of the spec? Do they define what "correct" means before asking for code?</p>
+      </div>
+    </div>
+
+    <div class="interview-stage">
+      <div class="interview-header">Stage 2: Debugging Hallucinations</div>
+      <div class="interview-body">
+        <p>Show the candidate AI-generated code that contains subtle errors (logic hallucination, security bypass, bulk-safety issue). Can they identify what's wrong? Can they explain why it's wrong?</p>
+        <p><b>What you're evaluating:</b> Can they read code critically rather than assuming it's correct? Do they check boundaries? Do they notice missing security patterns? Do they question plausible-looking output?</p>
+      </div>
+    </div>
+
+    <div class="interview-stage">
+      <div class="interview-header">Stage 3: Demonstrating Taste</div>
+      <div class="interview-body">
+        <p>Present the candidate with multiple AI-generated solutions to the same problem. All are functionally correct. Ask them which they'd choose and why. Can they articulate architectural reasoning beyond "it works"?</p>
+        <p><b>What you're evaluating:</b> Do they consider maintainability, scale, team comprehension, and consistency with existing patterns? Can they reject "correct" code for legitimate architectural reasons? This is taste.</p>
+      </div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Daily Controls -->
+    <h2><b>Practical Organizational Controls</b></h2>
+
+    <p><b>Spec-before-generate policy.</b> No AI code generation without a written spec. This can be lightweight (a structured comment block with inputs/outputs/boundaries) but it must exist. The spec is the governance artifact.</p>
+
+    <p><b>PR attribution.</b> Every PR clearly identifies which portions are AI-generated. This isn't about blame &mdash; it's about directing reviewer attention. AI-generated code gets the five-question review. Human-written code gets standard review.</p>
+
+    <p><b>Periodic manual sprints.</b> Once a quarter, the team implements a feature without AI assistance. This maintains hands-on skills, prevents tool dependency, and builds the muscle memory that makes "taste" possible.</p>
+
+    <p><b>Comprehension debt tracking.</b> Identify code in production that nobody on the current team fully understands. Treat it like any other form of tech debt: track it, prioritize it, and allocate time to pay it down.</p>
+
+    <p><b>Knowledge transfer in PRs.</b> AI-generated PRs include a brief explanation (in the PR description, not just in code comments) of what the code does and why it's structured this way. This forces the author to understand what they're shipping.</p>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The organizational principle:</b> Technology controls prevent the failure modes. People controls prevent the conditions that create failure modes. If your organization rewards velocity without measuring quality, if interviews test coding speed rather than governance judgment, if career paths don't value "taste" &mdash; no amount of platform control will prevent comprehension debt from accumulating.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="mulesoft.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>MuleSoft</a>
+      <a href="platform-governance.html" class="w3-button w3-blue">Platform as Governance Layer<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
