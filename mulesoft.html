@@ -285,162 +285,50 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
 
     <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>MuleSoft</b></h1>
-    <p style="font-size:1.1em; color:#555; margin-top:0;">Controlled agent-to-API execution and multi-agent orchestration</p>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">Controlled agent-to-API execution across enterprise systems</p>
 
     <!-- Opening -->
     <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
       <p class="w3-large" style="margin:0;">
-        Agents don't operate in isolation. They need to call external APIs, access enterprise systems, and increasingly coordinate with other agents. MuleSoft provides the governed integration layer that sits between agent intent and external execution &mdash; ensuring that every API call, every data retrieval, and every agent-to-agent interaction is policy-controlled, observable, and secure.
+        MuleSoft is where agents move from CRM reasoning into enterprise execution: APIs, integrations, DataWeave transformations, ERP updates, order flows, billing, fulfillment, and external systems. It becomes the execution layer for AI-generated and agent-invoked integrations.
       </p>
     </div>
 
-    <p>In the governance model, MuleSoft occupies a critical position: it's the control point between what happens inside the Salesforce platform (where the Trust Layer, permissions, and bounded autonomy apply) and what happens outside (where external APIs, third-party systems, and other agent frameworks operate). Without a governed integration layer, every external call is an uncontrolled exit point from your governance boundary.</p>
+    <hr style="margin: 32px 0;">
+
+    <!-- Key Considerations -->
+    <h2><b>Key Considerations</b></h2>
+
+    <p>Secure vibe coding must ensure that AI-generated APIs, tools, connectors, DataWeave mappings, and Mule flows are not only functionally correct, but also policy-bound: authenticated, authorized, rate-limited, observable, retry-safe, and idempotent for write operations.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Example Guardrails -->
+    <h2><b>Example Guardrails</b></h2>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> MCP / AI Gateway Control Plane</div>
+      <div class="control-body">
+        <p>Centralize agent-to-API access, rate limits, token budgets, semantic filtering, and secret isolation. This gives AI-generated or agent-invoked integrations one governed choke point instead of letting every agent call enterprise systems directly. If an agent's reasoning is compromised, the gateway still enforces its policies independently.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> OBO (On-Behalf-Of) Delegated Access</div>
+      <div class="control-body">
+        <p>Use short-lived, user-scoped tokens instead of static API keys or broad service accounts. This ensures the integration executes under the requesting user's authority, not an overpowered shared credential. If an agent is compromised, the blast radius is limited to that user's access &mdash; not the entire enterprise system.</p>
+      </div>
+    </div>
+
+    <div class="control-card">
+      <div class="control-header"><i class="fa fa-check-circle"></i> Idempotent Write-Side Integrations</div>
+      <div class="control-body">
+        <p>Require idempotency keys and immutable decision logs for order, billing, fulfillment, case, or record-mutating APIs. This prevents retries, loops, or repeated agent actions from creating duplicate orders, duplicate charges, or inconsistent downstream records. AI-generated integration code must include idempotency handling by default &mdash; not as an afterthought.</p>
+      </div>
+    </div>
 
     <div class="key-insight">
-      <p>Think of MuleSoft as the <b>API governance layer for agents</b>. Inside the platform, Agentforce controls what agents can do. At the integration boundary, MuleSoft controls what agents can reach &mdash; which APIs, with what credentials, at what rate, with what data transformation and policy enforcement.</p>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- The Integration Governance Stack -->
-    <h2><b>The Integration Governance Stack</b></h2>
-
-    <p>When an Agentforce agent needs to interact with an external system &mdash; checking inventory, processing a payment, calling a third-party AI model, or coordinating with another agent &mdash; the request flows through MuleSoft's governance layers:</p>
-
-    <div class="layer-diagram">
-      <div class="layer-row layer-agent">
-        <div class="layer-label">Agent Layer</div>
-        <div class="layer-desc">Agentforce agent decides it needs external data or wants to trigger an external action (constrained by its action catalog)</div>
-      </div>
-      <div class="layer-row layer-mule">
-        <div class="layer-label">MuleSoft Layer</div>
-        <div class="layer-desc">API governance: authentication, rate limiting, data transformation, policy enforcement, logging &mdash; all before the external call executes</div>
-      </div>
-      <div class="layer-row layer-api">
-        <div class="layer-label">API / Agent Layer</div>
-        <div class="layer-desc">External system receives a well-formed, authenticated, policy-compliant request &mdash; not a raw agent output</div>
-      </div>
-      <div class="layer-row layer-data">
-        <div class="layer-label">Response Layer</div>
-        <div class="layer-desc">Response flows back through MuleSoft: validated, transformed, PII-masked if needed, before reaching the agent</div>
-      </div>
-    </div>
-
-    <p>This layered architecture means the agent never directly touches an external API. Every interaction is mediated, logged, and policy-checked. If an agent's reasoning is compromised (through prompt injection or logic hallucination), the integration layer still enforces its policies independently.</p>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Governance Controls -->
-    <h2><b>MuleSoft Governance Controls for AI</b></h2>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> API Access Governance</div>
-      <div class="control-body">
-        <p>Not every agent should be able to call every API. MuleSoft provides granular control over which agents can access which integrations:</p>
-        <p><b>API policies per consumer.</b> Each Agentforce agent (or agent role) gets a defined API access policy. A "Lead Research" agent can call the company enrichment API but not the payment processing API. These policies are enforced at the gateway level.</p>
-        <p><b>Rate limiting per agent.</b> Prevent runaway agents from overwhelming external systems. If an agent enters a reasoning loop that generates repeated API calls, the rate limit catches it before it becomes an incident.</p>
-        <p><b>Credential isolation.</b> Agents don't hold API credentials directly. MuleSoft manages credentials centrally and injects them at call time. If an agent is compromised, the attacker doesn't gain credential access.</p>
-      </div>
-    </div>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> Data Transformation &amp; Masking</div>
-      <div class="control-body">
-        <p>Data flowing between agents and external systems often needs transformation for governance reasons:</p>
-        <p><b>PII masking on outbound requests.</b> Before sending data to a third-party API (especially third-party AI models for enrichment or analysis), MuleSoft can mask or tokenize sensitive fields. The external system never sees raw PII.</p>
-        <p><b>Response validation.</b> Data returning from external APIs is validated against expected schemas before reaching the agent. Malformed or unexpected responses (which could be an indicator of API compromise) are caught at the integration layer.</p>
-        <p><b>Data minimization.</b> Transform requests to send only the fields the external API needs. Don't send the entire customer record when the API only requires an email address for lookup.</p>
-      </div>
-    </div>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> Multi-Agent Orchestration Governance</div>
-      <div class="control-body">
-        <p>As agent architectures evolve from single agents to multi-agent systems, MuleSoft's Agent Fabric provides the governance layer for agent-to-agent coordination:</p>
-        <p><b>Agent discovery and registration.</b> Agents are registered with defined capabilities (via Agent Cards in A2A protocol or MCP tool definitions). An agent can only invoke another agent's capabilities if the registration and policy allows it.</p>
-        <p><b>Orchestration policies.</b> Define which agents can coordinate with which, under what conditions, and with what approval requirements. Prevent unauthorized agent chains where one compromised agent triggers a cascade across the enterprise.</p>
-        <p><b>Cross-agent audit trail.</b> When multiple agents collaborate on a task, the orchestration layer maintains a unified trace that shows which agent did what, in what order, and with what data. Essential for debugging and compliance in multi-agent workflows.</p>
-      </div>
-    </div>
-
-    <div class="control-card">
-      <div class="control-header"><i class="fa fa-check-circle"></i> Observability &amp; Anomaly Detection</div>
-      <div class="control-body">
-        <p>MuleSoft provides integration-level observability that complements Salesforce's Event Monitoring:</p>
-        <p><b>API call pattern monitoring.</b> Baseline normal agent API usage patterns. Alert when patterns deviate &mdash; unusual endpoints called, abnormal data volumes, unexpected time-of-day activity.</p>
-        <p><b>Error rate tracking.</b> If an agent's API calls suddenly start failing at a high rate, it may indicate reasoning problems (hallucinated API parameters) or external system issues. Either way, it warrants investigation.</p>
-        <p><b>Latency and dependency monitoring.</b> Track how external API performance affects agent response times. When a downstream system degrades, surface it before it cascades into poor agent performance or timeout-induced errors.</p>
-      </div>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Integration Patterns -->
-    <h2><b>Common AI Integration Patterns</b></h2>
-
-    <div class="pattern-grid">
-      <div class="pattern-item">
-        <b>Agent → External AI Model</b>
-        <p>Agentforce agent needs enrichment from a specialized model (translation, document analysis, code review). MuleSoft routes to the model, masks PII, enforces rate limits, and validates the response before returning to the agent.</p>
-      </div>
-      <div class="pattern-item">
-        <b>Agent → Enterprise System (ERP, HRIS)</b>
-        <p>Agent needs real-time data from SAP, Workday, or similar. MuleSoft authenticates, transforms the request to the target system's format, and returns only the fields the agent's policy permits.</p>
-      </div>
-      <div class="pattern-item">
-        <b>Agent → Agent (Cross-Platform)</b>
-        <p>Agentforce agent coordinates with a non-Salesforce agent (e.g., a specialized inventory agent). MuleSoft's Agent Fabric brokers the interaction with policy enforcement, preventing unauthorized data sharing or action execution.</p>
-      </div>
-      <div class="pattern-item">
-        <b>External Agent → Salesforce</b>
-        <p>An external system's agent needs to trigger a Salesforce action. MuleSoft provides the authentication gateway, validates the request against allowed operations, and routes through appropriate Salesforce APIs with proper access controls.</p>
-      </div>
-    </div>
-
-    <hr style="margin: 32px 0;">
-
-    <!-- Governance Map -->
-    <h2><b>MuleSoft Governance Map</b></h2>
-
-    <table class="governance-map">
-      <thead>
-        <tr>
-          <th>Governance Pillar</th>
-          <th>MuleSoft Implementation</th>
-          <th>What It Prevents</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>Design</b></td>
-          <td>API specifications (RAML/OAS) define contracts before agents consume them; MCP tool definitions declare capabilities explicitly</td>
-          <td>Agents calling undefined endpoints; hallucinated API parameters</td>
-        </tr>
-        <tr>
-          <td><b>Build</b></td>
-          <td>API policy configuration in Anypoint Platform; integration testing with agent scenarios; credential management setup</td>
-          <td>Over-privileged integrations; untested error paths; credential exposure</td>
-        </tr>
-        <tr>
-          <td><b>Runtime</b></td>
-          <td>Gateway policy enforcement; rate limiting; PII masking; response validation; anomaly detection</td>
-          <td>Runaway agents; data leakage to external systems; API abuse</td>
-        </tr>
-        <tr>
-          <td><b>Data</b></td>
-          <td>Data minimization on outbound calls; transformation to remove sensitive fields; inbound validation against schemas</td>
-          <td>PII exposure to third parties; malformed data corrupting agent context</td>
-        </tr>
-        <tr>
-          <td><b>People</b></td>
-          <td>Integration team owns API policies; agent developers consume registered APIs (not arbitrary endpoints); cross-agent audit trail for accountability</td>
-          <td>Shadow integrations; unaccountable agent-to-agent interactions; debugging blind spots</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout-blue">
-      <p style="margin:0;"><b>The integration governance principle:</b> Inside the platform, Agentforce governs what agents can do. At the boundary, MuleSoft governs what agents can reach. Together, they create an end-to-end governance model that extends from agent reasoning through platform execution to external system interaction &mdash; with policy enforcement, observability, and audit at every layer.</p>
+      <p>Inside the platform, Agentforce governs what agents can do. At the integration boundary, <b>MuleSoft governs what agents can reach</b> &mdash; which APIs, with what credentials, at what rate, with what policy enforcement. Together they create end-to-end governance from agent reasoning through external execution.</p>
     </div>
 
     <hr style="margin: 40px 0;">
