@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Logic Hallucination — VibeOps Framework</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.nav-item {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.nav-item i {
+  margin-top: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.nav-text {
+  flex-grow: 1;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav-title {
+  font-weight: bold;
+  display: block;
+}
+.nav-desc {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+}
+
+code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 20px 24px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.88em;
+  line-height: 1.6;
+  margin: 16px 0;
+}
+pre .comment { color: #64748b; }
+pre .keyword { color: #7dd3fc; }
+pre .string { color: #86efac; }
+pre .danger { color: #fca5a5; }
+pre .safe { color: #86efac; }
+pre .highlight { color: #fde68a; }
+
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+@media (max-width: 900px) {
+  .comparison-container { grid-template-columns: 1fr; }
+}
+
+.comparison-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 12px 16px;
+  font-weight: bold;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-header i { font-size: 1.1em; }
+.panel-bad .panel-header {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.panel-good .panel-header {
+  background: #dcfce7;
+  color: #166534;
+}
+.panel-body {
+  padding: 0;
+}
+.panel-body pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+.callout-blue {
+  background: #eff6ff;
+  border-left: 4px solid #1a73e8;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.callout-amber {
+  background: #fffbeb;
+  border-left: 4px solid #d97706;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.key-insight {
+  background: #0d1b2a;
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 6px;
+  margin: 32px 0;
+}
+.key-insight p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+.key-insight b {
+  color: #7eb8ff;
+}
+
+.test-case {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .test-case { grid-template-columns: 1fr; }
+}
+.test-case .scenario { font-size: 0.95em; }
+.test-case .expected {
+  font-size: 0.85em;
+  color: #16a34a;
+  font-weight: bold;
+}
+.test-case .actual-bad {
+  font-size: 0.85em;
+  color: #dc2626;
+  font-weight: bold;
+}
+.test-case .actual-good {
+  font-size: 0.85em;
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.taxonomy-tag {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.money-impact {
+  background: #fef2f2;
+  border: 2px solid #fca5a5;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  text-align: center;
+}
+.money-impact .big-number {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #dc2626;
+  margin: 8px 0;
+}
+.money-impact .label {
+  font-size: 0.9em;
+  color: #555;
+}
+</style>
+</head>
+<body class="w3-content" style="max-width:1600px;">
+
+<!-- Sidebar Navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3; width:300px; overflow-y:auto; padding-bottom:50px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4><b>VibeOps</b></h4>
+    <p style="font-size:0.9em; color:#555;">AI Development Governance Framework for Salesforce</p>
+  </div>
+
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-home fa-fw w3-margin-right"></i>
+      <span class="nav-text"><span class="nav-title">Overview</span>
+      <span class="nav-desc">Executive summary and framework introduction</span></span>
+    </a>
+
+    <a href="governance-gap.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-warning fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Gap</span>
+        <span class="nav-desc">Why vibe coding changes the risk equation</span>
+      </span>
+    </a>
+
+    <a href="taxonomy.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bug fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Failure Taxonomy</span>
+        <span class="nav-desc">Four vectors of agentic SDLC failure</span>
+      </span>
+    </a>
+
+    <a href="governance-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-shield fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">The Governance Model</span>
+        <span class="nav-desc">Five pillars of vibe coding control</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">ILLUSTRATIVE EXAMPLES</p></div>
+
+  <div class="w3-bar-block">
+    <a href="demo-secure-apex.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-lock fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Secure Apex</span>
+        <span class="nav-desc">Security bypass — unsafe vs governed code</span>
+      </span>
+    </a>
+
+    <a href="demo-logic-hallucination.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item w3-light-grey">
+      <i class="fa fa-calculator fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Logic Hallucination</span>
+        <span class="nav-desc">Looks correct, is wrong</span>
+      </span>
+    </a>
+
+    <a href="demo-prompt-injection.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-user-secret fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Prompt Injection</span>
+        <span class="nav-desc">Data becomes instruction — the ForcedLeak chain</span>
+      </span>
+    </a>
+
+    <a href="demo-flow-sprawl.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-sitemap fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Flow Sprawl</span>
+        <span class="nav-desc">Sandbox success, production failure</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">PLATFORM APPLICATIONS</p></div>
+
+  <div class="w3-bar-block">
+    <a href="sales-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-line-chart fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Sales Cloud</span>
+        <span class="nav-desc">Revenue guardrails for autonomous pipeline</span>
+      </span>
+    </a>
+
+    <a href="service-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-headphones fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Service Cloud</span>
+        <span class="nav-desc">Trusted agent execution across service channels</span>
+      </span>
+    </a>
+
+    <a href="marketing-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Marketing Cloud</span>
+        <span class="nav-desc">Governed personalization at campaign scale</span>
+      </span>
+    </a>
+
+    <a href="data-cloud.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-database fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Data Cloud</span>
+        <span class="nav-desc">Trusted data foundation for AI and identity</span>
+      </span>
+    </a>
+
+    <a href="agentforce.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-bolt fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Agentforce</span>
+        <span class="nav-desc">Deterministic execution with observable reasoning</span>
+      </span>
+    </a>
+
+    <a href="mulesoft.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-exchange fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">MuleSoft</span>
+        <span class="nav-desc">Controlled agent-to-API execution</span>
+      </span>
+    </a>
+  </div>
+
+  <hr style="margin: 16px 0;">
+  <div class="w3-container"><p style="font-size:0.8em; color:#999; margin:0;">OPERATING MODEL</p></div>
+
+  <div class="w3-bar-block">
+    <a href="people.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-users fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">People &amp; Organization</span>
+        <span class="nav-desc">Roles, scorecards, interviews, and taste</span>
+      </span>
+    </a>
+
+    <a href="platform-governance.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-cubes fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Platform as Governance Layer</span>
+        <span class="nav-desc">How Salesforce primitives map to each control</span>
+      </span>
+    </a>
+
+    <a href="maturity-model.html" onclick="w3_close()" class="w3-bar-item w3-button nav-item">
+      <i class="fa fa-tasks fa-fw w3-margin-right"></i>
+      <span class="nav-text">
+        <span class="nav-title">Maturity &amp; Roadmap</span>
+        <span class="nav-desc">Self-assessment and 30/60/90 day plan</span>
+      </span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- Overlay for mobile -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main Content -->
+<div class="w3-main" style="margin-left:300px;">
+
+  <header class="w3-container">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+  </header>
+
+  <div class="w3-container" style="margin-top:10px; margin-bottom:30px; padding: 0 32px;">
+
+    <span class="taxonomy-tag"><i class="fa fa-bug w3-margin-right"></i>Failure Mode #1: Logic Hallucination</span>
+
+    <h1 class="w3-xxlarge" style="margin-bottom:4px;"><b>Logic Hallucination: Looks Correct, Is Wrong</b></h1>
+    <p style="font-size:1.1em; color:#555; margin-top:0;">When AI-generated code compiles, passes tests, and implements the wrong business rule</p>
+
+    <!-- Opening -->
+    <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0;">
+        A developer asks an AI assistant: <i>"Apply a 10% loyalty discount for orders above $100."</i> The code comes back clean, readable, well-structured. It applies a 10% discount to every order. The $100 threshold check is missing. Money leaks quietly.
+      </p>
+    </div>
+
+    <!-- The Scenario -->
+    <h2><b>The Scenario</b></h2>
+
+    <p>This is the most insidious failure mode because there's nothing obviously wrong. No syntax error. No security warning. No governor limit violation. The code looks like correct Apex. A reviewer scanning for "does this look right" will often approve it &mdash; especially under the volume pressure of AI-generated PRs.</p>
+
+    <p>The problem isn't that the AI can't code. It's that the AI optimized for <i>plausibility</i> rather than <i>accuracy</i>. The generated code is the most likely-looking implementation of the prompt &mdash; but "most likely-looking" and "correct" are different things, especially at boundary conditions.</p>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Prompt -->
+    <h2><b>The Developer's Prompt</b></h2>
+
+    <div class="callout-blue">
+      <p style="margin:0; font-style:italic; font-size:1.05em;">"Write an Apex method that applies a 10% loyalty discount to orders above $100. The method should take an Order record and return the discounted amount."</p>
+    </div>
+
+    <p>Sounds clear enough, right? Let's see what comes back.</p>
+
+    <!-- Side by Side -->
+    <h2><b>What the AI Generates vs. What the Business Needs</b></h2>
+
+    <div class="comparison-container">
+      <div class="comparison-panel panel-bad">
+        <div class="panel-header"><i class="fa fa-times-circle"></i> What the AI generates</div>
+        <div class="panel-body">
+<pre>
+<span class="keyword">public class</span> OrderDiscountService {
+
+  <span class="keyword">public static</span> Decimal applyLoyaltyDiscount(
+    Order__c order
+  ) {
+    Decimal discountRate = 0.10;
+    Decimal originalAmount = order.Total_Amount__c;
+
+    <span class="comment">// Apply 10% loyalty discount</span>
+    Decimal discountedAmount =
+      originalAmount * (1 - discountRate);
+
+    <span class="danger">return discountedAmount;</span>
+    <span class="comment">// Always applies discount — no threshold!</span>
+  }
+}
+</pre>
+        </div>
+      </div>
+
+      <div class="comparison-panel panel-good">
+        <div class="panel-header"><i class="fa fa-check-circle"></i> What the business actually needs</div>
+        <div class="panel-body">
+<pre>
+<span class="keyword">public class</span> OrderDiscountService {
+
+  <span class="keyword">private static final</span> Decimal DISCOUNT_RATE = 0.10;
+  <span class="keyword">private static final</span> Decimal MIN_THRESHOLD = 100.00;
+
+  <span class="keyword">public static</span> Decimal applyLoyaltyDiscount(
+    Order__c order
+  ) {
+    Decimal originalAmount = order.Total_Amount__c;
+
+    <span class="safe">if (originalAmount > MIN_THRESHOLD) {</span>
+      <span class="keyword">return</span> originalAmount * (1 - DISCOUNT_RATE);
+    <span class="safe">}</span>
+
+    <span class="comment">// Below threshold — no discount</span>
+    <span class="keyword">return</span> originalAmount;
+  }
+}
+</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's Wrong -->
+    <h2><b>Why This Is Hard to Catch</b></h2>
+
+    <p>Look at the left side again. It's clean code. Good variable names. A comment that describes what it does. If you're scanning PRs quickly &mdash; which everyone does when volume triples &mdash; this looks correct. The method name says "loyalty discount." The code applies a discount. Your brain fills in the threshold check because the prompt mentioned it.</p>
+
+    <p>Now look at what a typical test would look like:</p>
+
+<pre>
+<span class="keyword">@isTest</span>
+<span class="keyword">static void</span> testLoyaltyDiscount() {
+  Order__c order = <span class="keyword">new</span> Order__c(Total_Amount__c = <span class="highlight">150.00</span>);
+  Decimal result = OrderDiscountService.applyLoyaltyDiscount(order);
+  System.assertEquals(<span class="highlight">135.00</span>, result); <span class="comment">// Passes!</span>
+}
+</pre>
+
+    <p>The test passes. Of course it passes &mdash; $150 is above $100, so the discount should apply. The test only checks the happy path. It never tests the boundary: what happens at $99? What happens at exactly $100? What happens at $0?</p>
+
+    <div class="callout-amber">
+      <p style="margin:0;"><b>This is the trap:</b> When the AI writes both the code AND the test, both tend to validate the same plausible interpretation. The test confirms the code works &mdash; but it doesn't confirm the code is <i>right</i>. A test derived from the business spec would include boundary cases. A test derived from the code just mirrors its logic.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Test Matrix -->
+    <h2><b>The Test Cases That Would Have Caught It</b></h2>
+
+    <p>A spec-driven approach writes the test cases from the business requirement, not from the generated code:</p>
+
+    <div class="test-case">
+      <div class="scenario"><b>Order = $150</b> — above threshold</div>
+      <div class="expected">Expected: $135</div>
+      <div class="actual-good">Both versions: $135 &#10003;</div>
+    </div>
+
+    <div class="test-case">
+      <div class="scenario"><b>Order = $100</b> — at threshold (boundary)</div>
+      <div class="expected">Expected: $100 (not above)</div>
+      <div class="actual-bad">AI version: $90 &#10007;</div>
+    </div>
+
+    <div class="test-case">
+      <div class="scenario"><b>Order = $99.99</b> — below threshold</div>
+      <div class="expected">Expected: $99.99 (no discount)</div>
+      <div class="actual-bad">AI version: $89.99 &#10007;</div>
+    </div>
+
+    <div class="test-case">
+      <div class="scenario"><b>Order = $50</b> — well below</div>
+      <div class="expected">Expected: $50 (no discount)</div>
+      <div class="actual-bad">AI version: $45 &#10007;</div>
+    </div>
+
+    <div class="test-case">
+      <div class="scenario"><b>Order = $0</b> — zero edge case</div>
+      <div class="expected">Expected: $0</div>
+      <div class="actual-good">Both versions: $0 &#10003;</div>
+    </div>
+
+    <p>Three out of five test cases fail on the AI-generated version. But notice &mdash; the one test case the AI would naturally generate ($150) passes fine. This is why the order of operations matters: write tests from the spec first, then generate the implementation.</p>
+
+    <!-- Money Impact -->
+    <div class="money-impact">
+      <div class="label">If this code processes 1,000 orders/month averaging $75 (below threshold)</div>
+      <div class="big-number">$7,500/month in unintended discounts</div>
+      <div class="label">$90,000/year in revenue leakage — from one missed boundary condition</div>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- The Fix: Spec-First -->
+    <h2><b>The Governed Approach: Spec-First Prompting</b></h2>
+
+    <p>The fix isn't "review more carefully." At AI-assisted velocity, you can't catch semantic errors through manual review alone. The fix is structural: write the spec (including boundaries and edge cases) before asking the AI to generate anything.</p>
+
+    <h4><b>A governed prompt for the same requirement:</b></h4>
+
+<pre>
+<span class="comment">Write an Apex method with these specifications:</span>
+
+<span class="string">Method:</span> applyLoyaltyDiscount(Order__c order) returns Decimal
+<span class="string">Rule:</span> Apply 10% discount ONLY when Total_Amount__c > 100.00
+<span class="string">Rule:</span> Orders at or below $100.00 receive NO discount
+<span class="string">Rule:</span> Return the final amount (not the discount value)
+
+<span class="string">Boundary cases:</span>
+  - $100.00 exactly → return $100.00 (no discount)
+  - $100.01 → return $90.01 (discount applies)
+  - $0 → return $0
+  - Null amount → throw IllegalArgumentException
+
+<span class="string">Constants:</span> Use named constants for threshold and rate
+<span class="string">Tests:</span> Write tests FIRST covering all boundary cases above
+</pre>
+
+    <p>When you give the AI this prompt, it generates the correct implementation because the boundaries are explicit. The spec leaves no room for "plausible interpretation." And critically, the tests are derived from the spec &mdash; not from the generated code &mdash; so they actually validate correctness.</p>
+
+    <div class="key-insight">
+      <p><b>The spec is the governance artifact.</b> In traditional development, the spec was documentation. In AI-assisted development, the spec is the constraint that prevents hallucination. If your team isn't writing specs before generating code, they're accepting whatever the AI finds most plausible &mdash; and plausible isn't the same as correct.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Beyond This Example -->
+    <h2><b>This Pattern Shows Up Everywhere</b></h2>
+
+    <p>The discount example is simple and easy to spot. In production, logic hallucinations are far subtler:</p>
+
+    <p><b>CPQ pricing logic</b> where a tiered discount applies to the wrong quantity brackets. Revenue recognition is off by small amounts per deal &mdash; invisible until quarter close.</p>
+
+    <p><b>Lead scoring models</b> where the AI implements a reasonable-looking formula that weights the wrong fields or applies thresholds in the wrong direction. Marketing complains that "the scores don't match reality" but can't point to a specific bug.</p>
+
+    <p><b>Approval routing</b> where the AI generates a Flow that routes to the correct approver for deals above $500K but silently skips approval for deals at exactly $500K. Those deals auto-approve without anyone noticing.</p>
+
+    <p><b>Date calculations</b> where the AI handles "30 days from today" correctly in most months but fails on month boundaries, leap years, or time zone transitions. The errors are sporadic and nearly impossible to reproduce.</p>
+
+    <div class="callout-blue">
+      <p style="margin:0;"><b>The common thread:</b> None of these produce errors. They all produce <i>wrong results that look right.</i> The only reliable detection is testing from a spec that explicitly defines boundary behavior &mdash; not testing from the code's own logic.</p>
+    </div>
+
+    <hr style="margin: 32px 0;">
+
+    <!-- Prevention Summary -->
+    <h2><b>Prevention at Each Governance Pillar</b></h2>
+
+    <p><b>Design-time:</b> Spec-first prompting with explicit boundary conditions. The spec IS the governance artifact. No spec, no generation.</p>
+
+    <p><b>Build-time:</b> Test coverage requirements that mandate boundary cases. The AI Code Review Standard asks: "Does this handle boundaries correctly?" as question #2 of five.</p>
+
+    <p><b>People:</b> The ability to look at plausible code and say "this is wrong" is exactly what we mean by "taste." It's the core skill of the AI-era developer &mdash; and it has to be cultivated through practice, not assumed.</p>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Navigation -->
+    <div class="w3-container w3-padding-16" style="display:flex; justify-content:space-between;">
+      <a href="demo-secure-apex.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Secure Apex</a>
+      <a href="demo-prompt-injection.html" class="w3-button w3-blue">Prompt Injection<i class="fa fa-arrow-right w3-margin-left"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-container w3-padding-32" style="color:#777; font-size:0.9em;">
+      <p><b>VibeOps Framework</b> &mdash; AI Development Governance for the Salesforce Platform</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
