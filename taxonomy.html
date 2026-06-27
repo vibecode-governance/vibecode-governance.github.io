@@ -451,32 +451,29 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="number">04</div>
         <div>
           <h3>State Corruption &amp; Automation Sprawl</h3>
-          <div class="subtitle">Sandbox success, production failure. The haunted database.</div>
+          <div class="subtitle">Multiple AI-generated automations on the same object &mdash; nobody knows which one is changing the data.</div>
         </div>
       </div>
       <div class="failure-body">
-        <p>AI is excellent at generating a Flow, a trigger, or a data transform that "does the thing." It is not good at ensuring that artifact remains governable under scale, bulk processing, ownership boundaries, and interactions with existing automation. The result: automation that works in a test environment and creates silent corruption in production.</p>
-
-        <p>This failure mode is the most dangerous because it's not observable until a bulk data load, an audit, or a customer complaint surfaces the drift. By then, the damage is already embedded in your data.</p>
+        <p>AI generates a Flow or trigger that works perfectly for one record in sandbox. But production has existing automation on the same object, bulk data loads that fire it thousands of times, and no one tracking which automation owns which field. The result: conflicting automations silently corrupt data and you don't find out until a report doesn't add up weeks later.</p>
 
         <div class="example-box">
           <b>Salesforce example</b>
-          A developer asks the AI to create a Flow that updates Opportunities when stage changes and notifies sales. The AI generates a Flow that works for one record in sandbox. But it contains unnecessary loops, no fault paths, no consideration for existing automation on the same object, and no bulk-safety. When a data migration touches 5,000 records at once, the Flow fires 5,000 times, conflicts with an existing trigger, creates duplicate tasks, and corrupts stage history. The result is invisible for weeks &mdash; until someone runs a pipeline report and the numbers don't add up.
+          A developer asks the AI to create a Flow that updates Opportunities on stage change and notifies sales. It works for one record in sandbox. In production, a data migration touches 5,000 records &mdash; the Flow fires 5,000 times, conflicts with an existing trigger on the same object, creates duplicate tasks, and corrupts stage history. The pipeline report breaks three weeks later.
         </div>
 
         <div class="example-box">
           <b>Related patterns</b>
-          Duplicate records from AI-generated data transforms. Redundant columns from schema hallucination. Conflicting automation on the same object with no conflict detection. Data Cloud identity resolution that probabilistically merges distinct individuals. "Haunted databases" where no one knows which of three automations is responsible for a field value.
+          Three automations on the same object with no one knowing which sets a field value. Duplicate records from AI-generated transforms. Conflicting identity resolution rules in Data Cloud. Schema bloat from AI-hallucinated redundant fields.
         </div>
 
         <p><b>Detection requires:</b></p>
-        <span class="detection-tag">Bulk-safe design enforcement</span>
         <span class="detection-tag">Automation overlap detection</span>
+        <span class="detection-tag">Bulk-safe design enforcement</span>
         <span class="detection-tag">Metadata validation in CI/CD</span>
         <span class="detection-tag">Naming and ownership standards</span>
-        <span class="detection-tag">Fault path requirements</span>
 
-        <p><b>Prevention pattern:</b> Constrain the generation before scale, then validate in the pipeline. The problem isn't that AI made a Flow. The problem is that it made one with no operating model around it &mdash; no ownership metadata, no bulk-safety, no interaction analysis, and no fault handling.</p>
+        <p><b>Prevention pattern:</b> Before generating any automation, map what already exists on that object. The prompt must include existing triggers, Flows, and process builders. CI/CD must validate that no two automations write to the same field without explicit conflict resolution.</p>
 
         <a href="demo-flow-sprawl.html" class="link-arrow"><i class="fa fa-arrow-right w3-margin-right"></i>See the illustrative example: Flow Sprawl</a>
       </div>
