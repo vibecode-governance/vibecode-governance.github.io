@@ -282,8 +282,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
     <!-- Opening -->
     <div class="w3-panel w3-leftbar w3-light-grey w3-padding-16" style="border-left-color: #1a73e8; margin-bottom:32px;">
+      <p class="w3-large" style="margin:0 0 16px 0;">
+        Platform controls catch the technical failures. People controls address the organizational ones.
+      </p>
       <p class="w3-large" style="margin:0;">
-        Platform controls catch the technical failures. People controls address the organizational ones. When developers can generate code faster than they can understand it, and when traditional metrics reward volume over value, the governance model needs a human layer that's intentionally designed for the AI-assisted world.
+        When developers can generate code faster than they can understand it, and when traditional metrics reward volume over value, the governance model needs a human layer that's intentionally designed for the AI-assisted world.
       </p>
     </div>
 
@@ -455,6 +458,109 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
     <div class="callout-blue">
       <p style="margin:0;"><b>The organizational principle:</b> Technology controls prevent the failure modes. People controls prevent the conditions that create failure modes. If your organization rewards velocity without measuring quality, if interviews test coding speed rather than governance judgment, if career paths don't value "taste" &mdash; no amount of platform control will prevent comprehension debt from accumulating.</p>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Interview Question Bank -->
+    <h2><b>Interview Question Bank</b></h2>
+    <p>Example questions for evaluating AI-assisted development skills at different levels. These are organized by general development role and by Salesforce-specific expertise.</p>
+
+    <!-- General Development Questions -->
+    <details style="margin: 20px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+      <summary style="padding: 16px 20px; background: #eff6ff; cursor: pointer; font-weight: bold; font-size: 1.05em; color: #1d4ed8;">General Development — Junior / Curator</summary>
+      <div style="padding: 20px;">
+        <ol style="margin:0; padding-left: 20px; line-height: 2;">
+          <li>Here's a piece of AI-generated code. Walk me through what it does line by line. Where would you want to see tests?</li>
+          <li>This function works for 1 record. What happens if 200 records come in at once? What would you check?</li>
+          <li>The AI generated this code and all tests pass. What would make you hesitate before approving it?</li>
+          <li>You asked the AI to build a login form. The code works. What security issues would you look for that the AI might have missed?</li>
+          <li>Describe a situation where code that compiles and passes tests is still wrong. How would you catch it?</li>
+          <li>You don't understand a section of code the AI generated. What do you do? (Looking for: "I flag it and ask" vs. "I approve it anyway.")</li>
+          <li>The AI generated three possible solutions. All work. How do you decide which one to use?</li>
+        </ol>
+      </div>
+    </details>
+
+    <details style="margin: 20px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+      <summary style="padding: 16px 20px; background: #f0fdf4; cursor: pointer; font-weight: bold; font-size: 1.05em; color: #166534;">General Development — Mid-Level / Pipeline Owner</summary>
+      <div style="padding: 20px;">
+        <ol style="margin:0; padding-left: 20px; line-height: 2;">
+          <li>How would you write a spec for a feature such that AI generates correct, secure code on the first try? Walk me through your process.</li>
+          <li>You're reviewing a PR from a junior who accepted AI-generated code. What's your review checklist? What specifically do you look for?</li>
+          <li>Two different AI-generated automations modify the same data. How do you design a system that prevents this conflict before it reaches production?</li>
+          <li>You notice that AI-generated code in your team's area has a high revert rate. How do you diagnose why, and what do you change?</li>
+          <li>How would you set up a CI/CD gate that catches AI-specific failure patterns (security bypass, bulk-safety, missing error handling) without slowing deployment to a crawl?</li>
+          <li>A junior on your team is approving AI output without really understanding it. How do you address this without making them feel micromanaged?</li>
+          <li>Describe how you'd design prompt constraints or templates so that AI generates code that follows your team's patterns by default.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details style="margin: 20px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+      <summary style="padding: 16px 20px; background: #ede9fe; cursor: pointer; font-weight: bold; font-size: 1.05em; color: #5b21b6;">General Development — Senior / Constraint Architect</summary>
+      <div style="padding: 20px;">
+        <ol style="margin:0; padding-left: 20px; line-height: 2;">
+          <li>Your organization just adopted AI coding tools across 50 developers. What governance framework do you put in place in the first 90 days?</li>
+          <li>How do you measure whether AI-assisted development is actually making the team more effective — vs. just faster at producing code that creates rework downstream?</li>
+          <li>You have a codebase where half the code was AI-generated six months ago and the original developers have left. How do you assess and manage the comprehension debt?</li>
+          <li>Design an automation registry for an org with 15 teams all using AI to generate Flows. How do you prevent sprawl and conflicts at organizational scale?</li>
+          <li>What's the difference between code that's functionally correct and code that demonstrates architectural taste? Give me a concrete example.</li>
+          <li>A CIO asks you: "How do I know my AI-generated code is safe?" What's your answer — not the tools, but the organizational system you'd design?</li>
+          <li>How do you evolve a career ladder and performance reviews when traditional metrics (lines of code, PRs merged, velocity points) no longer measure what matters?</li>
+        </ol>
+      </div>
+    </details>
+
+    <!-- Salesforce-Specific Questions -->
+    <details style="margin: 20px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+      <summary style="padding: 16px 20px; background: #fff7ed; cursor: pointer; font-weight: bold; font-size: 1.05em; color: #c2410c;">Salesforce-Specific — Developer / Admin</summary>
+      <div style="padding: 20px;">
+        <ol style="margin:0; padding-left: 20px; line-height: 2;">
+          <li>AI generated an Apex class without <code>with sharing</code>. What's the risk? When would <code>without sharing</code> actually be appropriate?</li>
+          <li>Explain the difference between <code>WITH USER_MODE</code> and <code>WITH SECURITY_ENFORCED</code>. Which would you use and why?</li>
+          <li>The AI generated a Record-Triggered Flow that works in sandbox. What three things would you check before deploying to production?</li>
+          <li>You asked the AI to write a trigger. It has SOQL inside a for loop. Why is this a problem on Salesforce specifically, and how do you fix it?</li>
+          <li>An AI-generated Flow has no fault path on its DML elements. What happens in production when one of those DML operations fails?</li>
+          <li>The AI generated a <code>@future</code> method to call an external API. What governor limit concerns would you raise? What alternative patterns exist?</li>
+          <li>You're told there are already two triggers and a Flow on the Account object. The AI is asked to create another Flow on Account. What questions do you ask before allowing it?</li>
+          <li>How does Platform Encryption affect AI-generated SOQL queries? What can and can't you do with encrypted fields?</li>
+        </ol>
+      </div>
+    </details>
+
+    <details style="margin: 20px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+      <summary style="padding: 16px 20px; background: #fef2f2; cursor: pointer; font-weight: bold; font-size: 1.05em; color: #991b1b;">Salesforce-Specific — Architect / Expert</summary>
+      <div style="padding: 20px;">
+        <ol style="margin:0; padding-left: 20px; line-height: 2;">
+          <li>Walk me through how you'd design a governance model for an org where 20 citizen developers are using AI to generate Flows. What controls exist natively on the platform?</li>
+          <li>An Agentforce agent has access to a broad action catalog. How do you scope it down, and what's the risk if you don't? Explain <code>confirmationRequired</code> and Agent Script in this context.</li>
+          <li>Describe the Salesforce Trust Layer. How does it intercept prompt injection? What happens if an inbound Web-to-Lead form contains malicious instructions?</li>
+          <li>A developer used AI to generate a Data Cloud ingestion pipeline. What governance checks should exist before it reaches production? Think about PII, identity resolution, and Data Spaces.</li>
+          <li>How do Transaction Security Policies and Event Monitoring work together to provide runtime governance? Give an example of a policy that would block a data exfiltration attempt in real time.</li>
+          <li>You're designing a shared responsibility model between the platform team and application teams. What does the platform enforce automatically, and what must each team configure?</li>
+          <li>A MuleSoft integration is being invoked by an Agentforce agent. Walk me through the security chain: how does OBO work, what's the blast radius if the agent is compromised, and where are the control points?</li>
+          <li>How would you use Security Center, Shield, and Code Analyzer together to create end-to-end governance across a multi-cloud Salesforce estate with AI-generated code?</li>
+        </ol>
+      </div>
+    </details>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- Summary Points -->
+    <div style="padding: 24px 0;">
+      <div style="display:flex; gap:16px; align-items:flex-start; margin-bottom:20px;">
+        <div style="min-width:36px; height:36px; background:#1a73e8; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">01</div>
+        <div style="font-size: 1.05em; line-height: 1.7;">The job has changed. Developers are reviewers and constraint-setters now, not typists. The ones who are good at this aren't the fastest coders — they're the ones who can look at AI output and say "that's wrong" before it ships.</div>
+      </div>
+      <div style="display:flex; gap:16px; align-items:flex-start; margin-bottom:20px;">
+        <div style="min-width:36px; height:36px; background:#1a73e8; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">02</div>
+        <div style="font-size: 1.05em; line-height: 1.7;">Measuring lines of code or PRs merged is measuring the wrong thing. When AI can produce unlimited volume, the only metrics that matter are whether the output actually works in production and whether the team can maintain it six months from now.</div>
+      </div>
+      <div style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="min-width:36px; height:36px; background:#1a73e8; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">03</div>
+        <div style="font-size: 1.05em; line-height: 1.7;">Hiring for this world means testing whether someone can catch what the AI gets wrong — not whether they can write code under time pressure. The interview should look like a code review, not a whiteboard exercise.</div>
+      </div>
     </div>
 
     <hr style="margin: 40px 0;">
