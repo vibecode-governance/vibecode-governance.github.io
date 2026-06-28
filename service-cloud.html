@@ -458,7 +458,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="control-body">
         <p>Agent responses to customers are externally visible and represent your brand. Governance requirements:</p>
         <p><b>Toxicity detection</b> via the Trust Layer. Before any agent response is sent to a customer, it passes through content safety checks. Hallucinated responses that contain inappropriate content, PII from other customers, or inaccurate policy information are caught.</p>
-        <p><b>PII masking</b> on outbound agent responses. Even if the agent's reasoning surfaces PII from the account, the Trust Layer's PII masking prevents it from appearing in customer-facing output.</p>
+        <p><b>Scoped data grounding.</b> Agent prompts and knowledge retrieval should be designed so that only the fields relevant to the customer interaction are surfaced in context — limiting what the agent can even reference in its response.</p>
         <p><b>Compliance language monitoring.</b> For regulated industries, agent responses must not make promises, legal claims, or medical/financial advice that the organization isn't authorized to provide. Prompt engineering defines these guardrails; the Trust Layer enforces them.</p>
       </div>
     </div>
